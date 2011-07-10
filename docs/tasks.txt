@@ -4,7 +4,8 @@ display game grid - done
 display player immortal - done
 display enemy immortal - done
 
-click handling
+click handling - done
+grid controls - done
 select player immortal
 highlight player immortal
 move player immortal

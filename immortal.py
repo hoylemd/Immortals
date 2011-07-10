@@ -7,20 +7,13 @@
 # import libraries
 import pygame
 from hutils import colours
-import ImmortalGraphics
+import Graphics
 import Creatures
 import controlNodes
 from controlNodes import ControlNode
 import gameStates
 from gameStates import currentState
 import Immortals
-
-# shorthand for blitting a sprite
-def drawSprite(theSprite):
-	if theSprite != None:
-		screen.blit(theSprite.image, theSprite.rect)
-# shorthand for drawing a line
-DrawLine = pygame.draw.line
 		
 # initialize pygame
 pygame.init() 
@@ -28,13 +21,14 @@ pygame.init()
 # Set up the window
 size=[1050,750]
 screen=pygame.display.set_mode(size)
+screen.set_colorkey(colours.green)
 pygame.display.set_caption("Immortals") 
 
 # Used to manage how fast the screen updates
 clock=pygame.time.Clock()
 
 # generate the game terrain
-terrain = ImmortalGraphics.generateBoard(10,10,"img\\tile.png")
+terrain = Graphics.generateBoard(10,10,"img\\tile.png")
 
 # make the board grid
 board = []
@@ -45,7 +39,7 @@ for i in range(10):
 	board.append(line)
 
 # generate the immortals
-immortalSprites = ImmortalGraphics.generateImmortalSprites("img\\immortalSmall.png")
+immortalSprites = Graphics.generateImmortalSprites("img\\immortalSmall.png")
 avatar = Creatures.Avatar(immortalSprites[0], 1,1,3,1,(9,4),25)
 player = Immortals.Immortal(avatar)
 avatar = Creatures.Avatar(immortalSprites[1], 1,1,3,1,(0,5),25)
@@ -55,8 +49,13 @@ opponent = Immortals.Immortal(avatar)
 board[player.avatar.position[0]][player.avatar.position[1]] = player.avatar
 board[opponent.avatar.position[0]][opponent.avatar.position[1]] = opponent.avatar
 
+# generate the selection sprite
+#Graphics.generateSelectionSprite("img\\selected.png")
+
+print type(currentState)
 # generate the gamestate
 currentState = gameStates.GameState(player, opponent, board)
+print type(currentState)
 
 # set up the control tree
 controlTree = ControlNode(0,0,size[0],size[1])
@@ -82,21 +81,10 @@ while quit == False:
 		if event.type == pygame.MOUSEBUTTONUP:
 			controlTree.click(pygame.mouse.get_pos())
 			
-	# draw the background
-	screen.fill(colours.grey)
-	
-	# draw the board
-	for line in terrain:
-		for tile in line:
-			drawSprite(tile)
-	# draw gridlines
-	for x in range(11):
-		DrawLine(screen, colours.black, [(x*75),0], [(x*75),750], 3)
-		DrawLine(screen, colours.black, [0,(x*75)], [750,(x*75)], 3)
-	
-	# draw Immortal's avatars
-	drawSprite(player.avatar.sprite)
-	drawSprite(opponent.avatar.sprite)
+	# draw stuff
+	print type(currentState)
+	Graphics.draw(screen)
+	print type(currentState)
 	
 	# update the screen.
 	pygame.display.flip()

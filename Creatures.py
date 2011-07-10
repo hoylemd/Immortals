@@ -1,8 +1,10 @@
 #Immortals creatures
 
 import pygame
-import ImmortalGraphics
+import Graphics
 import Immortals
+import gameStates
+from gameStates import currentState
 
 class Creature:
 	sprite = None
@@ -23,8 +25,9 @@ class Creature:
 		self.owner = None
 		
 	def moveTo(self, position):
-		self.position = position
+		currentState.moveMe(self, position)
 		self.sprite.moveTo(position)
+		self.position = position
 		
 	def takeControl(self, immortal):
 		self.owner = immortal

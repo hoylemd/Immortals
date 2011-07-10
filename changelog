@@ -1,5 +1,3 @@
-added in the .pyc of hutils.
-added creature movement methods
-created controlnode
-created global gameState
-greated Immortal classes
+fixed a minor bug in module naming
+added grid controls
+moved drawing logic into graphics module

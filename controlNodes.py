@@ -1,7 +1,7 @@
 # controlNode
 
 import pygame
-from globals import gameState
+from gameStates import currentState
 
 class ControlNode(pygame.Rect):
 	def __init__(self, top, left, width, height):
@@ -31,10 +31,29 @@ class ControlNode(pygame.Rect):
 			return self.handler()
 		
 	def handler(self):
-		print gameState
+		print "click event"
 		
 	def enable(self):
 		self.enabled = True
 		
 	def disable(self):
 		self.enabled = False
+		
+class gridControl(ControlNode):
+	def __init__(self, gridPos):
+		# initialize base class
+		controlNode.__init__(self, gridPos[0]*75, gridPos[1]*75,75,75)
+		
+		# store the grid position
+		self.position = gridPos
+		
+	def handler(self):
+		thingAt = currentState.getAtFromBoard(self.position)
+		if thingAt != None:
+			if currentState.selectedCreature == thingAt:
+				currentState.selectedCreature = None
+			else:
+				currentState.selectedCreature = thingAt
+		else:
+			thingAt.moveTo(self.position)
+			
