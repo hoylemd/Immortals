@@ -3,3 +3,4 @@ made initial game window
  - made Creature class
  - made Immortal class
  - added displaying of player and enemy immortals
+ - added hutils package to project
