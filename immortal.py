@@ -8,6 +8,7 @@
 import pygame
 from hutils import colours
 import ImmortalGraphics
+import ImmortalCreatures
 
 # shorthand for blitting a sprite
 def drawSprite(theSprite):
@@ -29,6 +30,12 @@ clock=pygame.time.Clock()
 
 # generate the game board
 board = ImmortalGraphics.generateBoard(10,10,"img\\tile.png")
+
+# generate the immortals
+immortalSprites = ImmortalGraphics.generateImmortalSprites("img\\immortalSmall.png")
+immortals = []
+immortals.append(ImmortalCreatures.Immortal(immortalSprites[0], 1,1,3,25))
+immortals.append(ImmortalCreatures.Immortal(immortalSprites[1], 1,1,3,25))
 
 #Loop until the user clicks the close button.
 quit = False
@@ -55,6 +62,11 @@ while quit == False:
 	for x in range(11):
 		DrawLine(screen, colours.black, [(x*75),0], [(x*75),750], 3)
 		DrawLine(screen, colours.black, [0,(x*75)], [750,(x*75)], 3)
+	
+	# draw Immortals
+	
+	for immortal in immortals:
+		drawSprite(immortal.sprite)
 	
 	# update the screen.
 	pygame.display.flip()

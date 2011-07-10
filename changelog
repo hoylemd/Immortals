@@ -1,6 +1,5 @@
 made initial game window
- - made immortal sprite
- - made tile sprite
- - added board generation code
- - added board tiles
- - added grid lines
+ - made Creature sprite class
+ - made Creature class
+ - made Immortal class
+ - added displaying of player and enemy immortals
