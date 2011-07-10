@@ -1,0 +1,6 @@
+made initial game window
+ - made immortal sprite
+ - made tile sprite
+ - added board generation code
+ - added board tiles
+ - added grid lines
