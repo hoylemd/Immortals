@@ -25,6 +25,9 @@ class CreatureSprite(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.topleft = ((gridPos[0]*75),(gridPos[1]*75))
 		self.facing = facing
+	
+	def moveTo(position):
+		self.rect.topleft = ((position[0]*75),(position[1]*75))
 
 def generateBoard(length, width, tilePath):
 	board = []

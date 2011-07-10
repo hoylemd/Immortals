@@ -1,6 +1,5 @@
-made initial game window
- - made Creature sprite class
- - made Creature class
- - made Immortal class
- - added displaying of player and enemy immortals
- - added hutils package to project
+added in the .pyc of hutils.
+added creature movement methods
+created controlnode
+created global gameState
+greated Immortal classes
