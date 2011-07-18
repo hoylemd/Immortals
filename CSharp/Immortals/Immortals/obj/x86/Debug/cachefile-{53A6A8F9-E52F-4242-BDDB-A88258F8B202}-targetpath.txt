@@ -1,0 +1,4 @@
+Content\Images\immortal.xnb
+Content\Images\immortalSmall.xnb
+Content\Images\selected.xnb
+Content\Images\tile.xnb

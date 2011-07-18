@@ -1,0 +1,10 @@
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Immortals.exe
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Immortals.pdb
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\obj\x86\Debug\Immortals.exe
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\obj\x86\Debug\Immortals.pdb
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortal.xnb
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortalSmall.xnb
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\selected.xnb
+C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb
