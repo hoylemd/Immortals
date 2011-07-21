@@ -23,6 +23,32 @@ namespace Immortals
         Texture2D immortalTexture;
         Texture2D tileTexture;
         Texture2D selectedTexture;
+        Texture2D pixel; 
+        // Mouse Variables
+        MouseState prevMouseState;
+
+        // Game state variables
+        Boolean selectingState;
+        Rectangle selectionRect;
+        Vector2 selectionOrigin;
+
+        // get the least of 2 ints
+        public int leastInt(int a, int b)
+        {
+            if (a <= b)
+                return a;
+            else
+                return b;
+        }
+
+        // get the greater of 2 ints
+        public int greaterInt(int a, int b)
+        {
+            if (a >= b)
+                return a;
+            else
+                return b;
+        }
 
         public ImmortalsEngine()
         {
@@ -41,6 +67,11 @@ namespace Immortals
         protected override void Initialize()
         {
             this.IsMouseVisible = true;
+
+            selectingState = false;
+
+            pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            pixel.SetData(new[] { Color.White });  
 
             base.Initialize();
         }
@@ -76,13 +107,48 @@ namespace Immortals
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            MouseState mouseState;
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            
+            // Poll dat mouse
+            mouseState = Mouse.GetState();
 
-            // TODO: Add your update logic here
+            // Mouse left button down.
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                //Console.Out.WriteLine("down.");
+                if (prevMouseState.LeftButton == ButtonState.Released)
+                {
+                    selectingState = true;
+                    selectionOrigin.X = mouseState.X;
+                    selectionOrigin.Y = mouseState.Y;
+                    selectionRect = new Rectangle(mouseState.X, mouseState.Y, 0, 0);
+                }
+                else
+                {
+                   // generate the selection rect
+                    selectionRect.X = leastInt((int)selectionOrigin.X, (int)mouseState.X);
+                    selectionRect.Y = leastInt((int)selectionOrigin.Y, (int)mouseState.Y);
+                    selectionRect.Width = greaterInt((int)selectionOrigin.X, (int)mouseState.X)
+                        - leastInt((int)selectionOrigin.X, (int)mouseState.X);
+                    selectionRect.Height = greaterInt((int)selectionOrigin.Y, (int)mouseState.Y)
+                        - leastInt((int)selectionOrigin.Y, (int)mouseState.Y);
+                }
+            }
+            // Mouse left button up.
+            if (mouseState.LeftButton == ButtonState.Released 
+                && prevMouseState.LeftButton == ButtonState.Pressed)
+            {
+                selectingState = false;
+            }
+
+            prevMouseState = mouseState;
 
             base.Update(gameTime);
+
         }
 
         /// <summary>
@@ -102,11 +168,31 @@ namespace Immortals
             {
                 for (j = 0; j < 10; j++)
                 {
-                    spriteBatch.Draw(tileTexture, new Vector2(i*75,j*75), Color.White);
+                    spriteBatch.Draw(tileTexture, new Vector2(i * 75, j * 75), Color.White);
                 }
             }
+
+            // Draw the immortal
             spriteBatch.Draw(immortalTexture, Vector2.Zero, Color.White);
-            spriteBatch.Draw(selectedTexture, Vector2.Zero, Color.White);
+
+            // Draw the selection box
+            if (selectingState == true)
+            {
+                // draw the top
+                spriteBatch.Draw(pixel, 
+                    new Rectangle(selectionRect.X, selectionRect.Y, selectionRect.Width, 1), Color.LightGreen);  
+                // draw the left
+                spriteBatch.Draw(pixel,
+                     new Rectangle(selectionRect.X + selectionRect.Width, selectionRect.Y, 1, selectionRect.Height), Color.LightGreen);
+                // draw the bottom
+                spriteBatch.Draw(pixel,
+                     new Rectangle(selectionRect.X, selectionRect.Y + selectionRect.Height, selectionRect.Width, 1), Color.LightGreen);
+                // draw the right
+                spriteBatch.Draw(pixel,
+                    new Rectangle(selectionRect.X, selectionRect.Y, 1, selectionRect.Height), Color.LightGreen);
+                
+            }
+            //spriteBatch.Draw(selectedTexture, Vector2.Zero, Color.White);
 
             spriteBatch.End();
 

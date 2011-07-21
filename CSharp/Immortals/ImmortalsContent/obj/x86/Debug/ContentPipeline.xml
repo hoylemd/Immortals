@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortal.xnb</Output>
+      <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\immortal.xnb</Output>
       <Time>2011-07-17T20:30:38.203222-04:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortalSmall.xnb</Output>
+      <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\immortalSmall.xnb</Output>
       <Time>2011-07-17T21:10:47.6720357-04:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\selected.xnb</Output>
+      <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\selected.xnb</Output>
       <Time>2011-07-17T20:33:02.5324772-04:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb</Output>
+      <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb</Output>
       <Time>2011-07-10T12:54:56.7022529-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -43,10 +43,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\ImmortalsContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\ImmortalsContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\Immortals\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\ImmortalsContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\ImmortalsContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
