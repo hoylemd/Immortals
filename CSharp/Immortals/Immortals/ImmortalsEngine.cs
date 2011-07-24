@@ -16,8 +16,8 @@ namespace Immortals
     /// </summary>
     public class ImmortalsEngine : Microsoft.Xna.Framework.Game
     {
+        // graphics managers
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
         SpriteManager spriteManager;
 
         // Texture variables
@@ -38,7 +38,12 @@ namespace Immortals
         // Sprite Pointers
         Sprite thing;
 
-        // get the least of 2 ints
+        /// <summary>
+        /// Function to get the least of 2 ints
+        /// </summary>
+        /// <param name="a">The first int to compare</param>
+        /// <param name="b">The second int to compare</param>
+        /// <returns>The least of the 2 ints</returns>
         public int leastInt(int a, int b)
         {
             if (a <= b)
@@ -47,7 +52,12 @@ namespace Immortals
                 return b;
         }
 
-        // get the greater of 2 ints
+        /// <summary>
+        /// Function to get the greatest of 2 ints
+        /// </summary>
+        /// <param name="a">The first int to compare</param>
+        /// <param name="b">The second int to compare</param>
+        /// <returns>The greatest of the 2 ints</returns>
         public int greaterInt(int a, int b)
         {
             if (a >= b)
@@ -56,11 +66,17 @@ namespace Immortals
                 return b;
         }
 
+        /// <summary>
+        /// Constructor for the main engine class
+        /// </summary>
         public ImmortalsEngine()
         {
+            // Set up the game window
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = 750;
             graphics.PreferredBackBufferWidth = 1250;
+
+            // set up the Content path
             Content.RootDirectory = "Content";
         }
 
@@ -72,18 +88,21 @@ namespace Immortals
         /// </summary>
         protected override void Initialize()
         {
+            // make visible the mouse
             this.IsMouseVisible = true;
 
+            // initialize game state variables
             selectingState = false;
 
+            // Create the "pixel" object
             pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             pixel.SetData(new[] { Color.White });
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteManager = new SpriteManager(this);
             Components.Add(spriteManager);
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // Initialize base class
             base.Initialize();
         }
 
@@ -127,7 +146,7 @@ namespace Immortals
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             
-            // Poll dat mouse
+            // Poll that mouse
             mouseState = Mouse.GetState();
 
             // Mouse left button down.
@@ -146,10 +165,10 @@ namespace Immortals
                    // generate the selection rect
                     selectionRect.X = leastInt((int)selectionOrigin.X, (int)mouseState.X);
                     selectionRect.Y = leastInt((int)selectionOrigin.Y, (int)mouseState.Y);
-                    selectionRect.Width = greaterInt((int)selectionOrigin.X, (int)mouseState.X)
-                        - leastInt((int)selectionOrigin.X, (int)mouseState.X);
-                    selectionRect.Height = greaterInt((int)selectionOrigin.Y, (int)mouseState.Y)
-                        - leastInt((int)selectionOrigin.Y, (int)mouseState.Y);
+                    selectionRect.Width = greaterInt((int)selectionOrigin.X, (int)mouseState.X) -
+                        leastInt((int)selectionOrigin.X, (int)mouseState.X);
+                    selectionRect.Height = greaterInt((int)selectionOrigin.Y, (int)mouseState.Y) -
+                        leastInt((int)selectionOrigin.Y, (int)mouseState.Y);
                 }
             }
             // Mouse left button up.
@@ -159,14 +178,16 @@ namespace Immortals
                 selectingState = false;
             }
 
+            // save the mouse state for next cyle
             prevMouseState = mouseState;
 
+            // update the base class
             base.Update(gameTime);
 
         }
 
         /// <summary>
-        /// This is called when the game should draw itself.
+        /// This is called when the game should draw itself. This shouldn't be drawing anything.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
