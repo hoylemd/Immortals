@@ -18,12 +18,15 @@ namespace Immortals
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteManager spriteManager;
 
         // Texture variables
         Texture2D immortalTexture;
         Texture2D tileTexture;
         Texture2D selectedTexture;
-        Texture2D pixel; 
+        Texture2D pixel;
+        Texture2D rotatingThing;
+
         // Mouse Variables
         MouseState prevMouseState;
 
@@ -31,6 +34,9 @@ namespace Immortals
         Boolean selectingState;
         Rectangle selectionRect;
         Vector2 selectionOrigin;
+
+        // Sprite Pointers
+        Sprite thing;
 
         // get the least of 2 ints
         public int leastInt(int a, int b)
@@ -82,13 +88,22 @@ namespace Immortals
         /// </summary>
         protected override void LoadContent()
         {
+            
+
             // Create a new SpriteBatch, which can be used to draw textures.
+            spriteManager = new SpriteManager(this);
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load the sprite textures
             immortalTexture = Content.Load<Texture2D>(@"Images/immortalSmall");
             tileTexture = Content.Load<Texture2D>(@"Images/tile");
             selectedTexture = Content.Load<Texture2D>(@"Images/selected");
+            rotatingThing = Content.Load<Texture2D>(@"Images/rotatingThing");
+
+            // Make a sprite
+            thing = new Sprite(rotatingThing, new Point(75, 75), new Point(3, 4), 16, new Point(10,10));
+            spriteManager.AddSprite(thing);
+
         }
 
         /// <summary>
@@ -158,7 +173,7 @@ namespace Immortals
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            int i, j;
+            /*int i, j;
 
             // Draw the sprites
             spriteBatch.Begin();
@@ -194,7 +209,7 @@ namespace Immortals
             }
             //spriteBatch.Draw(selectedTexture, Vector2.Zero, Color.White);
 
-            spriteBatch.End();
+            spriteBatch.End();*/
 
             base.Draw(gameTime);
         }

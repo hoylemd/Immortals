@@ -111,6 +111,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="ImmortalsEngine.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="SpriteManager.cs" />
     <Compile Include="Unit.cs" />
   </ItemGroup>
   <ItemGroup>

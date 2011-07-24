@@ -18,3 +18,4 @@ C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Resolve
 C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Immortals.exe
 C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Immortals.pdb
+C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\rotatingThing.xnb
