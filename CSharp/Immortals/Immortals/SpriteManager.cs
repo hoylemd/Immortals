@@ -17,10 +17,17 @@ namespace Immortals
     /// </summary>
     public class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
+        // SpriteBatch for drawing
         SpriteBatch spriteBatch;
+
+        // List of sprites to draw
         List<Sprite> spriteList = new List<Sprite>();
 
         // special sprite pointers
+
+
+        // Board pointer
+        Board gameBoard;
 
         public SpriteManager(Game game)
             : base(game)
@@ -77,15 +84,16 @@ namespace Immortals
         {
             Game.GraphicsDevice.Clear(Color.Purple);
 
-            Console.Out.WriteLine("spritemanager draw");
+            // Draw Stuff
+            spriteBatch.Begin();
 
-            // Draw Sprites
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            // Draw the Board
+            if (gameBoard != null)
+                gameBoard.Draw(spriteBatch, Vector2.Zero, Game.Window.ClientBounds);
 
-            // Draw the sprite s
+            // Draw the sprites
             foreach (Sprite sprite in spriteList)
             {
-                Console.Out.WriteLine("drawing a sprite");
                 sprite.Draw(spriteBatch);
             }
 
@@ -103,6 +111,16 @@ namespace Immortals
         {
             this.spriteList.Add(newSprite);
             return newSprite;
+        }
+
+        /// <summary>
+        /// Function to set up a gameboard
+        /// </summary>
+        /// <param name="boardSize"> Point object containing the board dimensions in tiles.</param>
+        /// <param name="tile"> Sprite to use for the tiles.</param>
+        public void GenerateBoard(Point boardSize, Sprite tile)
+        {
+            this.gameBoard = new Board(boardSize, tile);
         }
     }
 }

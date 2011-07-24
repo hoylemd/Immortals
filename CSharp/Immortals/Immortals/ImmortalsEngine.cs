@@ -98,7 +98,7 @@ namespace Immortals
             pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             pixel.SetData(new[] { Color.White });
 
-            // Create a new SpriteBatch, which can be used to draw textures.
+            // Create a new SpriteManager, which handles all sprites
             spriteManager = new SpriteManager(this);
             Components.Add(spriteManager);
 
@@ -117,6 +117,14 @@ namespace Immortals
             tileTexture = Content.Load<Texture2D>(@"Images/tile");
             selectedTexture = Content.Load<Texture2D>(@"Images/selected");
             rotatingThing = Content.Load<Texture2D>(@"Images/rotatingThing");
+
+            // make the background
+            spriteManager.GenerateBoard(new Point(10, 10),
+                new Sprite(tileTexture,
+                    new Point(75, 75),
+                    new Point(1, 1),
+                    0,
+                    new Point(0, 0)));
 
             // Make a sprite
             thing = new Sprite(rotatingThing, new Point(75, 75), new Point(3, 4), 16, new Point(10,10));
@@ -192,12 +200,8 @@ namespace Immortals
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            /*int i, j;
-
-            // Draw the sprites
-            spriteBatch.Begin();
-
+                
+                /*
             // draw the tile board
             for (i = 0; i < 10; i++)
             {

@@ -14,7 +14,7 @@ namespace Immortals
         Point currentFrame;
         Point sheetSize;
         int timeSinceLastFrame;
-        int millisecondsPerFrame;
+        int frameDuration;
 
         // drawing variables
         Texture2D texture;
@@ -24,18 +24,43 @@ namespace Immortals
         Point boundingOffset;
         Rectangle boundingBox;
 
-        // constructor
-        public Sprite(Texture2D texture, Point frameSize, Point sheetSize, int msPerFrame, Point boundingOffset)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="texture"> The texture to associate with this sprite</param>
+        /// <param name="frameSize"> The size of each frame in pixels</param>
+        /// <param name="sheetSize"> The dimensions of the sheet in frames</param>
+        /// <param name="frameDuration"> The number of milliseconds to display each frame</param>
+        /// <param name="boundingOffset"> The number of pixels the bounding box is offset from the frame edges</param>
+        public Sprite(Texture2D texture, Point frameSize, 
+            Point sheetSize, int frameDuration, Point boundingOffset)
         {
+            // Save data
             this.texture = texture;
             this.frameSize = frameSize;
-            this.currentFrame = new Point(0, 0);
             this.sheetSize = sheetSize;
-            this.timeSinceLastFrame = 0;
-            this.millisecondsPerFrame = msPerFrame;
-
-            this.boundingBox = new Rectangle(boundingOffset.X, boundingOffset.Y, frameSize.X - (2 * boundingOffset.X), frameSize.Y - (2 * boundingOffset.Y));
+            this.frameDuration = frameDuration;
             this.boundingOffset = boundingOffset;
+
+            // Initialize variables
+            this.timeSinceLastFrame = 0;
+            this.currentFrame = new Point(0, 0);
+
+            // Calculate the bounding box
+            this.boundingBox = new Rectangle(
+                boundingOffset.X, 
+                boundingOffset.Y, 
+                frameSize.X - (2 * boundingOffset.X), 
+                frameSize.Y - (2 * boundingOffset.Y));
+        }
+
+        /// <summary>
+        /// Accessor for the frameSize variable.
+        /// </summary>
+        /// <returns> Returns a copy of the Point object representing the framesize.</returns>
+        public Point GetFrameSize()
+        {
+            return new Point(this.frameSize.X, this.frameSize.Y);
         }
 
         /// <summary>
@@ -47,9 +72,9 @@ namespace Immortals
             this.timeSinceLastFrame += elapsedTime;
 
             // Update sprite animation, if time has past
-            if (this.timeSinceLastFrame > this.millisecondsPerFrame)
+            if (this.timeSinceLastFrame > this.frameDuration)
             {
-                this.timeSinceLastFrame -= this.millisecondsPerFrame;
+                this.timeSinceLastFrame -= this.frameDuration;
                 this.currentFrame.X++;
                 if (this.currentFrame.X >= this.sheetSize.X)
                 {
@@ -77,9 +102,16 @@ namespace Immortals
                 this.frameSize.Y);
         }
 
+        /// <summary>
+        /// Function to update a sprite. Currently only increments the 
+        /// frame if the sprite is animated
+        /// </summary>
+        /// <param name="gameTime"> Time object to indicate the amount of
+        /// time that's past.</param>
         public void Update(GameTime gameTime)
         {
-            this.IncrementFrame(gameTime.ElapsedGameTime.Milliseconds);
+            if (this.frameDuration > 0)
+                this.IncrementFrame(gameTime.ElapsedGameTime.Milliseconds);
         }
 
         /// <summary>
@@ -106,8 +138,35 @@ namespace Immortals
             {
                 Console.Out.WriteLine("Sprite.Draw call outside of SpriteBatch.Begin() and End() calls. Error type: " + e.GetType().ToString());
             }
-
         }
+
+        /// <summary>
+        /// Function to tell a sprite to draw itself at a specified location.
+        /// </summary>
+        /// <param name="spriteBatch"> The spriteBatch that will draw the sprite.</param>
+        /// <param name="location"> The location to draw the sprite at.</param>
+        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        {
+            try
+            {
+                //Draw the sprite.
+                spriteBatch.Draw(this.texture,
+                   location,
+                   this.NextFrame(),
+                   Color.White,
+                   0,
+                   Vector2.Zero,
+                   1,
+                   SpriteEffects.None,
+                   1);
+            }
+            // Handle unbegun spriteBatches
+            catch (InvalidOperationException e)
+            {
+                Console.Out.WriteLine("Sprite.Draw call outside of SpriteBatch.Begin() and End() calls. Error type: " + e.GetType().ToString());
+            }
+        }
+
 
         /// <summary>
         /// Function to update the bouding box. to be called whenever the sprite moves.
