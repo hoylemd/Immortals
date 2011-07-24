@@ -77,7 +77,12 @@ namespace Immortals
             selectingState = false;
 
             pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            pixel.SetData(new[] { Color.White });  
+            pixel.SetData(new[] { Color.White });
+
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteManager = new SpriteManager(this);
+            Components.Add(spriteManager);
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             base.Initialize();
         }
@@ -88,12 +93,6 @@ namespace Immortals
         /// </summary>
         protected override void LoadContent()
         {
-            
-
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteManager = new SpriteManager(this);
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
             // Load the sprite textures
             immortalTexture = Content.Load<Texture2D>(@"Images/immortalSmall");
             tileTexture = Content.Load<Texture2D>(@"Images/tile");

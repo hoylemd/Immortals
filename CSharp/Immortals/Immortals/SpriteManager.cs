@@ -34,7 +34,7 @@ namespace Immortals
         /// </summary>
         public override void Initialize()
         {
-            this.spriteBatch = new SpriteBatch(Game.GraphicsDevice);
+            Console.Out.WriteLine("SPRITEMANAGER INIT");
             base.Initialize();
         }
 
@@ -50,7 +50,9 @@ namespace Immortals
                     5,
                     new Point(10, 10));
             spriteList.Add(ring);*/
-        
+
+            this.spriteBatch = new SpriteBatch(Game.GraphicsDevice);
+
             base.LoadContent();
         }
 
@@ -73,7 +75,9 @@ namespace Immortals
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Purple);
+            Game.GraphicsDevice.Clear(Color.Purple);
+
+            Console.Out.WriteLine("spritemanager draw");
 
             // Draw Sprites
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
@@ -81,6 +85,7 @@ namespace Immortals
             // Draw the sprite s
             foreach (Sprite sprite in spriteList)
             {
+                Console.Out.WriteLine("drawing a sprite");
                 sprite.Draw(spriteBatch);
             }
 
@@ -89,9 +94,15 @@ namespace Immortals
             base.Draw(gameTime);
         }
 
-        public void AddSprite(Sprite newSprite)
+        /// <summary>
+        /// Function to register a sprite with this spriteManager
+        /// </summary>
+        /// <param name="newSprite">The sprite to register</param>
+        /// <returns></returns>
+        public Sprite AddSprite(Sprite newSprite)
         {
-
+            this.spriteList.Add(newSprite);
+            return newSprite;
         }
     }
 }

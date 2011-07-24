@@ -2,13 +2,22 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
+      <Source>Images\rotatingThing.png</Source>
+      <Name>Images\rotatingThing</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\rotatingThing.xnb</Output>
+      <Time>2011-07-24T12:17:42.364331-04:00</Time>
+    </Item>
+    <Item>
       <Source>Images\immortal.png</Source>
       <Name>Images\immortal</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\immortal.xnb</Output>
-      <Time>2011-07-23T18:54:17.2112-04:00</Time>
+      <Time>2011-07-24T12:17:42.3603307-04:00</Time>
     </Item>
     <Item>
       <Source>Images\immortalSmall.png</Source>
@@ -17,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\immortalSmall.xnb</Output>
-      <Time>2011-07-23T18:54:17.2132-04:00</Time>
+      <Time>2011-07-24T12:17:42.3623309-04:00</Time>
     </Item>
     <Item>
       <Source>Images\selected.png</Source>
@@ -26,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\selected.xnb</Output>
-      <Time>2011-07-23T18:54:17.2162-04:00</Time>
+      <Time>2011-07-24T12:17:42.3663311-04:00</Time>
     </Item>
     <Item>
       <Source>Images\tile.png</Source>
@@ -35,16 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb</Output>
-      <Time>2011-07-23T18:54:17.2172-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\rotatingThing.png</Source>
-      <Name>Images\rotatingThing</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\rotatingThing.xnb</Output>
-      <Time>2011-07-23T19:44:16.9232-04:00</Time>
+      <Time>2011-07-24T12:17:42.3683312-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -84,7 +84,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-07-12T22:52:16.8602-04:00</Value>
+        <Value>2011-07-17T17:53:05.8385777-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
