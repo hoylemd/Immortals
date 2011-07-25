@@ -27,7 +27,10 @@ namespace Immortals
 
 
         // Board pointer
-        Board gameBoard;
+        Board board;
+
+        // Sidebar pointer
+        Sidebar sidebar;
 
         public SpriteManager(Game game)
             : base(game)
@@ -88,18 +91,42 @@ namespace Immortals
             spriteBatch.Begin();
 
             // Draw the Board
-            if (gameBoard != null)
-                gameBoard.Draw(spriteBatch, Vector2.Zero, Game.Window.ClientBounds);
+            if (board != null)
+                board.Draw(spriteBatch, Vector2.Zero, Game.Window.ClientBounds);
+
+            // Draw the sidebar
+            if (sidebar != null)
+                sidebar.Draw(spriteBatch);
 
             // Draw the sprites
             foreach (Sprite sprite in spriteList)
-            {
                 sprite.Draw(spriteBatch);
-            }
 
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+
+        /// <summary>
+        /// Function to set up a gameboard
+        /// </summary>
+        /// <param name="boardSize"> Point object containing the board dimensions in tiles.</param>
+        /// <param name="tile"> Sprite to use for the tiles.</param>
+        public void GenerateBoard(Point boardSize, Sprite tile)
+        {
+            this.board = new Board(boardSize, tile);
+        }
+
+        /// <summary>
+        /// Function to make and register the sidebar.
+        /// </summary>
+        /// <param name="background"> The background image of the sidebar.</param>
+        /// <param name="size"> The size of the background image in pixels.</param>
+        /// <param name="clientBounds"> The rectangle represeting the client window.</param>
+        public void MakeSidebar(Texture2D background, Point size, Rectangle clientBounds)
+        {
+            sidebar = new Sidebar(background, size, clientBounds);
         }
 
         /// <summary>
@@ -111,16 +138,6 @@ namespace Immortals
         {
             this.spriteList.Add(newSprite);
             return newSprite;
-        }
-
-        /// <summary>
-        /// Function to set up a gameboard
-        /// </summary>
-        /// <param name="boardSize"> Point object containing the board dimensions in tiles.</param>
-        /// <param name="tile"> Sprite to use for the tiles.</param>
-        public void GenerateBoard(Point boardSize, Sprite tile)
-        {
-            this.gameBoard = new Board(boardSize, tile);
         }
     }
 }

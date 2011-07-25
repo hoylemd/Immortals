@@ -46,6 +46,15 @@
       <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb</Output>
       <Time>2011-07-24T12:17:42.3683312-04:00</Time>
     </Item>
+    <Item>
+      <Source>Images\sidebarTemplate.png</Source>
+      <Name>Images\sidebarTemplate</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarTemplate.xnb</Output>
+      <Time>2011-07-24T17:42:23.5227241-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

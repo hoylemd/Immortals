@@ -45,9 +45,9 @@ namespace Immortals
             int i, j;
 
             // Iterate over the board and draw each tile
-            for (i=0; i < boardSize.X; i++)
+            for (i= 0; i < boardSize.X; i++)
             {
-                for (j=0; j < boardSize.Y; j++)
+                for (j= 0; j < boardSize.Y; j++)
                 {
                     tile.Draw(spriteBatch,
                         new Vector2(offset.X + (i * this.tileSize.X),

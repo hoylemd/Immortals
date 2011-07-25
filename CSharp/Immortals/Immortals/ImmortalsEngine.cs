@@ -22,10 +22,8 @@ namespace Immortals
 
         // Texture variables
         Texture2D immortalTexture;
-        Texture2D tileTexture;
         Texture2D selectedTexture;
         Texture2D pixel;
-        Texture2D rotatingThing;
 
         // Mouse Variables
         MouseState prevMouseState;
@@ -114,20 +112,28 @@ namespace Immortals
         {
             // Load the sprite textures
             immortalTexture = Content.Load<Texture2D>(@"Images/immortalSmall");
-            tileTexture = Content.Load<Texture2D>(@"Images/tile");
             selectedTexture = Content.Load<Texture2D>(@"Images/selected");
-            rotatingThing = Content.Load<Texture2D>(@"Images/rotatingThing");
 
             // make the background
-            spriteManager.GenerateBoard(new Point(10, 10),
-                new Sprite(tileTexture,
+            spriteManager.GenerateBoard(new Point(15, 15),
+                new Sprite(Content.Load<Texture2D>(@"Images/tile"),
                     new Point(75, 75),
                     new Point(1, 1),
                     0,
                     new Point(0, 0)));
 
+            // make the sidebar
+            spriteManager.MakeSidebar(
+                Content.Load<Texture2D>(@"Images/sidebarTemplate"),
+                new Point(300, 750),
+                this.Window.ClientBounds);
+
             // Make a sprite
-            thing = new Sprite(rotatingThing, new Point(75, 75), new Point(3, 4), 16, new Point(10,10));
+            thing = new Sprite(Content.Load<Texture2D>(@"Images/rotatingThing"),
+                new Point(75, 75), 
+                new Point(3, 4), 
+                41, 
+                new Point(10,10));
             spriteManager.AddSprite(thing);
 
         }

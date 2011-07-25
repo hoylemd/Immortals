@@ -108,7 +108,7 @@ namespace Immortals
         /// </summary>
         /// <param name="gameTime"> Time object to indicate the amount of
         /// time that's past.</param>
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             if (this.frameDuration > 0)
                 this.IncrementFrame(gameTime.ElapsedGameTime.Milliseconds);
@@ -118,7 +118,7 @@ namespace Immortals
         /// Function to tell a sprite to draw itself.
         /// </summary>
         /// <param name="spriteBatch"> The spriteBatch that will draw the sprite.</param>
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             try
             {

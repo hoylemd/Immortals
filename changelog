@@ -1,4 +1,3 @@
-Added Board class
-Overloaded sprite's Draw method to accept a position as well so a sprite can be copied to multiple locations.
-Modified Sprite's constructor to mark a sprite with a frame duration of 0 to be non animated.
-removed arguments in the Spritebatch.begin call in spritemanager to allow for proper layering.
+made initial plans for the sidbar layout.
+Added sidebar drawing logic
+added initial sidebar background template
