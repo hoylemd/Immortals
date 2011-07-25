@@ -20,3 +20,16 @@ C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Immorta
 C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Immortals.pdb
 C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\rotatingThing.xnb
 C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarTemplate.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\rotatingThing.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\immortal.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\immortalSmall.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\selected.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarTemplate.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarScroll.xnb
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Immortals.exe
+H:\Code\Immortals\CSharp\Immortals\Immortals\bin\x86\Debug\Immortals.pdb
+H:\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+H:\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Immortals.exe
+H:\Code\Immortals\CSharp\Immortals\Immortals\obj\x86\Debug\Immortals.pdb

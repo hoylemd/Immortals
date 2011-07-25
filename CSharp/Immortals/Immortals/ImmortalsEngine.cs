@@ -124,7 +124,7 @@ namespace Immortals
 
             // make the sidebar
             spriteManager.MakeSidebar(
-                Content.Load<Texture2D>(@"Images/sidebarTemplate"),
+                Content.Load<Texture2D>(@"Images/sidebarScroll"),
                 new Point(300, 750),
                 this.Window.ClientBounds);
 

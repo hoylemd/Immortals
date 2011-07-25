@@ -4,3 +4,4 @@ Content\Images\immortalSmall.xnb
 Content\Images\selected.xnb
 Content\Images\tile.xnb
 Content\Images\sidebarTemplate.xnb
+Content\Images\sidebarScroll.xnb
