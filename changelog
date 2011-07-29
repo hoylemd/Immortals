@@ -1,3 +1,3 @@
-reorganized some texture files
-added game view class
-started implementing zooming and panning
+Fixed zooming to scale properly.
+constrained zooming to arbitrary limits.
+constrained zoom to clientbounds limits

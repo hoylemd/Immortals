@@ -13,6 +13,7 @@ namespace Immortals
     {
         // Variables to represent zoom and pan
         int zoom;
+        int zoomSpeed;
         int minZoom;
         int maxZoom;
         Point pan;
@@ -38,6 +39,7 @@ namespace Immortals
         {
             // store all data and pointers
             this.zoom = 100;
+            this.zoomSpeed = 1;
             this.minZoom = 0;
             this.maxZoom = 100;
             this.pan = new Point(0, 0);
@@ -48,6 +50,9 @@ namespace Immortals
             // calculate the board rectangles
             this.board = new Rectangle(0, 0, boardFrameSize.X, boardFrameSize.Y);
             this.boardDisplayed = new Rectangle(0, 0, boardFrameSize.X, boardFrameSize.Y);
+
+            // recalculate minimum zoom
+            this.minZoom = (int)((float)clientBounds.Height / (float)boardFrameSize.Y * 100);
         }
 
         /// <summary>
@@ -92,11 +97,18 @@ namespace Immortals
         /// <param name="zoomValue">int representing the zoom value of the mouse wheel.</param>
         public void Zoom(int zoomValue)
         {
-            // if the zoom value is within acceptable values, update the zoom.
-            if (zoomValue >= this.minZoom && zoomValue <= this.maxZoom)
-            {
-                this.zoom = zoomValue;
-            }
+            // calculate the new zoom value
+            int newZoom = (zoomValue * this.zoomSpeed) + this.zoom;
+
+            // apply it, but respect max and min zooms.
+            if (newZoom >= this.maxZoom)
+                this.zoom = this.maxZoom;
+            else if (newZoom <= this.minZoom)
+                this.zoom = this.minZoom;
+            else
+                this.zoom = newZoom;
+
+            Console.Out.WriteLine("gameview zoom: " + this.zoom + ", min: " + this.minZoom);
         }
 
         /// <summary>

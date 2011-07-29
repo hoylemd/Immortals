@@ -73,7 +73,7 @@ namespace Immortals
             // Set up the game window
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = 750;
-            graphics.PreferredBackBufferWidth = 1250;
+            graphics.PreferredBackBufferWidth = 1050;
 
             // set up the Content path
             Content.RootDirectory = "Content";
@@ -210,7 +210,7 @@ namespace Immortals
             if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue)
             {
                 Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
-                gameView.Zoom(mouseState.ScrollWheelValue / 100);
+                gameView.Zoom((mouseState.ScrollWheelValue - prevMouseState.ScrollWheelValue) / 25);
             }
 
             // Update the view
