@@ -167,6 +167,26 @@ namespace Immortals
             }
         }
 
+        public void Draw(SpriteBatch spriteBatch, Rectangle view)
+        {
+            try
+            {
+                //Draw the sprite.
+                spriteBatch.Draw(this.texture,
+                    view,
+                    this.NextFrame(),
+                    Color.White,
+                    0,
+                    Vector2.Zero,
+                    SpriteEffects.None,
+                    1);
+            }
+            // Handle unbegun spriteBatches
+            catch (InvalidOperationException e)
+            {
+                Console.Out.WriteLine("Sprite.Draw call outside of SpriteBatch.Begin() and End() calls. Error type: " + e.GetType().ToString());
+            }
+        }
 
         /// <summary>
         /// Function to update the bouding box. to be called whenever the sprite moves.

@@ -23,11 +23,14 @@ namespace Immortals
         // List of sprites to draw
         List<Sprite> spriteList = new List<Sprite>();
 
-        // special sprite pointers
-
 
         // Board pointer
         Board board;
+
+        // Map Pointer
+        Sprite map;
+        Boolean useMap = false;
+        Rectangle boardView;
 
         // Sidebar pointer
         Sidebar sidebar;
@@ -91,8 +94,16 @@ namespace Immortals
             spriteBatch.Begin();
 
             // Draw the Board
-            if (board != null)
-                board.Draw(spriteBatch, Vector2.Zero, Game.Window.ClientBounds);
+            if (useMap)
+            {
+                if (map != null)
+                    map.Draw(this.spriteBatch, this.boardView);
+            }
+            else
+            {
+                if (board != null)
+                    board.Draw(this.spriteBatch, Vector2.Zero, Game.Window.ClientBounds);
+            }
 
             // Draw the sidebar
             if (sidebar != null)
@@ -116,6 +127,18 @@ namespace Immortals
         public void GenerateBoard(Point boardSize, Sprite tile)
         {
             this.board = new Board(boardSize, tile);
+            this.useMap = false;
+        }
+
+        /// <summary>
+        /// Function to register a map to the spritemanager
+        /// </summary>
+        /// <param name="mapSize"> Point object containing the map dimensions in pixels.</param>
+        /// <param name="map"> Sprite to use for the map. </param>
+        public void RegisterMap(Point mapSize, Sprite map)
+        {
+            this.map = map;
+            this.useMap = true;
         }
 
         /// <summary>
@@ -138,6 +161,11 @@ namespace Immortals
         {
             this.spriteList.Add(newSprite);
             return newSprite;
+        }
+
+        public void SetBoardView(Rectangle boardView)
+        {
+            this.boardView = boardView;
         }
     }
 }

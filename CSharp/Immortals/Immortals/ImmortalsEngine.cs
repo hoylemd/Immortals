@@ -19,6 +19,7 @@ namespace Immortals
         // graphics managers
         GraphicsDeviceManager graphics;
         SpriteManager spriteManager;
+        GameView gameView;
 
         // Texture variables
         Texture2D immortalTexture;
@@ -110,6 +111,8 @@ namespace Immortals
         /// </summary>
         protected override void LoadContent()
         {
+            Point mapSize = new Point(3000,3000);
+
             // Load the sprite textures
             immortalTexture = Content.Load<Texture2D>(@"Images/immortalSmall");
             selectedTexture = Content.Load<Texture2D>(@"Images/selected");
@@ -121,6 +124,15 @@ namespace Immortals
                     new Point(1, 1),
                     0,
                     new Point(0, 0)));
+
+            // use the void map
+            spriteManager.RegisterMap(mapSize,
+                new Sprite(Content.Load<Texture2D>(@"Images/Terrains/Void/void 40x40 board"),
+                    mapSize,
+                    new Point(1, 1),
+                    0,
+                    new Point(0,0)));
+
 
             // make the sidebar
             spriteManager.MakeSidebar(
@@ -135,6 +147,8 @@ namespace Immortals
                 41, 
                 new Point(10,10));
             spriteManager.AddSprite(thing);
+
+            this.gameView = new GameView(this.Window.ClientBounds, this.spriteManager, mapSize);
 
         }
 
@@ -191,6 +205,16 @@ namespace Immortals
             {
                 selectingState = false;
             }
+
+            // Mouse scrolling
+            if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue)
+            {
+                Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
+                gameView.Zoom(mouseState.ScrollWheelValue / 100);
+            }
+
+            // Update the view
+            this.gameView.Update();
 
             // save the mouse state for next cyle
             prevMouseState = mouseState;

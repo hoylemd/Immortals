@@ -28,7 +28,7 @@ namespace Immortals
         /// Override for the sprite Update method. does nothing.
         /// </summary>
         /// <param name="gameTime"> Artifact from base class.</param>
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             // Do nothing.
         }
