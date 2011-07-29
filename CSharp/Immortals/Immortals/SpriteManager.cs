@@ -47,7 +47,7 @@ namespace Immortals
         /// </summary>
         public override void Initialize()
         {
-            Console.Out.WriteLine("SPRITEMANAGER INIT");
+            // Console.Out.WriteLine("SPRITEMANAGER INIT");
             base.Initialize();
         }
 

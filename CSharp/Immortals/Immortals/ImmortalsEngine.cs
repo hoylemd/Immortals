@@ -168,15 +168,18 @@ namespace Immortals
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // input states
             MouseState mouseState;
-
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+            KeyboardState keyboardState;
             
-            // Poll that mouse
-            mouseState = Mouse.GetState();
+            // middleman variables
+            Point scrollDirection = new Point(0,0);
 
+            // Poll devices
+            mouseState = Mouse.GetState();
+            keyboardState = Keyboard.GetState();
+
+            // Mouse input
             // Mouse left button down.
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
@@ -205,13 +208,25 @@ namespace Immortals
             {
                 selectingState = false;
             }
-
-            // Mouse scrolling
+            // Mouse zooming
             if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue)
             {
-                Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
+                // Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
                 gameView.Zoom((mouseState.ScrollWheelValue - prevMouseState.ScrollWheelValue) / 25);
             }
+
+            // Keyboard Input
+            if (keyboardState.IsKeyDown(Keys.Up))
+                scrollDirection.Y +=1;
+            if (keyboardState.IsKeyDown(Keys.Down))
+                scrollDirection.Y -= 1;
+            if (keyboardState.IsKeyDown(Keys.Right))
+                scrollDirection.X -= 1;
+            if (keyboardState.IsKeyDown(Keys.Left))
+                scrollDirection.X += 1;
+
+            if (scrollDirection != Point.Zero)
+                gameView.Pan(scrollDirection);
 
             // Update the view
             this.gameView.Update();

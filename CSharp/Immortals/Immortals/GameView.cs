@@ -18,6 +18,8 @@ namespace Immortals
         int maxZoom;
         Point pan;
         int panSpeed;
+        Boolean panned;
+        Boolean zoomed;
 
         // Rectangle representing the game window
         Rectangle clientBounds;
@@ -61,13 +63,20 @@ namespace Immortals
         public void Update()
         {
             float zoomRatio = 0;
-            // update the board's location.
-            this.boardDisplayed.Location = new Point(this.board.X + pan.X, this.board.Y + pan.Y);
+            int zoomedHeight;
+            int zoomedWidth;
 
             // update the board's draw size.
             zoomRatio = (float)this.zoom / (float)this.maxZoom;
-            this.boardDisplayed.Width = (int)(zoomRatio * (float)this.board.Width);
-            this.boardDisplayed.Height = (int)(zoomRatio * (float)this.board.Height);
+            zoomedHeight = (int)(zoomRatio * (float)this.board.Height);
+            zoomedWidth = (int)(zoomRatio * (float)this.board.Width);
+            this.PanExact(new Point((int)((float)zoomedWidth / (float)this.boardDisplayed.Width), 
+                (int)((float)zoomedHeight / (float)this.boardDisplayed.Height)));
+            this.boardDisplayed.Width = zoomedWidth;
+            this.boardDisplayed.Height = zoomedHeight;
+
+            // update the board's location.
+            this.boardDisplayed.Location = new Point(this.board.X + pan.X, this.board.Y + pan.Y);
 
             // update the sprite manager with the drawing information
             this.spriteManager.SetBoardView(this.boardDisplayed);
@@ -81,14 +90,36 @@ namespace Immortals
         public void Pan(Point direction)
         {
             // calculate the pan distances
-            int panX = direction.X * panSpeed + this.pan.X;
-            int panY = direction.Y * panSpeed + this.pan.Y;
+            int panX = direction.X * this.panSpeed + this.pan.X;
+            int panY = direction.Y * this.panSpeed + this.pan.Y;
+
+            this.PanExact(new Point(panX, panY));
+
+            this.panned = true;
+        }
+
+        void PanExact(Point displacement)
+        {
+            // calculate the pan distances
+            int panX = displacement.X;
+            int panY = displacement.Y;
 
             // validate them
-            
-            // update the pan
+            if (panX > 0)
+                panX = 0;
+            else if (panX < (this.clientBounds.Width - this.boardDisplayed.Width))
+                panX = this.clientBounds.Width - this.boardDisplayed.Width;
+
+            if (panY > 0)
+                panY = 0;
+            else if (panY < (this.clientBounds.Height - this.boardDisplayed.Height))
+                panY = this.clientBounds.Height - this.boardDisplayed.Height;
+
+            // update them
             this.pan.X += panX;
             this.pan.Y += panY;
+
+            this.panned = true;
         }
 
         /// <summary>
@@ -108,7 +139,8 @@ namespace Immortals
             else
                 this.zoom = newZoom;
 
-            Console.Out.WriteLine("gameview zoom: " + this.zoom + ", min: " + this.minZoom);
+            this.zoomed = true;
+            // Console.Out.WriteLine("gameview zoom: " + this.zoom + ", min: " + this.minZoom);
         }
 
         /// <summary>

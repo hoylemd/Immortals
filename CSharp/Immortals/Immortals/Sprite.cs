@@ -167,8 +167,14 @@ namespace Immortals
             }
         }
 
+        /// <summary>
+        /// overload of draw to draw into a specific rectangle
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="view"></param>
         public void Draw(SpriteBatch spriteBatch, Rectangle view)
         {
+            // Console.Out.WriteLine("Drawing in " + view.ToString());
             try
             {
                 //Draw the sprite.
