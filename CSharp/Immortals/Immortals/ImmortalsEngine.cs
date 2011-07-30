@@ -212,7 +212,11 @@ namespace Immortals
             if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue)
             {
                 // Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
-                gameView.Zoom((mouseState.ScrollWheelValue - prevMouseState.ScrollWheelValue) / 25);
+                if ((mouseState.ScrollWheelValue - prevMouseState.ScrollWheelValue) > 0)
+                    gameView.Zoom(true);
+                else
+                    gameView.Zoom(false);
+    
             }
 
             // Keyboard Input

@@ -1,1 +1,2 @@
-cleaned up compiled binaries cluttering up the source
+Refactored Zooming to use new zoom level system.
+Panning is now broken though.
