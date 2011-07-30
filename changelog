@@ -1,5 +1,1 @@
-Fixed zooming to scale properly.
-constrained zooming to arbitrary limits.
-constrained zoom to clientbounds limits.
-implemented panning and limits
-NEXT: pan while zooming so view stays centered
+cleaned up compiled binaries cluttering up the source
