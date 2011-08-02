@@ -174,7 +174,7 @@ namespace Immortals
         /// <param name="view"></param>
         public void Draw(SpriteBatch spriteBatch, Rectangle view)
         {
-            // Console.Out.WriteLine("Drawing in " + view.ToString());
+            //Console.Out.WriteLine("Drawing in " + view.ToString());
             try
             {
                 //Draw the sprite.

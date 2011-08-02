@@ -81,13 +81,11 @@ namespace Immortals
         {
             int zoomedHeight;
             int zoomedWidth;
-            int zoomDeltaX = 0;
-            int zoomDeltaY = 0;
 
             // update the board's draw size if zooming occurred.
             if (this.zoomed)
             {
-                Console.Out.WriteLine("zoomed " + this.zoom);
+                //Console.Out.WriteLine("zoomed " + this.zoom);
                 
                 // recalculate zoom Ratio
                 this.zoomRatio = GameView.ZoomRatios[this.zoom];
@@ -95,10 +93,6 @@ namespace Immortals
                 // recalculate the draw size of the view
                 zoomedHeight = (int)(this.zoomRatio * (double)this.board.Height);
                 zoomedWidth = (int)(this.zoomRatio * (double)this.board.Width);
-                
-                //Console.Out.WriteLine("zW:" + zoomedWidth + "zH: " + 
-                //    zoomedHeight + "dW:"+ this.boardDisplayed.Width + "dH:" + 
-                //    this.boardDisplayed.Height);
 
                 // mark panned so the view location is readjusted
                 this.panned = true;
@@ -106,16 +100,40 @@ namespace Immortals
                 // change the draw size
                 this.boardDisplayed.Width = zoomedWidth;
                 this.boardDisplayed.Height = zoomedHeight;
+
+                // Console.Out.WriteLine("zW:" + zoomedWidth + " zH: " +
+                //    zoomedHeight + " dW:" + this.boardDisplayed.Width + " dH:" +
+                //    this.boardDisplayed.Height);
             }
 
             // update the board's location.
             if (this.panned)
             {
 
+                // Console.Out.WriteLine("Pan: " + this.pan.ToString() + ", boardsize: " + this.board.Width + ", " + this.board.Height);
+
+                // validate the new location
+                if (this.pan.X < ((this.board.Width * -1) + (int)((double)this.clientBounds.Width / this.zoomRatio)))
+                    this.pan.X = ((this.board.Width * -1) + (int)((double)this.clientBounds.Width / this.zoomRatio));
+
+                if (this.pan.X > 0)
+                    this.pan.X = 0;
+
+                if (this.pan.Y < ((this.board.Height * -1) + (int)((double)this.clientBounds.Height / this.zoomRatio)))
+                    this.pan.Y = ((this.board.Height * -1) + (int)((double)this.clientBounds.Height / this.zoomRatio));
+
+                if (this.pan.Y > 0)
+                    this.pan.Y = 0;
+
+
                 this.boardDisplayed.Location = new Point(
                     (int)(this.zoomRatio * (double)(this.board.X + pan.X)),
                     (int)(this.zoomRatio * (double)(this.board.Y + pan.Y)));
 
+                // Console.Out.WriteLine("drawing at " + this.boardDisplayed.Location.ToString() + " should be no more than " + ((this.zoomRatio * this.board.Height) * -1) + ", " + ((this.zoomRatio * this.board.Width) * -1));
+                // Console.Out.WriteLine("draw size dW:"+ this.boardDisplayed.Width + " dH:" + this.boardDisplayed.Height);
+                // Console.Out.WriteLine("should be " + this.zoomRatio * this.board.Width + ", " + this.zoomRatio * this.board.Height);
+            
             }
 
             // reset panning and zooming flags
@@ -145,21 +163,8 @@ namespace Immortals
         void PanExact(Point displacement)
         {
             // calculate the pan distances
-            int panX = displacement.X + this.pan.X;
-            int panY = displacement.Y + this.pan.Y;
-
-            // validate them
-            if (panX > 0)
-                panX = 0;
-            else if (panX < (this.clientBounds.Width - 
-                this.boardDisplayed.Width))
-                panX = this.clientBounds.Width - this.boardDisplayed.Width;
-
-            if (panY > 0)
-                panY = 0;
-            else if (panY < (this.clientBounds.Height - 
-                this.boardDisplayed.Height))
-                panY = this.clientBounds.Height - this.boardDisplayed.Height;
+            int panX = (int)((double)displacement.X / this.zoomRatio) + this.pan.X;
+            int panY = (int)((double)displacement.Y / this.zoomRatio) + this.pan.Y;
 
             // update them
             this.pan.X = panX;

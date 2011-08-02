@@ -1,1 +1,1 @@
-Fixed zoom jittering bug.
+fixed panning not staying within bounds at most zoom levels

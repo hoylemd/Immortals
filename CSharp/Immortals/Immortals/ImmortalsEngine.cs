@@ -112,6 +112,7 @@ namespace Immortals
         protected override void LoadContent()
         {
             Point mapSize = new Point(3000,3000);
+            Rectangle bounds = new Rectangle(0, 0, 750, 750);
 
             // Load the sprite textures
             immortalTexture = Content.Load<Texture2D>(@"Images/immortalSmall");
@@ -148,7 +149,9 @@ namespace Immortals
                 new Point(10,10));
             spriteManager.AddSprite(thing);
 
-            this.gameView = new GameView(this.Window.ClientBounds, this.spriteManager, mapSize);
+
+
+            this.gameView = new GameView(bounds, this.spriteManager, mapSize);
 
         }
 
