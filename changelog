@@ -1,1 +1,1 @@
-Changed panning to use the center of the view instead of the topright. hopefully this'll make zooming easier
+removed old python stuff
