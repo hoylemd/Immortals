@@ -54,7 +54,7 @@ namespace Immortals
             Point boardFrameSize)
         {
             // store all data and pointers
-            this.zoom = 2;
+            this.zoom = 4;
             this.zoomSpeed = 1;
             this.minZoom = 0;
             this.maxZoom = 4;
@@ -81,6 +81,8 @@ namespace Immortals
         {
             int zoomedHeight;
             int zoomedWidth;
+            int changeHeight;
+            int changeWidth;
 
             // update the board's draw size if zooming occurred.
             if (this.zoomed)
@@ -94,8 +96,15 @@ namespace Immortals
                 zoomedHeight = (int)(this.zoomRatio * (double)this.board.Height);
                 zoomedWidth = (int)(this.zoomRatio * (double)this.board.Width);
 
+                // calculate the change in size
+                changeWidth = (zoomedWidth - this.boardDisplayed.Width);
+                changeHeight = (zoomedHeight - this.boardDisplayed.Height);
+
                 // mark panned so the view location is readjusted
                 this.panned = true;
+
+                // pan half the change in hight/width so the view stays centered
+                this.PanExact(new Point(changeWidth / -2, changeHeight / -2));
 
                 // change the draw size
                 this.boardDisplayed.Width = zoomedWidth;

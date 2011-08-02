@@ -1,1 +1,1 @@
-fixed panning not staying within bounds at most zoom levels
+disabled zooming for now. Need to refactor panning to use the center of the view as a referance point instead of the topleft

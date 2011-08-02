@@ -212,7 +212,7 @@ namespace Immortals
                 selectingState = false;
             }
             // Mouse zooming
-            if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue)
+            if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue && false)
             {
                 Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
                 if ((mouseState.ScrollWheelValue - prevMouseState.ScrollWheelValue) > 0)
