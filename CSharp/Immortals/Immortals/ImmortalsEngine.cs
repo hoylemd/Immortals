@@ -211,7 +211,7 @@ namespace Immortals
             // Mouse zooming
             if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue)
             {
-                // Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
+                Console.Out.WriteLine("Scroll wheel moved: " + mouseState.ScrollWheelValue);
                 if ((mouseState.ScrollWheelValue - prevMouseState.ScrollWheelValue) > 0)
                     gameView.Zoom(true);
                 else

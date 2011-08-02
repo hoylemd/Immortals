@@ -96,9 +96,9 @@ namespace Immortals
                 zoomedHeight = (int)(this.zoomRatio * (double)this.board.Height);
                 zoomedWidth = (int)(this.zoomRatio * (double)this.board.Width);
                 
-                Console.Out.WriteLine("zW:" + zoomedWidth + "zH: " + 
-                    zoomedHeight + "dW:"+ this.boardDisplayed.Width + "dH:" + 
-                    this.boardDisplayed.Height);
+                //Console.Out.WriteLine("zW:" + zoomedWidth + "zH: " + 
+                //    zoomedHeight + "dW:"+ this.boardDisplayed.Width + "dH:" + 
+                //    this.boardDisplayed.Height);
 
                 // mark panned so the view location is readjusted
                 this.panned = true;
@@ -176,10 +176,16 @@ namespace Immortals
         public void Zoom(Boolean zoomIn)
         {
             // validate for, and apply for indicated direction
-            if (zoomIn && (this.zoom > this.minZoom))
-                this.zoom -= 1;
-            else if (this.zoom < this.maxZoom)
-                this.zoom += 1;
+            if (zoomIn)
+            {
+                if (this.zoom > this.minZoom)
+                    this.zoom -= 1;
+            }
+            else
+            {
+                if (this.zoom < this.maxZoom)
+                    this.zoom += 1;
+            }
 
             // raise the zoomed flag
             this.zoomed = true;
