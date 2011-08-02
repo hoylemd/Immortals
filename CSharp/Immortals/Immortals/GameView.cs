@@ -22,16 +22,20 @@ namespace Immortals
         // static zoom ratios
         static double[] ZoomRatios = {1.000, 0.833, 0.666, 0.500, 0.333};
 
-        // Variables to represent zoom and pan
+        // Variables to represent zoom
         int zoom;
         double zoomRatio;
-        int zoomSpeed;
+        //int zoomSpeed;
         int minZoom;
         int maxZoom;
+        Boolean zoomed;
+
+        // variables to represent pan
         Point pan;
+        Point panOffset;
+        Rectangle panBounds;
         int panSpeed;
         Boolean panned;
-        Boolean zoomed;
 
         // Rectangle representing the game window
         Rectangle clientBounds;
@@ -53,14 +57,27 @@ namespace Immortals
         public GameView(Rectangle clientBounds, SpriteManager spriteManager, 
             Point boardFrameSize)
         {
-            // store all data and pointers
-            this.zoom = 4;
-            this.zoomSpeed = 1;
+            // store and.or initlialize all data and pointers
+            // zoom data
+            this.zoom = 0;
+            //this.zoomSpeed = 1;
             this.minZoom = 0;
             this.maxZoom = 4;
+
+            // pan data
             this.pan = new Point(0, 0);
             this.panSpeed = 25;
             this.clientBounds = clientBounds;
+            this.panOffset = new Point(clientBounds.Width / 2, clientBounds.Height / 2);
+            // Console.Out.WriteLine(" offset: " +this.panOffset.ToString());
+
+            this.panBounds = new Rectangle(
+                panOffset.X,
+                panOffset.Y,
+                (boardFrameSize.X - (2 * panOffset.X)),
+                (boardFrameSize.Y - (2 * panOffset.Y)));
+
+            // sprite managment
             this.spriteManager = spriteManager;
 
             // calculate the board rectangles
@@ -104,7 +121,7 @@ namespace Immortals
                 this.panned = true;
 
                 // pan half the change in hight/width so the view stays centered
-                this.PanExact(new Point(changeWidth / -2, changeHeight / -2));
+                // this.PanExact(new Point(changeWidth / -2, changeHeight / -2));
 
                 // change the draw size
                 this.boardDisplayed.Width = zoomedWidth;
@@ -121,23 +138,20 @@ namespace Immortals
 
                 // Console.Out.WriteLine("Pan: " + this.pan.ToString() + ", boardsize: " + this.board.Width + ", " + this.board.Height);
 
-                // validate the new location
-                if (this.pan.X < ((this.board.Width * -1) + (int)((double)this.clientBounds.Width / this.zoomRatio)))
-                    this.pan.X = ((this.board.Width * -1) + (int)((double)this.clientBounds.Width / this.zoomRatio));
 
-                if (this.pan.X > 0)
-                    this.pan.X = 0;
+                if (this.pan.X < this.panBounds.X)
+                    this.pan.X = this.panBounds.X;
+                if (this.pan.X > (this.panBounds.X + this.panBounds.Width))
+                    this.pan.X = (this.panBounds.X + this.panBounds.Width);
 
-                if (this.pan.Y < ((this.board.Height * -1) + (int)((double)this.clientBounds.Height / this.zoomRatio)))
-                    this.pan.Y = ((this.board.Height * -1) + (int)((double)this.clientBounds.Height / this.zoomRatio));
-
-                if (this.pan.Y > 0)
-                    this.pan.Y = 0;
-
+                if (this.pan.Y < this.panBounds.Y)
+                    this.pan.Y = this.panBounds.Y;
+                if (this.pan.Y > (this.panBounds.Y + this.panBounds.Height))
+                    this.pan.Y = (this.panBounds.Y + this.panBounds.Height);
 
                 this.boardDisplayed.Location = new Point(
-                    (int)(this.zoomRatio * (double)(this.board.X + pan.X)),
-                    (int)(this.zoomRatio * (double)(this.board.Y + pan.Y)));
+                    this.board.X - (this.pan.X - this.panOffset.X),
+                    this.board.Y - (this.pan.Y - this.panOffset.Y));
 
                 // Console.Out.WriteLine("drawing at " + this.boardDisplayed.Location.ToString() + " should be no more than " + ((this.zoomRatio * this.board.Height) * -1) + ", " + ((this.zoomRatio * this.board.Width) * -1));
                 // Console.Out.WriteLine("draw size dW:"+ this.boardDisplayed.Width + " dH:" + this.boardDisplayed.Height);

@@ -30,7 +30,7 @@ namespace Immortals
         MouseState prevMouseState;
 
         // Game state variables
-        Boolean selectingState;
+        // Boolean selectingState;
         Rectangle selectionRect;
         Vector2 selectionOrigin;
 
@@ -91,7 +91,7 @@ namespace Immortals
             this.IsMouseVisible = true;
 
             // initialize game state variables
-            selectingState = false;
+            // selectingState = false;
 
             // Create the "pixel" object
             pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
@@ -189,7 +189,7 @@ namespace Immortals
                 //Console.Out.WriteLine("down.");
                 if (prevMouseState.LeftButton == ButtonState.Released)
                 {
-                    selectingState = true;
+                    // selectingState = true;
                     selectionOrigin.X = mouseState.X;
                     selectionOrigin.Y = mouseState.Y;
                     selectionRect = new Rectangle(mouseState.X, mouseState.Y, 0, 0);
@@ -209,7 +209,7 @@ namespace Immortals
             if (mouseState.LeftButton == ButtonState.Released 
                 && prevMouseState.LeftButton == ButtonState.Pressed)
             {
-                selectingState = false;
+                //selectingState = false;
             }
             // Mouse zooming
             if (mouseState.ScrollWheelValue != prevMouseState.ScrollWheelValue && false)
@@ -224,13 +224,13 @@ namespace Immortals
 
             // Keyboard Input
             if (keyboardState.IsKeyDown(Keys.Up))
-                scrollDirection.Y +=1;
+                scrollDirection.Y -=1;
             if (keyboardState.IsKeyDown(Keys.Down))
-                scrollDirection.Y -= 1;
+                scrollDirection.Y += 1;
             if (keyboardState.IsKeyDown(Keys.Right))
-                scrollDirection.X -= 1;
-            if (keyboardState.IsKeyDown(Keys.Left))
                 scrollDirection.X += 1;
+            if (keyboardState.IsKeyDown(Keys.Left))
+                scrollDirection.X -= 1;
 
             if (scrollDirection != Point.Zero)
                 gameView.Pan(scrollDirection);
