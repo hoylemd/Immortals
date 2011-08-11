@@ -68,6 +68,13 @@ namespace Immortals
 
         }
 
+        public override void Initialize()
+        {
+            this.mainCamera = new Camera(Game, new Vector3(0, 5, 0), Vector3.Zero, Vector3.UnitY);
+
+            base.Initialize();
+        }
+
         protected override void LoadContent()
         {
             Point mapSize = new Point(3000, 3000);

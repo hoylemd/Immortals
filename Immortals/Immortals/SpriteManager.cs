@@ -83,6 +83,7 @@ namespace Immortals
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
+            if (useMap) return;
 
             /*base.Draw(gameTime);
 
