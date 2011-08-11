@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.Storage;
+
 
 namespace Immortals
 {
     /// <summary>
     /// Class to represent where the view is centered and zoomed.
     /// </summary>
-    class GameView
+    public class GameView : Microsoft.Xna.Framework.DrawableGameComponent
     {
 
         /*Zoom levels 
@@ -37,6 +45,9 @@ namespace Immortals
         int panSpeed;
         Boolean panned;
 
+        // Main Camera
+        Camera mainCamera;
+
         // Rectangle representing the game window
         Rectangle clientBounds;
 
@@ -47,6 +58,13 @@ namespace Immortals
         // sprite manager
         SpriteManager spriteManager;
 
+        // Rectangles representing the sidebar and board areas
+        Rectangle sidebarView;
+        Rectangle boardView;
+
+        // game engine pointer
+        ImmortalsEngine engine;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -54,46 +72,72 @@ namespace Immortals
         /// the game is being run in.</param>
         /// <param name="spriteManager"></param>
         /// <param name="boardFrameSize"></param>
-        public GameView(Rectangle clientBounds, SpriteManager spriteManager, 
-            Point boardFrameSize)
+        public GameView(ImmortalsEngine game)
+            : base(game)
         {
             // store and.or initlialize all data and pointers
+            this.engine = game;
+
             // zoom data
             this.zoom = 0;
             //this.zoomSpeed = 1;
             this.minZoom = 0;
             this.maxZoom = 4;
 
-            // pan data
-            this.pan = new Point(0, 0);
-            this.panSpeed = 25;
-            this.clientBounds = clientBounds;
-            this.panOffset = new Point(clientBounds.Width / 2, clientBounds.Height / 2);
-            // Console.Out.WriteLine(" offset: " +this.panOffset.ToString());
-
-            this.panBounds = new Rectangle(
-                panOffset.X,
-                panOffset.Y,
-                (boardFrameSize.X - (2 * panOffset.X)),
-                (boardFrameSize.Y - (2 * panOffset.Y)));
+            // display data
+            this.clientBounds = game.Window.ClientBounds;
+            this.boardView = new Rectangle(0, 0, this.clientBounds.Width - 300, 
+                this.clientBounds.Height);
+            this.sidebarView = new Rectangle(this.boardView.Width, 0, 300,
+                this.clientBounds.Height);
 
             // sprite managment
-            this.spriteManager = spriteManager;
+            this.spriteManager = new SpriteManager(game);
+            game.Components.Add(this.spriteManager);
 
-            // calculate the board rectangles
-            this.board = new Rectangle(0, 0, boardFrameSize.X, 
-                boardFrameSize.Y);
-            this.boardDisplayed = new Rectangle(0, 0, boardFrameSize.X, 
-                boardFrameSize.Y);
+        }
 
-            // flag as zoomed in and panned so it gets recalculated
-            this.zoomed = true;
-            this.panned = true;
+        protected override void LoadContent()
+        {
+            Point mapSize = new Point(3000, 3000);
+            Rectangle bounds = new Rectangle(0, 0, 750, 750);
+
+            // Load the sprite textures
+            Texture2D immortalTexture = engine.Content.Load<Texture2D>(
+                @"Images/immortalSmall");
+            Texture2D selectedTexture = engine.Content.Load<Texture2D>(
+                @"Images/selected");
+
+            // use the void map
+            spriteManager.RegisterMap(mapSize,
+                new Sprite(engine.Content.Load<Texture2D>(
+                        @"Images/Terrains/Void/void 40x40 board"),
+                    mapSize,
+                    new Point(1, 1),
+                    0,
+                    new Point(0, 0)));
+
+            // make the sidebar
+            spriteManager.MakeSidebar(
+                engine.Content.Load<Texture2D>(@"Images/sidebarScroll"),
+                new Point(300, 750),
+                this.clientBounds);
+
+            // Make a sprite
+            Sprite thing = new Sprite(
+                engine.Content.Load<Texture2D>(@"Images/rotatingThing"),
+                new Point(75, 75),
+                new Point(3, 4),
+                41,
+                new Point(10, 10));
+            spriteManager.AddSprite(thing);
+
+            base.LoadContent();
         }
 
         /// <summary>
         /// Function to update the board location
-        /// </summary>
+        /// </summarawey>
         public void Update()
         {
             int zoomedHeight;
@@ -248,6 +292,14 @@ namespace Immortals
         private static double ZoomLevel(int zoomLevel)
         {
             return GameView.ZoomRatios[zoomLevel];  
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            // Clear the background
+            // GraphicsDevice.Clear(Color.Black);
+
+            base.Draw(gameTime);
         }
     }
 }

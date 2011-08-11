@@ -18,12 +18,9 @@ namespace Immortals
     {
         // graphics managers
         GraphicsDeviceManager graphics;
-        SpriteManager spriteManager;
         GameView gameView;
 
         // Texture variables
-        Texture2D immortalTexture;
-        Texture2D selectedTexture;
         Texture2D pixel;
 
         // Mouse Variables
@@ -77,6 +74,10 @@ namespace Immortals
 
             // set up the Content path
             Content.RootDirectory = "Content";
+
+            // set up the game View
+            gameView = new GameView(this);
+            Components.Add(gameView);
         }
 
         /// <summary>
@@ -97,10 +98,6 @@ namespace Immortals
             pixel = new Texture2D(GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
             pixel.SetData(new[] { Color.White });
 
-            // Create a new SpriteManager, which handles all sprites
-            spriteManager = new SpriteManager(this);
-            Components.Add(spriteManager);
-
             // Initialize base class
             base.Initialize();
         }
@@ -111,47 +108,6 @@ namespace Immortals
         /// </summary>
         protected override void LoadContent()
         {
-            Point mapSize = new Point(3000,3000);
-            Rectangle bounds = new Rectangle(0, 0, 750, 750);
-
-            // Load the sprite textures
-            immortalTexture = Content.Load<Texture2D>(@"Images/immortalSmall");
-            selectedTexture = Content.Load<Texture2D>(@"Images/selected");
-
-            // make the background
-            spriteManager.GenerateBoard(new Point(15, 15),
-                new Sprite(Content.Load<Texture2D>(@"Images/tile"),
-                    new Point(75, 75),
-                    new Point(1, 1),
-                    0,
-                    new Point(0, 0)));
-
-            // use the void map
-            spriteManager.RegisterMap(mapSize,
-                new Sprite(Content.Load<Texture2D>(@"Images/Terrains/Void/void 40x40 board"),
-                    mapSize,
-                    new Point(1, 1),
-                    0,
-                    new Point(0,0)));
-
-
-            // make the sidebar
-            spriteManager.MakeSidebar(
-                Content.Load<Texture2D>(@"Images/sidebarScroll"),
-                new Point(300, 750),
-                this.Window.ClientBounds);
-
-            // Make a sprite
-            thing = new Sprite(Content.Load<Texture2D>(@"Images/rotatingThing"),
-                new Point(75, 75), 
-                new Point(3, 4), 
-                41, 
-                new Point(10,10));
-            spriteManager.AddSprite(thing);
-
-
-
-            this.gameView = new GameView(bounds, this.spriteManager, mapSize);
 
         }
 
@@ -252,41 +208,6 @@ namespace Immortals
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-                
-                /*
-            // draw the tile board
-            for (i = 0; i < 10; i++)
-            {
-                for (j = 0; j < 10; j++)
-                {
-                    spriteBatch.Draw(tileTexture, new Vector2(i * 75, j * 75), Color.White);
-                }
-            }
-
-            // Draw the immortal
-            spriteBatch.Draw(immortalTexture, Vector2.Zero, Color.White);
-
-            // Draw the selection box
-            if (selectingState == true)
-            {
-                // draw the top
-                spriteBatch.Draw(pixel, 
-                    new Rectangle(selectionRect.X, selectionRect.Y, selectionRect.Width, 1), Color.LightGreen);  
-                // draw the left
-                spriteBatch.Draw(pixel,
-                     new Rectangle(selectionRect.X + selectionRect.Width, selectionRect.Y, 1, selectionRect.Height), Color.LightGreen);
-                // draw the bottom
-                spriteBatch.Draw(pixel,
-                     new Rectangle(selectionRect.X, selectionRect.Y + selectionRect.Height, selectionRect.Width, 1), Color.LightGreen);
-                // draw the right
-                spriteBatch.Draw(pixel,
-                    new Rectangle(selectionRect.X, selectionRect.Y, 1, selectionRect.Height), Color.LightGreen);
-                
-            }
-            //spriteBatch.Draw(selectedTexture, Vector2.Zero, Color.White);
-
-            spriteBatch.End();*/
-
             base.Draw(gameTime);
         }
     }

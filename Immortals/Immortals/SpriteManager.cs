@@ -38,7 +38,7 @@ namespace Immortals
         public SpriteManager(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
         }
 
         /// <summary>
@@ -47,7 +47,8 @@ namespace Immortals
         /// </summary>
         public override void Initialize()
         {
-            // Console.Out.WriteLine("SPRITEMANAGER INIT");
+            this.spriteBatch = new SpriteBatch(Game.GraphicsDevice);
+
             base.Initialize();
         }
 
@@ -56,16 +57,6 @@ namespace Immortals
         /// </summary>
         protected override void LoadContent()
         {
-           /*spritename = new Sprite(Game.Content.Load<Texture2D>(@"<asset path>"),
-                    new Point(h, w),  // frame size
-                    new Point(a, d),  // size of frame matrix
-                    16,               // ms per frame
-                    5,
-                    new Point(10, 10));
-            spriteList.Add(ring);*/
-
-            this.spriteBatch = new SpriteBatch(Game.GraphicsDevice);
-
             base.LoadContent();
         }
 
@@ -89,6 +80,8 @@ namespace Immortals
         public override void Draw(GameTime gameTime)
         {
             Game.GraphicsDevice.Clear(Color.Purple);
+
+            base.Draw(gameTime);
 
             // Draw Stuff
             spriteBatch.Begin();
@@ -115,7 +108,6 @@ namespace Immortals
 
             spriteBatch.End();
 
-            base.Draw(gameTime);
         }
 
 
