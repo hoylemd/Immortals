@@ -46,7 +46,7 @@ namespace Immortals
         Boolean panned;
 
         // Main Camera
-        Camera mainCamera;
+        public Camera mainCamera;
 
         // Rectangle representing the game window
         Rectangle clientBounds;
@@ -57,6 +57,9 @@ namespace Immortals
 
         // sprite manager
         SpriteManager spriteManager;
+
+        // model manager
+        ModelManager modelManager;
 
         // Rectangles representing the sidebar and board areas
         Rectangle sidebarView;
@@ -92,8 +95,12 @@ namespace Immortals
                 this.clientBounds.Height);
 
             // sprite managment
-            this.spriteManager = new SpriteManager(game);
+            this.spriteManager = new SpriteManager(game, this);
             game.Components.Add(this.spriteManager);
+
+            // Model management
+            this.modelManager = new ModelManager(game, this);
+            game.Components.Add(this.modelManager);
 
         }
 

@@ -35,10 +35,14 @@ namespace Immortals
         // Sidebar pointer
         Sidebar sidebar;
 
-        public SpriteManager(Game game)
+        // Gameview pointer
+        GameView gameView;
+
+        public SpriteManager(Game game, GameView gv)
             : base(game)
         {
-            
+            // register parent
+            this.gameView = gv;
         }
 
         /// <summary>
@@ -79,7 +83,6 @@ namespace Immortals
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
-            Game.GraphicsDevice.Clear(Color.Purple);
 
             base.Draw(gameTime);
 

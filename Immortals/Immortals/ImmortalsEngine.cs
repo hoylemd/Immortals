@@ -34,6 +34,9 @@ namespace Immortals
         // Sprite Pointers
         Sprite thing;
 
+        // Random Number Generator
+        public Random rnd { get; protected set; }
+
         /// <summary>
         /// Function to get the least of 2 ints
         /// </summary>
@@ -78,6 +81,9 @@ namespace Immortals
             // set up the game View
             gameView = new GameView(this);
             Components.Add(gameView);
+
+            // set up randomizer
+            this.rnd = new Random();
         }
 
         /// <summary>
