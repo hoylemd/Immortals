@@ -31,9 +31,6 @@ namespace Immortals
         Rectangle selectionRect;
         Vector2 selectionOrigin;
 
-        // Sprite Pointers
-        Sprite thing;
-
         // Random Number Generator
         public Random rnd { get; protected set; }
 
@@ -196,9 +193,6 @@ namespace Immortals
 
             if (scrollDirection != Point.Zero)
                 gameView.Pan(scrollDirection);
-
-            // Update the view
-            this.gameView.Update();
 
             // save the mouse state for next cyle
             prevMouseState = mouseState;

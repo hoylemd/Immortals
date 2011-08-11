@@ -84,9 +84,7 @@ namespace Immortals
         public override void Draw(GameTime gameTime)
         {
 
-            return;
-
-            base.Draw(gameTime);
+            /*base.Draw(gameTime);
 
             // Draw Stuff
             spriteBatch.Begin();
@@ -111,7 +109,7 @@ namespace Immortals
             foreach (Sprite sprite in spriteList)
                 sprite.Draw(spriteBatch);
 
-            spriteBatch.End();
+            spriteBatch.End();*/
 
         }
 

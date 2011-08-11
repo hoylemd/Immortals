@@ -253,6 +253,26 @@
       <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Snow\snow 40x40 board.xnb</Output>
       <Time>2011-08-11T14:26:20.5571286-04:00</Time>
     </Item>
+    <Item>
+      <Source>Models\ammo.x</Source>
+      <Name>Models\ammo</Name>
+      <Importer>XImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+      <Options>None</Options>
+      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Models\ammo.xnb</Output>
+      <Time>2011-08-11T16:02:35.7012495-04:00</Time>
+      <Dependency>
+        <Key>obj\x86\Debug\Models\ammo_0.xml</Key>
+        <Value>2011-08-11T16:15:51.2205081-04:00</Value>
+      </Dependency>
+    </Item>
+    <Item>
+      <Source>Models\ammo.x</Source>
+      <Importer>XImporter</Importer>
+      <Options>IntermediateFile, DontCacheImportedData</Options>
+      <Output>obj\x86\Debug\Models\ammo_0.xml</Output>
+      <Time>2011-08-11T16:02:35.7012495-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

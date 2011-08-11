@@ -19,41 +19,11 @@ namespace Immortals
     /// </summary>
     public class GameView : Microsoft.Xna.Framework.DrawableGameComponent
     {
-
-        /*Zoom levels 
-            1: maximum zoom.1 DU = 75 pixels	(1.000 ratio)
-            2: close zoom.	1 DU = 63 pixels	(0.833 ratio)	
-            3: medium zoom. 1 DU = 50 pixels	(0.666 ratio)
-            4: far zoom.	1 DU = 38 pixels	(0.500 ratio)
-            5: minimum zoom.1 DU = 25 pixels	(0.333 ratio)
-         * */
-        // static zoom ratios
-        static double[] ZoomRatios = {1.000, 0.833, 0.666, 0.500, 0.333};
-
-        // Variables to represent zoom
-        int zoom;
-        double zoomRatio;
-        //int zoomSpeed;
-        int minZoom;
-        int maxZoom;
-        Boolean zoomed;
-
-        // variables to represent pan
-        Point pan;
-        Point panOffset;
-        Rectangle panBounds;
-        int panSpeed;
-        Boolean panned;
-
         // Main Camera
-        public Camera mainCamera;
+        public Camera mainCamera { get; protected set; }
 
         // Rectangle representing the game window
         Rectangle clientBounds;
-
-        // Rectangle representing the game board
-        Rectangle board;
-        Rectangle boardDisplayed;
 
         // sprite manager
         SpriteManager spriteManager;
@@ -80,12 +50,6 @@ namespace Immortals
         {
             // store and.or initlialize all data and pointers
             this.engine = game;
-
-            // zoom data
-            this.zoom = 0;
-            //this.zoomSpeed = 1;
-            this.minZoom = 0;
-            this.maxZoom = 4;
 
             // display data
             this.clientBounds = game.Window.ClientBounds;
@@ -144,78 +108,11 @@ namespace Immortals
 
         /// <summary>
         /// Function to update the board location
-        /// </summarawey>
-        public void Update()
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values</param>
+        public override void Update(GameTime gameTime)
         {
-            int zoomedHeight;
-            int zoomedWidth;
-            int changeHeight;
-            int changeWidth;
 
-            // update the board's draw size if zooming occurred.
-            if (this.zoomed)
-            {
-                //Console.Out.WriteLine("zoomed " + this.zoom);
-                
-                // recalculate zoom Ratio
-                this.zoomRatio = GameView.ZoomRatios[this.zoom];
-
-                // recalculate the draw size of the view
-                zoomedHeight = (int)(this.zoomRatio * (double)this.board.Height);
-                zoomedWidth = (int)(this.zoomRatio * (double)this.board.Width);
-
-                // calculate the change in size
-                changeWidth = (zoomedWidth - this.boardDisplayed.Width);
-                changeHeight = (zoomedHeight - this.boardDisplayed.Height);
-
-                // mark panned so the view location is readjusted
-                this.panned = true;
-
-                // pan half the change in hight/width so the view stays centered
-                // this.PanExact(new Point(changeWidth / -2, changeHeight / -2));
-
-                // change the draw size
-                this.boardDisplayed.Width = zoomedWidth;
-                this.boardDisplayed.Height = zoomedHeight;
-
-                // Console.Out.WriteLine("zW:" + zoomedWidth + " zH: " +
-                //    zoomedHeight + " dW:" + this.boardDisplayed.Width + " dH:" +
-                //    this.boardDisplayed.Height);
-            }
-
-            // update the board's location.
-            if (this.panned)
-            {
-
-                // Console.Out.WriteLine("Pan: " + this.pan.ToString() + ", boardsize: " + this.board.Width + ", " + this.board.Height);
-
-
-                if (this.pan.X < this.panBounds.X)
-                    this.pan.X = this.panBounds.X;
-                if (this.pan.X > (this.panBounds.X + this.panBounds.Width))
-                    this.pan.X = (this.panBounds.X + this.panBounds.Width);
-
-                if (this.pan.Y < this.panBounds.Y)
-                    this.pan.Y = this.panBounds.Y;
-                if (this.pan.Y > (this.panBounds.Y + this.panBounds.Height))
-                    this.pan.Y = (this.panBounds.Y + this.panBounds.Height);
-
-                this.boardDisplayed.Location = new Point(
-                    this.board.X - (this.pan.X - this.panOffset.X),
-                    this.board.Y - (this.pan.Y - this.panOffset.Y));
-
-                // Console.Out.WriteLine("drawing at " + this.boardDisplayed.Location.ToString() + " should be no more than " + ((this.zoomRatio * this.board.Height) * -1) + ", " + ((this.zoomRatio * this.board.Width) * -1));
-                // Console.Out.WriteLine("draw size dW:"+ this.boardDisplayed.Width + " dH:" + this.boardDisplayed.Height);
-                // Console.Out.WriteLine("should be " + this.zoomRatio * this.board.Width + ", " + this.zoomRatio * this.board.Height);
-            
-            }
-
-            // reset panning and zooming flags
-            this.panned = false;
-            this.zoomed = false;
-
-            // update the sprite manager with the drawing information
-            this.spriteManager.SetBoardView(this.boardDisplayed);
         }
 
         /// <summary>
@@ -226,25 +123,12 @@ namespace Immortals
         /// both dimensions should be 1, 0 or -1</param>
         public void Pan(Point direction)
         {
-            // calculate the pan distances
-            int panX = direction.X * this.panSpeed;
-            int panY = direction.Y * this.panSpeed;
-
-            this.PanExact(new Point(panX, panY));
 
         }
 
         void PanExact(Point displacement)
         {
-            // calculate the pan distances
-            int panX = (int)((double)displacement.X / this.zoomRatio) + this.pan.X;
-            int panY = (int)((double)displacement.Y / this.zoomRatio) + this.pan.Y;
-
-            // update them
-            this.pan.X = panX;
-            this.pan.Y = panY;
-
-            this.panned = true;
+            
         }
 
         /// <summary>
@@ -257,17 +141,13 @@ namespace Immortals
             // validate for, and apply for indicated direction
             if (zoomIn)
             {
-                if (this.zoom > this.minZoom)
-                    this.zoom -= 1;
+               
             }
             else
             {
-                if (this.zoom < this.maxZoom)
-                    this.zoom += 1;
+                
             }
 
-            // raise the zoomed flag
-            this.zoomed = true;
 
         }
 
@@ -277,7 +157,7 @@ namespace Immortals
         /// <returns>int representing the zoom level.</returns>
         public int GetZoom()
         {
-            return this.zoom;
+            return 0;
         }
 
         /// <summary>
@@ -287,18 +167,7 @@ namespace Immortals
         /// board is.</returns>
         public Rectangle GetBoardView()
         {
-            return this.boardDisplayed;
-        }
-
-        /// <summary>
-        /// Static method to translate a zom level into a zoom ratio
-        /// </summary>
-        /// <param name="zoomLevel"> the zoom level to translate</param>
-        /// <returns> a double representing the zoom ratio for that zoom
-        /// level</returns>
-        private static double ZoomLevel(int zoomLevel)
-        {
-            return GameView.ZoomRatios[zoomLevel];  
+            return this.boardView;
         }
 
         public override void Draw(GameTime gameTime)

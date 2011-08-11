@@ -90,14 +90,6 @@ namespace Immortals
             {
                 // Update each model
                 this.models[i].Update();
-
-                // Remove models that are out of bounds
-                if (this.models[i].GetWorld().Translation.Z >
-                    (gameView.mainCamera.cameraPosition.Z + 100))
-                {
-                    models.RemoveAt(i);
-                    i--;
-                }
             }
         }
 

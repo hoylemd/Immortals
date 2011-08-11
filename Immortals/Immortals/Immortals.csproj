@@ -118,6 +118,7 @@
     <Compile Include="Sidebar.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteManager.cs" />
+    <Compile Include="StaticModel.cs" />
     <Compile Include="Unit.cs" />
   </ItemGroup>
   <ItemGroup>
