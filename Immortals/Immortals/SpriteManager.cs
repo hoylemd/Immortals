@@ -84,6 +84,8 @@ namespace Immortals
         public override void Draw(GameTime gameTime)
         {
 
+            return;
+
             base.Draw(gameTime);
 
             // Draw Stuff
