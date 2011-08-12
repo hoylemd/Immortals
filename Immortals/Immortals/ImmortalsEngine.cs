@@ -33,6 +33,8 @@ namespace Immortals
             graphics.PreferredBackBufferHeight = 750;
             graphics.PreferredBackBufferWidth = 1050;
 
+            Console.Out.WriteLine("bounds one: " + this.Window.ClientBounds.ToString());
+
             // set up the Content path
             Content.RootDirectory = "Content";
 
@@ -54,6 +56,8 @@ namespace Immortals
         {
             // make visible the mouse
             this.IsMouseVisible = true;
+
+            Console.Out.WriteLine("bounds two: " + this.Window.ClientBounds.ToString());
 
             // Initialize base class
             base.Initialize();

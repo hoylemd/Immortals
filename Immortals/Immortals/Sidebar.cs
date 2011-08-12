@@ -14,6 +14,9 @@ namespace Immortals
         // Background texture
         Texture2D backgroundTexture;
 
+        // Absolute rectangle
+        Rectangle rectangle;
+
         /// <summary>
         /// Constructor</summary>
         /// <param name="backgroundTexture">
@@ -23,14 +26,15 @@ namespace Immortals
         /// <param name="clientBounds">
         /// The rectangle representing the game window.</param>
         public Sidebar(
-            Texture2D backgroundTexture, Point size, Rectangle clientBounds)
+            Texture2D backgroundTexture, Point size, Rectangle rectangle)
             : base(backgroundTexture, size, new Point(1,1),0,Point.Zero)
         {
             // store textures
             this.backgroundTexture = backgroundTexture;
 
             // reposition
-            this.MoveTo(new Vector2(clientBounds.Width - size.X, 0));
+            this.rectangle = rectangle;
+            this.MoveTo(new Vector2(rectangle.X, rectangle.Y));
         }
 
         /// <summary>
@@ -41,8 +45,8 @@ namespace Immortals
         /// The spritebatch to draw with.</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Call the basic draw of a sprite
-            base.Draw(spriteBatch);
+            // Call the basic draw-to-rectangle of a sprite
+            base.Draw(spriteBatch,rectangle);
         }
     }
 }

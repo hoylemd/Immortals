@@ -52,7 +52,7 @@ namespace Immortals
         /// <summary>Allows the game component to load content.</summary>
         protected override void LoadContent()
         {
-            // Sidebar loading should happen here.
+
             base.LoadContent();
         }
 

@@ -36,7 +36,7 @@ namespace Immortals
         Rectangle boardView;
 
         // game engine pointer
-        ImmortalsEngine engine;
+        public ImmortalsEngine engine { get; protected set; }
 
         /// <summary>Constructor.</summary>
         /// <param name="game">The top-level game object.</param>
@@ -45,13 +45,6 @@ namespace Immortals
         {
             // store and/or initlialize all data and pointers
             this.engine = game;
-
-            // Display data
-            this.clientBounds = game.Window.ClientBounds;
-            this.boardView = new Rectangle(
-                0, 0, this.clientBounds.Width - 300, this.clientBounds.Height);
-            this.sidebarView = new Rectangle(
-                this.boardView.Width, 0, 300,this.clientBounds.Height);
 
             // Create subcomponents
             // Model management
@@ -71,6 +64,19 @@ namespace Immortals
             this.mainCamera = new Camera(Game, new Vector3(0, 0, 10), Vector3.Zero, Vector3.Up);
             engine.Components.Add(this.mainCamera);
 
+            Console.Out.WriteLine(
+                "ClientBounds: " + engine.Window.ClientBounds.ToString());
+
+            // Display data
+            this.clientBounds = engine.Window.ClientBounds;
+            this.boardView = new Rectangle(
+                0, 0, this.clientBounds.Width - 300, this.clientBounds.Height);
+            this.sidebarView = new Rectangle(
+                this.boardView.Width, 0, 300, this.clientBounds.Height);
+
+            Console.Out.WriteLine("Views:\n Board: " + boardView.ToString());
+            Console.Out.WriteLine("Sidebar: " + sidebarView.ToString());
+
             base.Initialize();
         }
 
@@ -85,7 +91,7 @@ namespace Immortals
             spriteManager.MakeSidebar(
                 engine.Content.Load<Texture2D>(@"Images/sidebarScroll"),
                 new Point(300, 750),
-                this.clientBounds);
+                this.sidebarView);
 
             base.LoadContent();
         }
