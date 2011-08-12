@@ -87,15 +87,6 @@ namespace Immortals
             Texture2D selectedTexture = engine.Content.Load<Texture2D>(
                 @"Images/selected");
 
-            // use the void map
-            spriteManager.RegisterMap(mapSize,
-                new Sprite(engine.Content.Load<Texture2D>(
-                        @"Images/Terrains/Void/void 40x40 board"),
-                    mapSize,
-                    new Point(1, 1),
-                    0,
-                    new Point(0, 0)));
-
             // make the sidebar
             spriteManager.MakeSidebar(
                 engine.Content.Load<Texture2D>(@"Images/sidebarScroll"),
