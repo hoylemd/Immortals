@@ -21,9 +21,6 @@ namespace Immortals
         // List of sprites to draw
         List<Sprite> spriteList = new List<Sprite>();
 
-        // Board pointer
-        Board board;
-
         // Sidebar pointer
         Sidebar sidebar;
 

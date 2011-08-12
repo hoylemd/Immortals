@@ -27,14 +27,6 @@ namespace Immortals
         Vector3 cameraUp;
         Vector3 cameraStrafe;
 
-        // Max yaw/pitch variables
-        float totalYaw;
-        float currentYaw = 0;
-        float totalPitch;
-        float currentPitch = 0;
-        float totalRoll;
-        float currentRoll = 0;
-
         // Mouse state
         MouseState prevMouseState;
 
