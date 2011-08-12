@@ -120,9 +120,9 @@ namespace Immortals
         /// </summary>
         /// <param name="boardSize"> Point object containing the board dimensions in tiles.</param>
         /// <param name="tile"> Sprite to use for the tiles.</param>
-        public void GenerateBoard(Point boardSize, Sprite tile)
+        public void GenerateBoard(Point boardSize)
         {
-            this.board = new Board(boardSize, tile);
+            this.board = new Board(boardSize);
             this.useMap = false;
         }
 
