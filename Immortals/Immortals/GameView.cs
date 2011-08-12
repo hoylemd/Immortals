@@ -181,7 +181,6 @@ namespace Immortals
         public override void Draw(GameTime gameTime)
         {
             // Clear the background
-            // GraphicsDevice.Clear(Color.Black);
 
             base.Draw(gameTime);
         }

@@ -255,9 +255,24 @@ namespace Immortals
             updateBoundingBox();
         }
 
+        /// <summary>
+        /// Function to check if this sprite collides with another
+        /// </summary>
+        /// <param name="other"> The sprite to check for collision with</param>
+        /// <returns> True if there is a collision, false if not.</returns>
         public Boolean CollidesWith(Sprite other)
         {
             return this.boundingBox.Intersects(other.boundingBox);
+        }
+
+        /// <summary>
+        /// Function to check if this sprite collides with a point
+        /// </summary>
+        /// <param name="point"> The point to check for collision with</param>
+        /// <returns> True if there is a collision, false if not.</returns>
+        public Boolean CollidePoint(Point point)
+        {
+            return this.boundingBox.Contains(point);
         }
     }
 }
