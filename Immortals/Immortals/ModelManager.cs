@@ -51,7 +51,7 @@ namespace Immortals
         protected override void LoadContent()
         {
             models.Add(new StaticModel(Game.Content.Load<Model>
-                (@"Models/ammo"), Vector3.Zero, Vector3.Up, 0f, 0f, 0f));
+                (@"Models/ammo"), Vector3.Zero, Vector3.Up, 0f, 0f, 0f, 0f));
             base.LoadContent();
         }
 

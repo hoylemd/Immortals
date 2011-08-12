@@ -100,7 +100,7 @@ namespace Immortals
             float pitchAngle;
 
             // Yaw
-            yawAngle = (-MathHelper.PiOver4 / 150) *
+            /* yawAngle = (-MathHelper.PiOver4 / 150) *
                 (mouse.X - this.prevMouseState.X);
 
             if (Math.Abs(this.currentYaw + yawAngle) < this.totalYaw)
@@ -119,7 +119,7 @@ namespace Immortals
                 this.cameraDirection = Vector3.Transform(this.cameraDirection,
                     Matrix.CreateFromAxisAngle(this.cameraStrafe, pitchAngle));
                 this.currentPitch += pitchAngle;
-            }
+            }*/
 
 
             // Reset prevMouseState

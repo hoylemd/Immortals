@@ -70,7 +70,8 @@ namespace Immortals
 
         public override void Initialize()
         {
-            this.mainCamera = new Camera(Game, new Vector3(0, 5, 0), Vector3.Zero, Vector3.UnitY);
+            this.mainCamera = new Camera(Game, new Vector3(0, 0, 10), Vector3.Zero, Vector3.Up);
+            engine.Components.Add(this.mainCamera);
 
             base.Initialize();
         }

@@ -20,12 +20,15 @@ namespace Immortals
         float rollAngle = 0;
         Vector3 direction;
 
+        // Movement variables
+        float speed = 0;
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="m">The model to use</param>
         public StaticModel(Model m, Vector3 Position,
-            Vector3 direction, float yaw, float pitch, float roll)
+            Vector3 direction, float yaw, float pitch, float roll, float speed)
             : base(m)
         {
             //Console.Out.WriteLine("make at" + Position);
@@ -35,19 +38,15 @@ namespace Immortals
             this.pitchAngle = pitch;
             this.rollAngle = roll;
             this.direction = direction;
+            this.speed = speed;
         }
 
         /// <summary>
-        /// Update the model by rotating it
+        /// Update the model
         /// </summary>
         public override void Update()
         {
-            // Rotate model
-            this.rotation *= Matrix.CreateFromYawPitchRoll(this.yawAngle,
-                this.pitchAngle, this.rollAngle);
 
-            // Move model
-            world *= Matrix.CreateTranslation(direction);
         }
 
         /// <summary>
