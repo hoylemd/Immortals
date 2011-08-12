@@ -21,6 +21,9 @@ namespace Immortals
         public Matrix view { get; protected set; }
         public Matrix projection { get; protected set; }
 
+        // Rectangle to be drawn to
+        Rectangle drawRectangle;
+
         // Camera Vectors
         public Vector3 cameraPosition { get; protected set; }
         Vector3 cameraDirection;
@@ -30,21 +33,29 @@ namespace Immortals
         // Mouse state
         MouseState prevMouseState;
 
+        // Game View
+        GameView gameView;
+
         /// <summary>Constructor</summary>
         /// <param name="game">
         /// Game object.  The top-level game entity.</param>
+        /// <param name="gv">The game view manager.</param>
         /// <param name="pos">
         /// Matrix representing the position of the camera.</param>
         /// <param name="target">
         /// Matrix representing the position the camera is looking at.</param>
         /// <param name="up">
         /// Matrix representing the orientation of the camera.</param>
-        public Camera(Game game, Vector3 pos, Vector3 target, Vector3 up)
+        public Camera(
+            Game game, GameView gv, Vector3 pos, Vector3 target, Vector3 up,
+            Rectangle drawRectangle)
             : base(game)
         {
             // Store data
             this.cameraPosition = pos;
             this.cameraUp = up;
+            this.gameView = gv;
+            this.drawRectangle = drawRectangle;
 
             // Normalize and calculate direction vectors
             this.cameraDirection = target - pos;
@@ -57,8 +68,8 @@ namespace Immortals
             // build the projection
             projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
-                (float)Game.Window.ClientBounds.Width /
-                (float)Game.Window.ClientBounds.Height,
+                (float)drawRectangle.Width /
+                (float)drawRectangle.Height,
                 1, 3000);
         }
 

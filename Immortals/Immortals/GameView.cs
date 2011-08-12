@@ -60,22 +60,18 @@ namespace Immortals
         /// <summary>Function to initialize local members.</summary>
         public override void Initialize()
         {
-            // Set up the main camera;
-            this.mainCamera = new Camera(Game, new Vector3(0, 0, 10), Vector3.Zero, Vector3.Up);
-            engine.Components.Add(this.mainCamera);
-
-            Console.Out.WriteLine(
-                "ClientBounds: " + engine.Window.ClientBounds.ToString());
-
-            // Display data
+            // Set up displays
             this.clientBounds = engine.Window.ClientBounds;
             this.boardView = new Rectangle(
                 0, 0, this.clientBounds.Width - 300, this.clientBounds.Height);
             this.sidebarView = new Rectangle(
                 this.boardView.Width, 0, 300, this.clientBounds.Height);
 
-            Console.Out.WriteLine("Views:\n Board: " + boardView.ToString());
-            Console.Out.WriteLine("Sidebar: " + sidebarView.ToString());
+            // Set up the main camera;
+            this.mainCamera = new Camera(
+                Game, this, new Vector3(0, 0, 10), Vector3.Zero, Vector3.Up,
+                boardView);
+            engine.Components.Add(this.mainCamera);
 
             base.Initialize();
         }
