@@ -12,12 +12,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Immortals
 {
-    /// <summary>
-    /// This is a game component that implements IUpdateable.
-    /// </summary>
+    /// <summary>Manager class to handle models.</summary>
     public class ModelManager : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        // the model lists
+        // Model list
         List<BasicModel> models = new List<BasicModel>();
 
         // GameView pointer
@@ -37,28 +35,29 @@ namespace Immortals
         }
 
         /// <summary>
-        /// Allows the game component to perform any initialization it needs to before starting
-        /// to run.  This is where it can query for any required services and load content.
-        /// </summary>
+        /// Allows the game component to perform any initialization it needs to
+        /// before starting to run.  This is where it can query for any 
+        /// required services and load content.</summary>
         public override void Initialize()
         {
             base.Initialize();
         }
 
-        /// <summary>
-        /// Allows the module to load it's content
-        /// </summary>
+        /// <summary>Allows the module to load it's content.</summary>
         protected override void LoadContent()
         {
-            models.Add(new StaticModel(Game.Content.Load<Model>
-                (@"Models/ammo"), Vector3.Zero));
+            // Load up the test model
+            models.Add(new StaticModel(
+                Game.Content.Load<Model>(@"Models/ammo"), Vector3.Zero));
+
             base.LoadContent();
         }
 
         /// <summary>
-        /// Allows the game component to update itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// Allows the game component to update itself. Updates all 
+        /// models.</summary>
+        /// <param name="gameTime">
+        /// Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
             // Update models
@@ -68,9 +67,9 @@ namespace Immortals
         }
 
         /// <summary>
-        /// Allows the component to draw itself
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        /// Allows the component to draw itself. Draws each model.</summary>
+        /// <param name="gameTime">
+        /// Provides a snapshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
             // loop through and draw each model
@@ -81,8 +80,7 @@ namespace Immortals
         }
 
         /// <summary>
-        /// function to iterate through all models and update them.
-        /// </summary>
+        /// Function to iterate through all models and update them.</summary>
         protected void UpdateModels()
         {
             // loop through all models and call Update
@@ -92,6 +90,5 @@ namespace Immortals
                 this.models[i].Update();
             }
         }
-
     }
 }
