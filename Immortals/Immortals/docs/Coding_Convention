@@ -1,0 +1,17 @@
+Files will be no wider than 80 characters
+if a function call, function definition, or similar construct would be longer than 80 characters due to arguments, the arguments will start on the next line.
+Termination strings should be on the same line as the last argument/parameter when possible.
+Class Constructors must use the "this" keywords when assigning to class variables.
+In class methods, the "this" keyword must be avoided when possible.  If there is a collision between method parameters and class variables, rename the parameter.
+Code blocks will be bound by open and close braces on their own lines.
+Code blocks that are only one line do not need to be bound by braces, but may be.
+Operators will be separated from their operands by a single space.
+When an operation statement spand multiple lines, operators should be at the ends of lines.
+When a statement is bound by brackets, there will be no space between the first and last expressions and the bounding brackets.
+When isngin increment or decrement statements, they will be postdecrement/increment statements whenever possible.
+Class names will start with capital letters, and variables will start with lower-case letters.
+Words in a name will be separated by Capitalizing the first letter of the second word.
+All functions and classes must be preceeded by an auto-implemented /// comment to describe it.
+Function definitions and calls with no parameters/arguments will have no space between the parentheses.
+In the case of literal strings not fitting on a line, they should be split up into separate literals and concatenated. They should also have a newline at the split, so they can be properly formatted for an 80-col width terminal.
+In lists of parameters or arguments, members should be delimited by a comma and a space.

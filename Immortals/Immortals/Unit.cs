@@ -6,12 +6,9 @@ using System.Text;
 namespace Immortals
 {
     /// <summary>
-    /// Class to represent a tactical unit
-    /// </summary>
+    /// Class to represent a tactical unit</summary>
     class Unit
     {
-        
-
 
     }
 }
