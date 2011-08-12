@@ -78,6 +78,8 @@ namespace Immortals
         /// Provides a nampshot of timing values.</param>
         public override void Draw(GameTime gameTime)
         {
+            base.Draw(gameTime);
+
             spriteBatch.Begin();
 
             // Draw the sidebar
