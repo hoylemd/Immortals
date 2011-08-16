@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 namespace Immortals
 {
     /// <summary>Manager class to handle models.</summary>
-    public class ModelManager : Microsoft.Xna.Framework.DrawableGameComponent
+    public class ModelManager
     {
         // Model list
         List<BasicModel> models = new List<BasicModel>();
@@ -24,11 +24,14 @@ namespace Immortals
         // Random number generator
         Random rnd;
 
+        // Engine pointer
+        ImmortalsEngine game;
+
         public ModelManager(ImmortalsEngine game, GameView gv)
-            : base(game)
         {
-            // register parent
+            // register parents
             this.gameView = gv;
+            this.game = game;
 
             // get the randomizer
             this.rnd = game.rnd;
@@ -38,19 +41,17 @@ namespace Immortals
         /// Allows the game component to perform any initialization it needs to
         /// before starting to run.  This is where it can query for any 
         /// required services and load content.</summary>
-        public override void Initialize()
+        public void Initialize()
         {
-            base.Initialize();
+
         }
 
         /// <summary>Allows the module to load it's content.</summary>
-        protected override void LoadContent()
+        public void LoadContent()
         {
             // Load up the test model
             models.Add(new StaticModel(
-                Game.Content.Load<Model>(@"Models/ammo"), Vector3.Zero));
-
-            base.LoadContent();
+                game.Content.Load<Model>(@"Models/ammo"), Vector3.Zero));
         }
 
         /// <summary>
@@ -58,25 +59,21 @@ namespace Immortals
         /// models.</summary>
         /// <param name="gameTime">
         /// Provides a snapshot of timing values.</param>
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             // Update models
             this.UpdateModels();
-
-            base.Update(gameTime);
         }
 
         /// <summary>
         /// Allows the component to draw itself. Draws each model.</summary>
         /// <param name="gameTime">
         /// Provides a snapshot of timing values.</param>
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             // loop through and draw each model
             foreach (BasicModel bm in this.models)
                 bm.Draw(gameView.mainCamera);
-
-            base.Draw(gameTime);
         }
 
         /// <summary>

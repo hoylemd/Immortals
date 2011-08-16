@@ -17,7 +17,7 @@ namespace Immortals
     /// <summary>
     /// Class to Handle all graphics in the game
     /// </summary>
-    public class GameView : Microsoft.Xna.Framework.DrawableGameComponent
+    public class GameView : Microsoft.Xna.Framework.DrawableGameComponent       
     {
         // Main Camera
         public Camera mainCamera { get; protected set; }
@@ -31,12 +31,17 @@ namespace Immortals
         // model manager
         ModelManager modelManager;
 
-        // Rectangles representing the sidebar and board areas
+        // Rectangles and viewports for sidebar and board views
         Rectangle sidebarView;
+        Viewport sidebarViewport;
         Rectangle boardView;
+        Viewport boardViewport;
 
-        // game engine pointer
-        public ImmortalsEngine engine { get; protected set; }
+        // Game engine pointer
+        public ImmortalsEngine engine { get; private set; }
+
+        // graphics device
+        public GraphicsDevice graphics { get; private set; }
 
         /// <summary>Constructor.</summary>
         /// <param name="game">The top-level game object.</param>
@@ -49,11 +54,9 @@ namespace Immortals
             // Create subcomponents
             // Model management
             this.modelManager = new ModelManager(game, this);
-            game.Components.Add(this.modelManager);
 
             // Sprite managment
             this.spriteManager = new SpriteManager(game, this);
-            game.Components.Add(this.spriteManager);
 
         }
 
@@ -61,17 +64,20 @@ namespace Immortals
         public override void Initialize()
         {
             // Set up displays
-            this.clientBounds = engine.Window.ClientBounds;
-            this.boardView = new Rectangle(
-                0, 0, this.clientBounds.Width - 300, this.clientBounds.Height);
-            this.sidebarView = new Rectangle(
-                this.boardView.Width, 0, 300, this.clientBounds.Height);
+            clientBounds = engine.Window.ClientBounds;
+            boardView = new Rectangle(
+                0, 0, clientBounds.Width - 300, clientBounds.Height);
+            sidebarView = new Rectangle(
+                boardView.Width, 0, 300, clientBounds.Height);
+            boardViewport = new Viewport(boardView);
+            sidebarViewport = new Viewport(sidebarView);
 
             // Set up the main camera;
-            this.mainCamera = new Camera(
+            mainCamera = new Camera(
                 Game, this, new Vector3(0, 0, 10), Vector3.Zero, Vector3.Up,
                 boardView);
-            engine.Components.Add(this.mainCamera);
+            engine.Components.Add(mainCamera);
+
 
             base.Initialize();
         }
@@ -81,13 +87,20 @@ namespace Immortals
         /// </summary>
         protected override void LoadContent()
         {
-            Rectangle bounds = new Rectangle(0, 0, 750, 750);
-
+            Rectangle bounds = new Rectangle(0, 0, 300, 750);
             // Make the sidebar
+
             spriteManager.MakeSidebar(
                 engine.Content.Load<Texture2D>(@"Images/sidebarScroll"),
-                new Point(300, 750),
-                this.sidebarView);
+                new Point(300, 750), bounds);
+
+            // initialize children
+            modelManager.Initialize();
+            spriteManager.Initialize();
+
+            // Load children's content
+            modelManager.LoadContent();
+            spriteManager.LoadContent();
 
             base.LoadContent();
         }
@@ -96,6 +109,9 @@ namespace Immortals
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         public override void Update(GameTime gameTime)
         {
+            // update children
+            modelManager.Update(gameTime);
+            spriteManager.Update(gameTime);
         }
 
         /// <summary>
@@ -146,6 +162,11 @@ namespace Immortals
         /// <param name="gameTime"></param>
         public override void Draw(GameTime gameTime)
         {
+            // draw children in their viewports
+            engine.GraphicsDevice.Viewport = boardViewport;
+            modelManager.Draw(gameTime);
+            engine.GraphicsDevice.Viewport = sidebarViewport;
+            spriteManager.Draw(gameTime);
 
             base.Draw(gameTime);
         }

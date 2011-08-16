@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 namespace Immortals
 {
     /// <summary>Manager class to handle sprites</summary>
-    public class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
+    public class SpriteManager
     {
         // SpriteBatch for drawing
         SpriteBatch spriteBatch;
@@ -27,11 +27,13 @@ namespace Immortals
         // Gameview pointer
         GameView gameView;
 
+        // Engine pointer
+        ImmortalsEngine game;
+
         /// <summary>Constuctor.</summary>
         /// <param name="game">The top-level Game object.</param>
         /// <param name="gv">The GameView manager.</param>
-        public SpriteManager(Game game, GameView gv)
-            : base(game)
+        public SpriteManager(ImmortalsEngine game, GameView gv)
         {
             // register parent
             this.gameView = gv;
@@ -41,42 +43,36 @@ namespace Immortals
         /// Allows the game component to perform any initialization it needs 
         /// to before starting to run.  This is where it can query for any 
         /// required services and load content.</summary>
-        public override void Initialize()
+        public void Initialize()
         {
             // Set up the SpriteBatch.
-            this.spriteBatch = new SpriteBatch(Game.GraphicsDevice);
+            this.spriteBatch = new SpriteBatch(gameView.GraphicsDevice);
 
-            base.Initialize();
         }
 
         /// <summary>Allows the game component to load content.</summary>
-        protected override void LoadContent()
+        public void LoadContent()
         {
 
-            base.LoadContent();
         }
 
         /// <summary>Allows the game component to update itself.</summary>
         /// <param name="gameTime">
         /// Provides a snapshot of timing values.</param>
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             // Call each sprite's update
             foreach (Sprite sprite in spriteList)
             {
                 sprite.Update(gameTime);
             }
-
-            base.Update(gameTime);
         }
 
         /// <summary>Draws all the sprites in the list.</summary>
         /// <param name="gameTime">
         /// Provides a nampshot of timing values.</param>
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
-
             spriteBatch.Begin();
 
             // Draw the sidebar
@@ -96,12 +92,12 @@ namespace Immortals
         /// The background image of the sidebar.</param>
         /// <param name="size"> 
         /// The size of the background image in pixels.</param>
-        /// <param name="clientBounds"> 
+        /// <param name="rectangle"> 
         /// The rectangle represeting the client window.</param>
         public void MakeSidebar(
-            Texture2D background, Point size, Rectangle clientBounds)
+            Texture2D background, Point size, Rectangle rectangle)
         {
-            sidebar = new Sidebar(background, size, clientBounds);
+            sidebar = new Sidebar(background, size, rectangle);
         }
 
         /// <summary>
