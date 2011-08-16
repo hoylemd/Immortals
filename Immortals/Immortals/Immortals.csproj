@@ -120,6 +120,7 @@
     <Compile Include="SpriteManager.cs" />
     <Compile Include="StaticModel.cs" />
     <Compile Include="Unit.cs" />
+    <Compile Include="VertexModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

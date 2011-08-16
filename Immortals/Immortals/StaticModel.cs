@@ -16,20 +16,12 @@ namespace Immortals
         /// The model to use.</param>,
         /// <param name="Position">
         /// The position this model begins at.</param>
-        public StaticModel(Model m, Vector3 Position)
-            : base(m)
+        public StaticModel(
+            ModelManager modelManager, Model model, Vector3 Position)
+            : base(modelManager, model)
         {
             //create the world
             this.world = Matrix.CreateTranslation(Position);
         }
-
-        /// <summary>
-        /// Update the model
-        /// </summary>
-        public override void Update()
-        {
-            // Do nothing
-        }
-
     }
 }

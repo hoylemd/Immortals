@@ -25,13 +25,16 @@ namespace Immortals
         Random rnd;
 
         // Engine pointer
-        ImmortalsEngine game;
+        ImmortalsEngine engine;
+
+        // Graphics Device pointer
+        public GraphicsDevice graphicsDevice { get; private set; }
 
         public ModelManager(ImmortalsEngine game, GameView gv)
         {
             // register parents
             this.gameView = gv;
-            this.game = game;
+            this.engine = game;
 
             // get the randomizer
             this.rnd = game.rnd;
@@ -43,15 +46,18 @@ namespace Immortals
         /// required services and load content.</summary>
         public void Initialize()
         {
-
+            this.graphicsDevice = engine.GraphicsDevice;
         }
 
         /// <summary>Allows the module to load it's content.</summary>
         public void LoadContent()
         {
             // Load up the test model
-            models.Add(new StaticModel(
-                game.Content.Load<Model>(@"Models/ammo"), Vector3.Zero));
+            models.Add(new StaticModel(this, 
+                engine.Content.Load<Model>(@"Models/ammo"), Vector3.Zero));
+
+            // Generate some terrain
+
         }
 
         /// <summary>

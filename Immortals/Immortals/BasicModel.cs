@@ -9,19 +9,33 @@ namespace Immortals
 {
     /// <summary>
     /// Class to hold information about a basic model</summary>
-    class BasicModel
+    abstract class BasicModel
     {
         // Model drawing information
         public Model model { get; protected set; }
         protected Matrix world = Matrix.Identity;
 
-        /// <summary>
-        /// Constructor</summary>
+        // Parent pointer
+        protected ModelManager modelManager;
+
+        /// <summary>Constructor</summary>
         /// <param name="m"> The model object to use</param>
-        public BasicModel(Model m)
+        /// <param name="modelManager">
+        /// The model manager handling this model</param>
+        public BasicModel(ModelManager modelManager, Model m)
         {
             // Save data
+            this.modelManager = modelManager;
             this.model = m;
+        }
+
+        /// <summary>Constructor</summary>
+        /// <param name="modelManager">
+        /// The model manager handling this model</param>
+        public BasicModel(ModelManager modelManager)
+        {            
+            // Save data
+            this.modelManager = modelManager;
         }
 
         /// <summary>
@@ -40,11 +54,10 @@ namespace Immortals
         { 
         }
 
-        /// <summary>
-        /// Function to draw this model.</summary>
+        /// <summary>Function to draw this model.</summary>
         /// <param name="camera"> 
         /// The camera to draw this model to.</param>
-        public void Draw(Camera camera)
+        public virtual void Draw(Camera camera)
         {
             // grab the list of bone transformations
             Matrix[] transforms = new Matrix[model.Bones.Count];
