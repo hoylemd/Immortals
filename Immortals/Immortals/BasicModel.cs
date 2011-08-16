@@ -9,7 +9,7 @@ namespace Immortals
 {
     /// <summary>
     /// Class to hold information about a basic model</summary>
-    abstract class BasicModel
+    public abstract class BasicModel
     {
         // Model drawing information
         public Model model { get; protected set; }

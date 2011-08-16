@@ -23,7 +23,7 @@ namespace Immortals
         /// <param name="effect">The effect to use to draw the model.</param>
         /// <param name="verts">The list of verts to use.</param>
         /// <param name="texture">The texture to use for the model.</param>
-        VertexModel(
+        public VertexModel(
             ModelManager modelManager, BasicEffect effect, VertexPositionTexture[] verts, Texture2D texture,
             Vector3 position)
             :base(modelManager)

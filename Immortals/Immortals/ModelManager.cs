@@ -93,5 +93,14 @@ namespace Immortals
                 this.models[i].Update();
             }
         }
+
+        /// <summary>
+        /// Function to add a model to be managed
+        /// </summary>
+        /// <param name="model"> The model to add.</param>
+        public void AddModel(BasicModel model)
+        {
+            this.models.Add(model);
+        }
     }
 }

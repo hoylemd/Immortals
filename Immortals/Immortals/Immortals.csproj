@@ -108,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicModel.cs" />
-    <Compile Include="Board.cs" />
+    <Compile Include="BoardModel.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="GameView.cs" />
     <Compile Include="ModelManager.cs" />
