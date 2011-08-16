@@ -87,13 +87,6 @@ namespace Immortals
         /// </summary>
         protected override void LoadContent()
         {
-            Rectangle bounds = new Rectangle(0, 0, 300, 750);
-            // Make the sidebar
-
-            spriteManager.MakeSidebar(
-                engine.Content.Load<Texture2D>(@"Images/sidebarScroll"),
-                new Point(300, 750), bounds);
-
             // initialize children
             modelManager.Initialize();
             spriteManager.Initialize();

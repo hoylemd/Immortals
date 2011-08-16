@@ -28,15 +28,16 @@ namespace Immortals
         GameView gameView;
 
         // Engine pointer
-        ImmortalsEngine game;
+        ImmortalsEngine engine;
 
         /// <summary>Constuctor.</summary>
         /// <param name="game">The top-level Game object.</param>
         /// <param name="gv">The GameView manager.</param>
         public SpriteManager(ImmortalsEngine game, GameView gv)
         {
-            // register parent
+            // register parentd
             this.gameView = gv;
+            this.engine = game;
         }
 
         /// <summary>
@@ -53,7 +54,11 @@ namespace Immortals
         /// <summary>Allows the game component to load content.</summary>
         public void LoadContent()
         {
-
+            Rectangle bounds = new Rectangle(0, 0, 300, 750);
+            // Make the sidebar
+            MakeSidebar(
+                engine.Content.Load<Texture2D>(@"Images/sidebarScroll"),
+                new Point(300, 750), bounds);
         }
 
         /// <summary>Allows the game component to update itself.</summary>
