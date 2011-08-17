@@ -32,26 +32,19 @@ namespace Immortals
             this.verts = verts;
             this.texture = texture;
             this.effect = effect;
+            this.modelManager = modelManager;
 
             // Create the world matrix
             this.world = Matrix.CreateTranslation(position);
 
             // Initialize vertices
-            this.verts = new VertexPositionTexture[4];
-            this.verts[0] = new VertexPositionTexture(
-                new Vector3(-1, 1, 0), new Vector2(0, 0));
-            this.verts[1] = new VertexPositionTexture(
-                new Vector3(1, 1, 0), new Vector2(1, 0));
-            this.verts[2] = new VertexPositionTexture(
-                new Vector3(-1, -1, 0), new Vector2(0, 1));
-            this.verts[3] = new VertexPositionTexture(
-                new Vector3(1, -1, 0), new Vector2(1, 1));
+            
 
             // Set vertex data in VertexBuffer
             vertexBuffer = new VertexBuffer(
                 modelManager.graphicsDevice, typeof(VertexPositionTexture), 
-                verts.Length, BufferUsage.None);
-            vertexBuffer.SetData(verts);
+                this.verts.Length, BufferUsage.None);
+            vertexBuffer.SetData(this.verts);
 
         }
         

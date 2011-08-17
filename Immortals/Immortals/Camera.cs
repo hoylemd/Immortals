@@ -30,6 +30,10 @@ namespace Immortals
         Vector3 cameraUp;
         Vector3 cameraStrafe;
 
+        // Orbit angles
+        // float tau = 6.2918f;
+        Vector3 orbit;
+
         // Mouse state
         MouseState prevMouseState;
 
@@ -71,6 +75,9 @@ namespace Immortals
                 (float)drawRectangle.Width /
                 (float)drawRectangle.Height,
                 1, 3000);
+
+            // set up the orbit
+            this.orbit = new Vector3(0, 0, 0);
         }
 
         /// <summary>Accessor for camera's direction</summary>
@@ -99,6 +106,22 @@ namespace Immortals
             // Poll input
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
+
+            // THIS CODE IS BROKEN
+            // rotate about the model
+            /*
+            float theta = ((float)(mouse.X - prevMouseState.X) / 200f) / tau;
+            float eta = ((float)(mouse.Y - prevMouseState.Y) / 200f) / tau;
+
+            this.orbit.Y += theta;
+            this.orbit.X += eta;
+
+            Vector3 newPos = new Vector3(
+                (float)Math.Asin(this.orbit.Y), this.cameraPosition.Y, 
+                (float)Math.Acos(this.orbit.Y));*/
+
+            // cameraPosition = newPos;
+            // END OF BROKEN CODE
 
             // Reset prevMouseState
             prevMouseState = mouse;

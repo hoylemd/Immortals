@@ -30,6 +30,9 @@ namespace Immortals
         // Graphics Device pointer
         public GraphicsDevice graphicsDevice { get; private set; }
 
+        // board pointer
+        Board board;
+
         public ModelManager(ImmortalsEngine game, GameView gv)
         {
             // register parents
@@ -53,12 +56,18 @@ namespace Immortals
         public void LoadContent()
         {
             // Load up the test model
-            models.Add(new StaticModel(this, 
-                engine.Content.Load<Model>(@"Models/ammo"), Vector3.Zero));
-
+            models.Add(new StaticModel(this,
+                engine.Content.Load<Model>(@"Models/spaceship"), 
+                new Vector3(0, 0, 1)));
+    
             // Generate some terrain
+            board = new Board(
+                engine, this, new Point(40, 40),
+                engine.Content.Load<Texture2D>(
+                    @"Images/Terrains/Grass/grass 40x40 board"));
 
-        }
+
+     }
 
         /// <summary>
         /// Allows the game component to update itself. Updates all 
