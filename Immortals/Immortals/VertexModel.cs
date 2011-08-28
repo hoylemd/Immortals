@@ -37,9 +37,6 @@ namespace Immortals
             // Create the world matrix
             this.world = Matrix.CreateTranslation(position);
 
-            // Initialize vertices
-            
-
             // Set vertex data in VertexBuffer
             vertexBuffer = new VertexBuffer(
                 modelManager.graphicsDevice, typeof(VertexPositionTexture), 
@@ -52,6 +49,10 @@ namespace Immortals
         /// <param name="camera">The camera to draw this model to</param>
         public override void Draw(Camera camera)
         {
+            // Call out
+            //Console.WriteLine("VertexModel.Draw");
+
+            // Set up the vertex buffer
             modelManager.graphicsDevice.SetVertexBuffer(vertexBuffer);
 
             //Set object and camera info
