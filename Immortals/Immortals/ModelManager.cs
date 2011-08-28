@@ -57,7 +57,7 @@ namespace Immortals
         {
             // Load up the test model
             models.Add(new StaticModel(this,
-                engine.Content.Load<Model>(@"Models/spaceship"), 
+                engine.Content.Load<Model>(@"Models/gamepiece"), 
                 new Vector3(0, 0, 1)));
     
             // Generate some terrain

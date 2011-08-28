@@ -181,15 +181,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ammo.x">
-      <Name>ammo</Name>
-      <Importer>XImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\spaceship.x">
-      <Name>spaceship</Name>
+    <Compile Include="Models\gamepiece.x">
+      <Name>gamepiece</Name>
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
     </Compile>

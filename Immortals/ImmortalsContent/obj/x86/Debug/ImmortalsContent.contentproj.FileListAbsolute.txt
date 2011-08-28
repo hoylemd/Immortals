@@ -2,3 +2,4 @@ C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\ImmortalsContent\obj\x86\Deb
 C:\Users\hoylemd\Code\Immortals\CSharp\Immortals\ImmortalsContent\obj\x86\Debug\ResolveAssemblyReference.cache
 H:\Code\Immortals\CSharp\Immortals\ImmortalsContent\obj\x86\Debug\ResolveAssemblyReference.cache
 H:\Code\Immortals\Immortals\ImmortalsContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\hoylemd\Code\Immortals\Immortals\ImmortalsContent\obj\x86\Debug\ResolveAssemblyReference.cache
