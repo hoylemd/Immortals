@@ -90,9 +90,7 @@ namespace Immortals
             graphicsDevice.BlendState = BlendState.Opaque;
             graphicsDevice.DepthStencilState = DepthStencilState.Default;
             graphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
-            RasterizerState rs = new RasterizerState();
-            rs.CullMode = CullMode.CullClockwiseFace;
-            graphicsDevice.RasterizerState = rs;
+            
             // loop through and draw each model
             foreach (BasicModel bm in this.models)
                 bm.Draw(gameView.mainCamera);

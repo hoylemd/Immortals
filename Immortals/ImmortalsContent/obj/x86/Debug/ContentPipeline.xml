@@ -170,10 +170,10 @@
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Models\gamepiece.xnb</Output>
-      <Time>2011-08-28T14:15:14.9445268-04:00</Time>
+      <Time>2011-09-01T17:23:59.5199622-04:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\gamepiece_0.xml</Key>
-        <Value>2011-08-28T14:22:42.8101432-04:00</Value>
+        <Value>2011-09-01T17:24:04.7702625-04:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -181,7 +181,7 @@
       <Importer>XImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Models\gamepiece_0.xml</Output>
-      <Time>2011-08-28T14:15:14.9445268-04:00</Time>
+      <Time>2011-09-01T17:23:59.5199622-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

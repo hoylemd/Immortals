@@ -74,7 +74,7 @@ namespace Immortals
 
             // Set up the main camera;
             mainCamera = new Camera(
-                Game, this, new Vector3(0, -10, 15), Vector3.Zero, Vector3.Up,
+                Game, this, new Vector3(0, -15, -15), Vector3.Zero, Vector3.Up,
                 boardView);
             engine.Components.Add(mainCamera);
 
