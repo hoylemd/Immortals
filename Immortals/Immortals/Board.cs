@@ -52,9 +52,9 @@ namespace Immortals
             verts[0] = new VertexPositionTexture(
                 new Vector3(-offset.X, offset.Y, 0), new Vector2(0, 0));
             verts[1] = new VertexPositionTexture(
-                new Vector3(offset.X, offset.Y, 0), new Vector2(1, 0));
+                new Vector3(-offset.X, -offset.Y, 0), new Vector2(1, 0));
             verts[2] = new VertexPositionTexture(
-                new Vector3(-offset.X, -offset.Y, 0), new Vector2(0, 1));
+                new Vector3(offset.X, offset.Y, 0), new Vector2(0, 1));
             verts[3] = new VertexPositionTexture(
                 new Vector3(offset.X, -offset.Y, 0), new Vector2(1, 1));
 

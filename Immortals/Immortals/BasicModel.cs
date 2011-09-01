@@ -59,6 +59,7 @@ namespace Immortals
         /// The camera to draw this model to.</param>
         public virtual void Draw(Camera camera)
         {
+
             // grab the list of bone transformations
             Matrix[] transforms = new Matrix[model.Bones.Count];
             this.model.CopyAbsoluteBoneTransformsTo(transforms);

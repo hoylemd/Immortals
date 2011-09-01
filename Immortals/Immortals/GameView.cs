@@ -74,7 +74,7 @@ namespace Immortals
 
             // Set up the main camera;
             mainCamera = new Camera(
-                Game, this, new Vector3(0, 0, 25), Vector3.Zero, Vector3.Up,
+                Game, this, new Vector3(0, -10, 15), Vector3.Zero, Vector3.Up,
                 boardView);
             engine.Components.Add(mainCamera);
 
@@ -156,8 +156,6 @@ namespace Immortals
         public override void Draw(GameTime gameTime)
         {
             // draw children in their viewports
-            GraphicsDevice.BlendState = BlendState.Opaque; 
-            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
             GraphicsDevice.Viewport = boardViewport;
             modelManager.Draw(gameTime);
 
