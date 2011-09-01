@@ -7,12 +7,11 @@ using Microsoft.Xna.Framework;
 namespace Immortals
 {
     // Class to represent a rectangular Prism
-    class Box
+    class Box : Volume
     {
         public float Width { get; protected set; }
         public float Height { get; protected set; }
         public float Depth { get; protected set; }
-        public Matrix World { get; protected set; }
 
         /// <summary>
         /// Constructor
@@ -23,12 +22,12 @@ namespace Immortals
         /// <param name="World">
         /// The matrix representing world transforms</param>
         public Box(float Width, float Height, float Depth, Matrix World)
+            :base(World)
         {
             // Save data
             this.Width = Width;
             this.Height = Height;
             this.Depth = Depth;
-            this.World = World;
         }
     }
 }

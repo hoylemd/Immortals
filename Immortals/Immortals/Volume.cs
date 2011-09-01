@@ -6,7 +6,22 @@ using Microsoft.Xna.Framework;
 
 namespace Immortals
 {
-    class Volume
+    /// <summary>
+    /// Abstract class to represent 3d volumes.
+    /// </summary>
+    abstract class Volume
     {
+        public Matrix World { get; protected set; }
+
+        /// <summary>
+        /// Consructor
+        /// </summary>
+        /// <param name="World">
+        /// The Matrix representing world transforms.</param>
+        public Volume(Matrix World)
+        {
+            // Save Data
+            this.World = World;
+        }
     }
 }
