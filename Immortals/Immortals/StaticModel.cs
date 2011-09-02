@@ -17,9 +17,11 @@ namespace Immortals
         /// <param name="Position">
         /// The position this model begins at.</param>
         public StaticModel(
-            ModelManager modelManager, Model model, Vector3 Position)
-            : base(modelManager, model)
+            ModelManager modelManager, Model model, Volume boundingVolume, 
+            Vector3 Position)
+            : base(modelManager, model, boundingVolume)
         {
+
             //create the world
             this.world = Matrix.CreateTranslation(Position);
         }

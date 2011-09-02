@@ -9,7 +9,7 @@ namespace Immortals
     /// <summary>
     /// Abstract class to represent 3d volumes.
     /// </summary>
-    abstract class Volume
+    class Volume
     {
         public Matrix World { get; protected set; }
         public float Height { get; protected set; }

@@ -15,18 +15,26 @@ namespace Immortals
         public Model model { get; protected set; }
         protected Matrix world = Matrix.Identity;
 
+        // Bounding volume information
+        public Volume BoundingVolume { get; protected set; }
+
         // Parent pointer
         protected ModelManager modelManager;
 
         /// <summary>Constructor</summary>
-        /// <param name="m"> The model object to use</param>
         /// <param name="modelManager">
         /// The model manager handling this model</param>
-        public BasicModel(ModelManager modelManager, Model m)
+        /// <param name="model"> The model object to use</param>
+        /// <param name="BoundingVolume">
+        /// The Volume to represent the 3-dimensional space the model 
+        /// occupies.</param>
+        public BasicModel(
+            ModelManager modelManager, Model model, Volume BoundingVolume)
         {
             // Save data
             this.modelManager = modelManager;
-            this.model = m;
+            this.model = model;
+            this.BoundingVolume = BoundingVolume;
         }
 
         /// <summary>Constructor</summary>
