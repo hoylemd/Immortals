@@ -17,15 +17,14 @@ namespace Immortals
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="Radius">The radius of the cylinder</param>
-        /// <param name="Height">The height of the cylinder</param>
         /// <param name="World">
         /// The transformation matrix of the cylinder</param>
-        public Cylinder(float Radius, float Height, Matrix World)
-            :base(World)
+        /// <param name="Height">The height of the cylinder</param>
+        /// <param name="Radius">The radius of the cylinder</param>
+        public Cylinder(Matrix World, float Height, float Radius)
+            :base(World, Height)
         {
             // Save data
-            this.Height = Height;
             this.Radius = Radius;
         }
         
