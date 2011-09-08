@@ -29,6 +29,9 @@ namespace Immortals
         // Rectangle representing the game window
         Rectangle clientBounds;
 
+        // Input settings
+        int panBuffer;
+
         // sprite manager
         SpriteManager spriteManager;
 
@@ -90,6 +93,8 @@ namespace Immortals
                 boardView);
             engine.Components.Add(mainCamera);
 
+            // set up input settings
+            panBuffer = 15;
 
             base.Initialize();
         }
@@ -114,21 +119,33 @@ namespace Immortals
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         public override void Update(GameTime gameTime)
         {
+            Point panDirection = new Point(0,0);
+
+            // Poll input
             MouseState mouseState = Mouse.GetState();
 
             // check if zoom has changed
             if (
                 mouseState.ScrollWheelValue - 
                 prevMouseState.ScrollWheelValue < 0)
-            {
                 Zoom(true);
-            }
             else if (
                 mouseState.ScrollWheelValue -
                 prevMouseState.ScrollWheelValue > 0)
-            {
                 Zoom(false);
-            }
+
+            // check for panning
+            // determine direction
+            if (mouseState.X <= panBuffer)
+                panDirection.X = -1;
+            if (mouseState.X >= (clientBounds.X - panBuffer))
+                panDirection.X = 1;
+            if (mouseState.Y <= panBuffer)
+                panDirection.Y = -1;
+            if (mouseState.Y >= (clientBounds.Y - panBuffer))
+                panDirection.Y = 1;
+            // execute pan
+            Pan(panDirection);
 
             // update Camera Zoom
             mainCamera.MoveCamera(CameraAngle * ZoomLevel);
