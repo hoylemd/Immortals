@@ -12,7 +12,6 @@ namespace Immortals
     class Cylinder :Volume
     {
         public float Radius { get; protected set; }
-        public float Height { get; protected set; }
 
         /// <summary>
         /// Constructor

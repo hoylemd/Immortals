@@ -58,6 +58,7 @@ namespace Immortals
             // Load up the test model
             models.Add(new StaticModel(this,
                 engine.Content.Load<Model>(@"Models/gamepiece"), 
+                new Cylinder(Matrix.Identity,1.5f,0.5f),
                 new Vector3(2, 0, 0)));
     
             // Generate some terrain
@@ -65,9 +66,7 @@ namespace Immortals
                 engine, this, new Point(40, 40),
                 engine.Content.Load<Texture2D>(
                     @"Images/Terrains/Grass/grass 40x40 board"));
-
-
-     }
+        }
 
         /// <summary>
         /// Allows the game component to update itself. Updates all 

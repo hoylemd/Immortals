@@ -109,7 +109,9 @@
   <ItemGroup>
     <Compile Include="BasicModel.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="Box.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Cylinder.cs" />
     <Compile Include="GameView.cs" />
     <Compile Include="ModelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="StaticModel.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="VertexModel.cs" />
+    <Compile Include="Volume.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
