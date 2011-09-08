@@ -26,5 +26,14 @@ namespace Immortals
             this.World = World;
             this.Height = Height;
         }
+
+        /// <summary>
+        /// Function to update the World variable of this volume.
+        /// </summary>
+        /// <param name="world">The World Matrix to update to.</param>
+        public void UpdateWorld(Matrix world)
+        {
+            this.World = world;
+        }
     }
 }

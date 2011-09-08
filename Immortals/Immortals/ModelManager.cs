@@ -59,7 +59,7 @@ namespace Immortals
             models.Add(new StaticModel(this,
                 engine.Content.Load<Model>(@"Models/gamepiece"), 
                 new Cylinder(Matrix.Identity,1.5f,0.5f),
-                new Vector3(2, 0, 0)));
+                new Vector3(2f, 0f, -0.75f)));
     
             // Generate some terrain
             board = new Board(

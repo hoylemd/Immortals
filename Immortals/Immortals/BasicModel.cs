@@ -35,6 +35,7 @@ namespace Immortals
             this.modelManager = modelManager;
             this.model = model;
             this.BoundingVolume = BoundingVolume;
+            this.BoundingVolume.UpdateWorld(this.world);
         }
 
         /// <summary>Constructor</summary>

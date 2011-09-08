@@ -24,6 +24,7 @@ namespace Immortals
 
             //create the world
             this.world = Matrix.CreateTranslation(Position);
+            this.BoundingVolume.UpdateWorld(this.world);
         }
     }
 }
