@@ -87,6 +87,16 @@ namespace Immortals
         }
 
         /// <summary>
+        /// Function to move a camera.
+        /// </summary>
+        /// <param name="position">
+        /// The XYZ coordinates to move the camera to.</param>
+        public void MoveCamera(Vector3 position)
+        {
+            this.cameraPosition = position;
+        }
+
+        /// <summary>
         /// Allows the game component to perform any initialization it needs 
         /// to before starting to run.  This is where it can query for any 
         /// required services and load content.</summary>
@@ -103,29 +113,6 @@ namespace Immortals
         /// Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // Poll input
-            KeyboardState keyboard = Keyboard.GetState();
-            MouseState mouse = Mouse.GetState();
-
-            // THIS CODE IS BROKEN
-            // rotate about the model
-            /*
-            float theta = ((float)(mouse.X - prevMouseState.X) / 200f) / tau;
-            float eta = ((float)(mouse.Y - prevMouseState.Y) / 200f) / tau;
-
-            this.orbit.Y += theta;
-            this.orbit.X += eta;
-
-            Vector3 newPos = new Vector3(
-                (float)Math.Asin(this.orbit.Y), this.cameraPosition.Y, 
-                (float)Math.Acos(this.orbit.Y));*/
-
-            // cameraPosition = newPos;
-            // END OF BROKEN CODE
-
-            // Reset prevMouseState
-            prevMouseState = mouse;
-
             // Reconstruct the view matrix
             CreateLookAt();
 

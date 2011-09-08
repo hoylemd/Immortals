@@ -21,6 +21,10 @@ namespace Immortals
     {
         // Main Camera
         public Camera mainCamera { get; protected set; }
+        private Vector3 CameraAngle;
+        private int ZoomLevel;
+        private int maxZoom;
+        private int minZoom;
 
         // Rectangle representing the game window
         Rectangle clientBounds;
@@ -36,6 +40,9 @@ namespace Immortals
         Viewport sidebarViewport;
         Rectangle boardView;
         Viewport boardViewport;
+
+        // Input Records
+        private MouseState prevMouseState;
 
         // Game engine pointer
         public ImmortalsEngine engine { get; private set; }
@@ -72,9 +79,14 @@ namespace Immortals
             boardViewport = new Viewport(boardView);
             sidebarViewport = new Viewport(sidebarView);
 
-            // Set up the main camera;
+            // Set up the main camera
+            CameraAngle = new Vector3(0, -10, -20);
+            CameraAngle.Normalize();
+            ZoomLevel = 20;
+            maxZoom = 50;
+            minZoom = 10;
             mainCamera = new Camera(
-                Game, this, new Vector3(0, -15, -15), Vector3.Zero, Vector3.Up,
+                Game, this, CameraAngle * ZoomLevel, Vector3.Zero, Vector3.Up,
                 boardView);
             engine.Components.Add(mainCamera);
 
@@ -102,9 +114,31 @@ namespace Immortals
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         public override void Update(GameTime gameTime)
         {
+            MouseState mouseState = Mouse.GetState();
+
+            // check if zoom has changed
+            if (
+                mouseState.ScrollWheelValue - 
+                prevMouseState.ScrollWheelValue < 0)
+            {
+                Zoom(true);
+            }
+            else if (
+                mouseState.ScrollWheelValue -
+                prevMouseState.ScrollWheelValue > 0)
+            {
+                Zoom(false);
+            }
+
+            // update Camera Zoom
+            mainCamera.MoveCamera(CameraAngle * ZoomLevel);
+
             // update children
             modelManager.Update(gameTime);
             spriteManager.Update(gameTime);
+
+            // record old input state
+            prevMouseState = mouseState;
         }
 
         /// <summary>
@@ -133,13 +167,17 @@ namespace Immortals
         /// false for out.</param>
         public void Zoom(Boolean zoomIn)
         {
-            // validate for, and apply for indicated direction
+            int newValue;
+
+            // calculate the new zoom level
             if (zoomIn)
-            {
-            }
+                newValue = ZoomLevel + 10;
             else
-            {
-            }
+                newValue = ZoomLevel - 10;
+
+            // validate for, and apply for indicated direction
+            if (newValue >= minZoom && newValue <= maxZoom)
+                ZoomLevel = newValue;
         }
 
         /// <summary>Accessor for the zoom level.</summary>
