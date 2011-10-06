@@ -93,7 +93,37 @@ namespace Immortals
         /// The XYZ coordinates to move the camera to.</param>
         public void MoveCamera(Vector3 position)
         {
-            this.cameraPosition = position;
+            cameraPosition = position;
+        }
+
+
+        /// <summary>
+        /// Function to zoom a camera towards or away from it's target
+        /// </summary>
+        /// <param name="distance">
+        /// The distance to move towards or away from the target.</param>
+        public void ZoomCamera(float distance)
+        {
+            cameraPosition = cameraPosition + (cameraDirection * distance);
+        }
+
+        /// <summary>
+        /// Function to slide a camera on the XY plane
+        /// </summary>
+        /// <param name="displacement">
+        /// The displacement on the XY plane to apply.</param>
+        public void SlideCamera(Vector2 displacement)
+        {
+            Console.WriteLine("sliding from " + cameraPosition.ToString() + " to " + displacement.ToString());
+            cameraPosition = new Vector3(
+                cameraPosition.X + displacement.X,
+                cameraPosition.Y + displacement.Y,
+                cameraPosition.Z);
+            /*cameraDirection = new Vector3(
+                cameraDirection.X + displacement.X,
+                cameraDirection.Y + displacement.Y,
+                cameraDirection.Z);*/
+            Console.WriteLine("Slid to " + cameraPosition.ToString());
         }
 
         /// <summary>
@@ -128,9 +158,9 @@ namespace Immortals
         /// </summary>
         private void CreateLookAt()
         {
-            view = Matrix.CreateLookAt(this.cameraPosition,
-                this.cameraPosition + this.cameraDirection,
-                this.cameraUp);
+            view = Matrix.CreateLookAt(cameraPosition,
+                cameraPosition + this.cameraDirection,
+                cameraUp);
         }
     }
 }

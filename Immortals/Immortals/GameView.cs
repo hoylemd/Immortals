@@ -22,9 +22,7 @@ namespace Immortals
         // Main Camera
         public Camera mainCamera { get; protected set; }
         private Vector3 CameraAngle;
-        private int ZoomLevel;
-        private int maxZoom;
-        private int minZoom;
+        private Boolean panningAllowed;
 
         // Rectangle representing the game window
         Rectangle clientBounds;
@@ -52,6 +50,11 @@ namespace Immortals
 
         // graphics device
         public GraphicsDevice graphics { get; private set; }
+
+        // Drawing Constraints
+        private int targetFPS = 60;
+        private int msBetweenFrames;
+        int timeSinceLastDraw = 0;
 
         /// <summary>Constructor.</summary>
         /// <param name="game">The top-level game object.</param>
@@ -85,16 +88,19 @@ namespace Immortals
             // Set up the main camera
             CameraAngle = new Vector3(0, -10, -20);
             CameraAngle.Normalize();
-            ZoomLevel = 20;
-            maxZoom = 50;
-            minZoom = 10;
             mainCamera = new Camera(
-                Game, this, CameraAngle * ZoomLevel, Vector3.Zero, Vector3.Up,
+                Game, this, CameraAngle * 20, Vector3.Zero, Vector3.Up,
                 boardView);
             engine.Components.Add(mainCamera);
+            panningAllowed = true;
 
             // set up input settings
-            panBuffer = 15;
+            panBuffer = 25;
+
+            // set up drawing constraints
+            targetFPS = 60;
+            msBetweenFrames = 1000 / targetFPS;
+            timeSinceLastDraw = 0;
 
             base.Initialize();
         }
@@ -120,42 +126,57 @@ namespace Immortals
         public override void Update(GameTime gameTime)
         {
             Point panDirection = new Point(0,0);
+            Vector2 panDisplacement = Vector2.Zero;
+            int panLimit;
 
-            // Poll input
-            MouseState mouseState = Mouse.GetState();
+            timeSinceLastDraw += gameTime.ElapsedGameTime.Milliseconds;
+            if (timeSinceLastDraw > msBetweenFrames)
+            {
+                timeSinceLastDraw = 0;
 
-            // check if zoom has changed
-            if (
-                mouseState.ScrollWheelValue - 
-                prevMouseState.ScrollWheelValue < 0)
-                Zoom(true);
-            else if (
-                mouseState.ScrollWheelValue -
-                prevMouseState.ScrollWheelValue > 0)
-                Zoom(false);
+                // Poll input
+                MouseState mouseState = Mouse.GetState();
 
-            // check for panning
-            // determine direction
-            if (mouseState.X <= panBuffer)
-                panDirection.X = -1;
-            if (mouseState.X >= (clientBounds.X - panBuffer))
-                panDirection.X = 1;
-            if (mouseState.Y <= panBuffer)
-                panDirection.Y = -1;
-            if (mouseState.Y >= (clientBounds.Y - panBuffer))
-                panDirection.Y = 1;
-            // execute pan
-            Pan(panDirection);
+                // check for panning
+                // determine direction
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                }
+                else
+                {
+                    //panningAllowed = false;
+                }
+                if (panningAllowed)
+                {
+                    if (mouseState.X <= panBuffer)
+                    {
+                        panDirection.X = 1;
+                    }
+                    if (mouseState.X >= (clientBounds.Width - panBuffer))
+                    {
+                        panDirection.X = -1;
+                        panLimit = clientBounds.X - panBuffer;
+                    }
+                    if (mouseState.Y <= panBuffer)
+                    {
+                        panDirection.Y = 1;
+                    }
+                    if (mouseState.Y >= (clientBounds.Height - panBuffer))
+                    {
+                        panDirection.Y = -1;
+     
+                    }
 
-            // update Camera Zoom
-            mainCamera.MoveCamera(CameraAngle * ZoomLevel);
+                    // execute pan
+                    Pan(panDirection);
+                }
+                // update children
+                modelManager.Update(gameTime);
+                spriteManager.Update(gameTime);
 
-            // update children
-            modelManager.Update(gameTime);
-            spriteManager.Update(gameTime);
-
-            // record old input state
-            prevMouseState = mouseState;
+                // record old input state
+                prevMouseState = mouseState;
+            }
         }
 
         /// <summary>
@@ -167,41 +188,12 @@ namespace Immortals
         public void Pan(Point direction)
         {
 
-        }
+            this.mainCamera.MoveCamera(
+                new Vector3(
+                    mainCamera.cameraPosition.X + (direction.X),
+                    mainCamera.cameraPosition.Y + (direction.Y),
+                    mainCamera.cameraPosition.Z ));
 
-        /// <summary>
-        /// Function to pan to a specific location.
-        /// </summary>
-        /// <param name="target">Coordinates of where to pan to.</param>
-        void PanExact(Point target)
-        {
-            
-        }
-
-        /// <summary>Function to zoom the game view in or out.</summary>
-        /// <param name="zoomValue">
-        /// Boolean representing representing zooming in or out. True for in, 
-        /// false for out.</param>
-        public void Zoom(Boolean zoomIn)
-        {
-            int newValue;
-
-            // calculate the new zoom level
-            if (zoomIn)
-                newValue = ZoomLevel + 10;
-            else
-                newValue = ZoomLevel - 10;
-
-            // validate for, and apply for indicated direction
-            if (newValue >= minZoom && newValue <= maxZoom)
-                ZoomLevel = newValue;
-        }
-
-        /// <summary>Accessor for the zoom level.</summary>
-        /// <returns>int representing the zoom level.</returns>
-        public int GetZoom()
-        {
-            return 0;
         }
 
         /// <summary>
@@ -213,7 +205,6 @@ namespace Immortals
             // draw children in their viewports
             GraphicsDevice.Viewport = boardViewport;
             modelManager.Draw(gameTime);
-
 
             engine.GraphicsDevice.Viewport = sidebarViewport;
             spriteManager.Draw(gameTime);

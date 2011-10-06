@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\rotatingThing.xnb</Output>
-      <Time>2011-08-11T14:26:25.9479261-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\rotatingThing.xnb</Output>
+      <Time>2011-08-28T14:10:27.0490601-04:00</Time>
     </Item>
     <Item>
       <Source>Images\immortal.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortal.xnb</Output>
-      <Time>2011-08-11T14:26:25.9010496-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortal.xnb</Output>
+      <Time>2011-08-28T14:10:27.0440598-04:00</Time>
     </Item>
     <Item>
       <Source>Images\immortalSmall.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortalSmall.xnb</Output>
-      <Time>2011-08-11T14:26:25.9323006-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\immortalSmall.xnb</Output>
+      <Time>2011-08-28T14:10:27.04706-04:00</Time>
     </Item>
     <Item>
       <Source>Images\selected.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\selected.xnb</Output>
-      <Time>2011-08-11T14:26:25.9635516-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\selected.xnb</Output>
+      <Time>2011-08-28T14:10:27.0510602-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Grass\grass 40x40 board.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Grass\grass 40x40 board.xnb</Output>
-      <Time>2011-08-11T14:26:19.2914631-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Grass\grass 40x40 board.xnb</Output>
+      <Time>2011-08-28T14:10:26.5700327-04:00</Time>
     </Item>
     <Item>
       <Source>Images\tile.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb</Output>
-      <Time>2011-08-11T14:26:26.1041811-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\tile.xnb</Output>
+      <Time>2011-08-28T14:10:27.0590607-04:00</Time>
     </Item>
     <Item>
       <Source>Images\sidebarTemplate.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarTemplate.xnb</Output>
-      <Time>2011-08-11T14:26:26.1041811-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarTemplate.xnb</Output>
+      <Time>2011-08-28T14:10:27.0570606-04:00</Time>
     </Item>
     <Item>
       <Source>Images\sidebarScrollNoBorder.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarScroll.xnb</Output>
-      <Time>2011-08-11T14:26:26.0729301-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarScroll.xnb</Output>
+      <Time>2011-08-28T14:10:27.0550604-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void 40x40 board.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void 40x40 board.xnb</Output>
-      <Time>2011-08-11T14:26:25.4635356-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void 40x40 board.xnb</Output>
+      <Time>2011-08-28T14:10:27.0100579-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void1.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void1.xnb</Output>
-      <Time>2011-08-11T14:26:25.5104121-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void1.xnb</Output>
+      <Time>2011-08-28T14:10:27.0160582-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void2.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void2.xnb</Output>
-      <Time>2011-08-11T14:26:25.6197906-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void2.xnb</Output>
+      <Time>2011-08-28T14:10:27.0180583-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void3.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void3.xnb</Output>
-      <Time>2011-08-11T14:26:25.6510416-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void3.xnb</Output>
+      <Time>2011-08-28T14:10:27.0200584-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void4.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void4.xnb</Output>
-      <Time>2011-08-11T14:26:25.6666671-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void4.xnb</Output>
+      <Time>2011-08-28T14:10:27.0240587-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void5.png</Source>
@@ -124,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void5.xnb</Output>
-      <Time>2011-08-11T14:26:25.6979181-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void5.xnb</Output>
+      <Time>2011-08-28T14:10:27.030059-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void6.png</Source>
@@ -133,8 +133,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void6.xnb</Output>
-      <Time>2011-08-11T14:26:25.7291691-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void6.xnb</Output>
+      <Time>2011-08-28T14:10:27.0320591-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void7.png</Source>
@@ -142,8 +142,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void7.xnb</Output>
-      <Time>2011-08-11T14:26:25.7604201-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void7.xnb</Output>
+      <Time>2011-08-28T14:10:27.0340592-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Void\void8.png</Source>
@@ -151,8 +151,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void8.xnb</Output>
-      <Time>2011-08-11T14:26:25.7916711-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Void\void8.xnb</Output>
+      <Time>2011-08-28T14:10:27.0360594-04:00</Time>
     </Item>
     <Item>
       <Source>Images\Terrains\Snow\snow 40x40 board.png</Source>
@@ -160,8 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Snow\snow 40x40 board.xnb</Output>
-      <Time>2011-08-11T14:26:20.5571286-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\Terrains\Snow\snow 40x40 board.xnb</Output>
+      <Time>2011-08-28T14:10:26.6370365-04:00</Time>
     </Item>
     <Item>
       <Source>Models\gamepiece.x</Source>
@@ -169,11 +169,11 @@
       <Importer>XImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Models\gamepiece.xnb</Output>
-      <Time>2011-09-08T11:02:22.6298645-04:00</Time>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Models\gamepiece.xnb</Output>
+      <Time>2011-09-01T17:23:59.5199622-04:00</Time>
       <Dependency>
         <Key>obj\x86\Debug\Models\gamepiece_0.xml</Key>
-        <Value>2011-09-08T11:04:29.0533577-04:00</Value>
+        <Value>2011-09-08T17:52:30.1488513-04:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -181,7 +181,7 @@
       <Importer>XImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
       <Output>obj\x86\Debug\Models\gamepiece_0.xml</Output>
-      <Time>2011-09-08T11:02:22.6298645-04:00</Time>
+      <Time>2011-09-01T17:23:59.5199622-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -189,10 +189,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>H:\Code\Immortals\Immortals\ImmortalsContent\</RootDirectory>
-      <LoggerRootDirectory>H:\Code\Immortals\Immortals\Immortals\</LoggerRootDirectory>
-      <IntermediateDirectory>H:\Code\Immortals\Immortals\ImmortalsContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>H:\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\ImmortalsContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\ImmortalsContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -221,7 +221,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2011-07-13T09:50:49.3682027-04:00</Value>
+        <Value>2011-07-17T17:53:05.8385777-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
