@@ -24,8 +24,11 @@ namespace Immortals
         private Vector3 CameraAngle;
 
         // Panning variables
-        private Boolean panningAllowed;
-        private Vector2 maxPan;
+        private Boolean panningAllowed; // Flag to allow or disallow panning
+        private Vector2 maxPan; // The maximum distance from the origin the 
+                                // camera is allowed to pan.
+        private double cameraRestrictionFactor; // Affects the reduction in 
+                                // space the camera may move in.
 
         // Rectangle representing the game window
         Rectangle clientBounds;
@@ -99,6 +102,10 @@ namespace Immortals
 
             // set up panning
             panningAllowed = true;
+            cameraRestrictionFactor = 0.60;  
+            // This allows the camera to move out to 60% of the board's edge's
+                // distance from the origin. This prevents the camera from 
+                // overlooking too much of the board when panned maximally.
 
             // set up input settings
             panBuffer = 25;
@@ -135,8 +142,12 @@ namespace Immortals
         {
             // calculate the maximum panning displacement
             maxPan = new Vector2(
-                (float)((double)boardSize.X / 2.0),
-                (float)((double)boardSize.Y / 2.0));
+                (float)(cameraRestrictionFactor * 
+                    ((double)boardSize.X / 2.0)),
+                (float)(cameraRestrictionFactor * 
+                    ((double)boardSize.Y / 2.0)));
+
+           
         }
 
         /// <summary>Function to update the view.</summary>
