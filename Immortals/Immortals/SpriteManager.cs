@@ -54,7 +54,7 @@ namespace Immortals
         /// <summary>Allows the game component to load content.</summary>
         public void LoadContent()
         {
-            Rectangle bounds = new Rectangle(0, 0, 300, 750);
+            Rectangle bounds = new Rectangle(0, 0, 300, 800);
             // Make the sidebar
             MakeSidebar(
                 engine.Content.Load<Texture2D>(@"Images/sidebarPurpleFrame"),

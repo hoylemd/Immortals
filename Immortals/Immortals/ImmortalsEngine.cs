@@ -32,11 +32,9 @@ namespace Immortals
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = 800;
             graphics.PreferredBackBufferWidth = 1280;
+            graphics.IsFullScreen = true;
 
-
-            Console.Out.WriteLine("bounds one: " + this.Window.ClientBounds.ToString());
-
-            // set up the Content path
+           // set up the Content path
             Content.RootDirectory = "Content";
 
             // set up the game View
@@ -55,15 +53,9 @@ namespace Immortals
         /// initialize them as well.</summary>
         protected override void Initialize()
         {
-
-            // graphics.GraphicsDevice.Viewport = new Viewport(0, 0, 750, 750);
-
             // make visible the mouse
             this.IsMouseVisible = true;
 
-            Console.Out.WriteLine("bounds two: " + this.Window.ClientBounds.ToString());
-
-        
             // Initialize base class
             base.Initialize();
         }

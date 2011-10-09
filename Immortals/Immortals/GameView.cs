@@ -87,9 +87,11 @@ namespace Immortals
             clientBounds = engine.Window.ClientBounds;
             boardView = new Rectangle(
                 0, 0, clientBounds.Width - 300, clientBounds.Height);
+            System.Console.WriteLine("clinetbounds before sidebarview gen " + clientBounds.ToString());
             sidebarView = new Rectangle(
                 boardView.Width, 0, 300, clientBounds.Height);
             boardViewport = new Viewport(boardView);
+            System.Console.WriteLine("sidebarViewport dimensions: " + sidebarView.ToString());
             sidebarViewport = new Viewport(sidebarView);
 
             // Set up the main camera
@@ -102,7 +104,7 @@ namespace Immortals
 
             // set up panning
             panningAllowed = true;
-            cameraRestrictionFactor = 0.3;  
+            cameraRestrictionFactor = 0.35;  
             // This restricts the camera from moving out more than 30% of the
                 // board's width from the origin. This prevents the camera from
                 // overlooking too much of the board when panned maximally.
