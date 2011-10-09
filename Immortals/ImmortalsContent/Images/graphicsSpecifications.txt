@@ -2,9 +2,71 @@ Default Res:
 1280 x 800
 
 Sidebar Specs:
+Location: Window(980, 0)
 Width: 300
-height: 800
+Height: 800
+
+Minimap:
+Location: Sidebar(25, 25)
+Width: 250
+Height: 250
+
+Turn Indicator:
+Location: Sidebar(25, 285)
+Width: 250
+Height: 15
+
+Turn Icon: 
+Location: Drawn
+Width: 25
+Height: 15
+
+Orders Frame:
+Location: Sidebar(25, 310)
+Width: 250
+Height: 250
+
+Action Button:
+Location: Drawn
+Width: 75
+Height: 75
+
+Orders Scrollbar:
+Location: Orders Frame(225, 0)
+Width: 25
+height: 250
+
+Scrollbar Up Arrow:
+Location: Orders Scrollbar(0,0)
+Width: 25
+Height: 25
+
+Scrollbar Indicator Top:
+Location: Drawn
+Width: 25
+Height: 12
+
+Scrollbar Indicator Middle:
+Location: Drawn
+Width: 25
+Height: 25
+
+Scrollbar Indicator Bottom:
+Location: Drawn
+Width: 25
+Height: 13
+
+Scrollbar Down Arrow:
+Location: Orders Scrollbar(0, 225)
+Width: 25
+Height: 25
+
+Unit Frame:
+Location: Sidebar(25, 570)
+Width: 250
+Height: 205
 
 Game View Specs:
+Location: Window(0, 0)
 Width: 920
-height: 800
+Height: 800
