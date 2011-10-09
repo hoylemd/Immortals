@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-
+///////////////////////////////////////////////////////////////////////////////
 namespace Immortals
 {
     /// <summary>Manager class to handle models.</summary>
@@ -31,7 +31,7 @@ namespace Immortals
         public GraphicsDevice graphicsDevice { get; private set; }
 
         // board pointer
-        Board board;
+        public Board board { get; protected set; }
 
         public ModelManager(ImmortalsEngine game, GameView gv)
         {
@@ -55,6 +55,9 @@ namespace Immortals
         /// <summary>Allows the module to load it's content.</summary>
         public void LoadContent()
         {
+            // temporary variables
+            Point boardSize;
+
             // Load up the test model
             models.Add(new StaticModel(this,
                 engine.Content.Load<Model>(@"Models/gamepiece"), 
@@ -62,10 +65,13 @@ namespace Immortals
                 new Vector3(2f, 0f, -0.75f)));
     
             // Generate some terrain
+            boardSize = new Point(40, 40);
             board = new Board(
-                engine, this, new Point(40, 40),
+                engine, this, boardSize,
                 engine.Content.Load<Texture2D>(
                     @"Images/Terrains/Grass/grass 40x40 board"));
+            gameView.RegisterBoardSize(boardSize);
+
         }
 
         /// <summary>

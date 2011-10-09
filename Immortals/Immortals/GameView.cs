@@ -11,24 +11,28 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
-
+///////////////////////////////////////////////////////////////////////////////
 namespace Immortals
 {
     /// <summary>
     /// Class to Handle all graphics in the game
     /// </summary>
-    public class GameView : Microsoft.Xna.Framework.DrawableGameComponent       
+    public class GameView : Microsoft.Xna.Framework.DrawableGameComponent
     {
         // Main Camera
         public Camera mainCamera { get; protected set; }
         private Vector3 CameraAngle;
+
+        // Panning variables
         private Boolean panningAllowed;
+        private Vector2 maxPan;
 
         // Rectangle representing the game window
         Rectangle clientBounds;
 
         // Input settings
-        int panBuffer;
+        int panBuffer;  // represents how close to the edge of the window the
+                        // cursor must be to trigger a pan.
 
         // sprite manager
         SpriteManager spriteManager;
@@ -92,6 +96,8 @@ namespace Immortals
                 Game, this, CameraAngle * 20, Vector3.Zero, Vector3.Up,
                 boardView);
             engine.Components.Add(mainCamera);
+
+            // set up panning
             panningAllowed = true;
 
             // set up input settings
@@ -119,6 +125,18 @@ namespace Immortals
             spriteManager.LoadContent();
 
             base.LoadContent();
+        }
+
+        /// <summary>
+        /// Function to register a board size so panning can be restricted.
+        /// </summary>
+        /// <param name="boardSize"> The dimensions of the board in DU</param>
+        public void RegisterBoardSize(Point boardSize)
+        {
+            // calculate the maximum panning displacement
+            maxPan = new Vector2(
+                (float)((double)boardSize.X / 2.0),
+                (float)((double)boardSize.Y / 2.0));
         }
 
         /// <summary>Function to update the view.</summary>
@@ -155,7 +173,6 @@ namespace Immortals
                     if (mouseState.X >= (clientBounds.Width - panBuffer))
                     {
                         panDirection.X = -1;
-                        panLimit = clientBounds.X - panBuffer;
                     }
                     if (mouseState.Y <= panBuffer)
                     {
@@ -180,20 +197,28 @@ namespace Immortals
         }
 
         /// <summary>
-        /// Function to pan the game view around
+        /// Function to pan the game view around. also ensures the camera 
+        /// cannot be panned to far as to lose the game board.
         /// </summary>
         /// <param name="direction">Point object representing in which 
         /// directions panning is happening. Both dimensions should be 1, 0 
         /// or -1</param>
         public void Pan(Point direction)
         {
+            // temporary variables
+            Vector3 camPosition = mainCamera.cameraPosition;
+            Vector3 newPosition = new Vector3(
+                camPosition.X, camPosition.Y, camPosition.Z);
 
-            this.mainCamera.MoveCamera(
-                new Vector3(
-                    mainCamera.cameraPosition.X + (direction.X),
-                    mainCamera.cameraPosition.Y + (direction.Y),
-                    mainCamera.cameraPosition.Z ));
+            // validate and calculate X & Y
+            if (Math.Abs(camPosition.X + direction.X) <= maxPan.X)
+                newPosition.X += direction.X;
+            if (Math.Abs(camPosition.Y + direction.Y) <= maxPan.Y)
+                newPosition.Y += direction.Y;
 
+            // move the camera
+            this.mainCamera.MoveCamera(newPosition);
+                
         }
 
         /// <summary>

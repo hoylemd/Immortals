@@ -10,14 +10,15 @@ namespace Immortals
     /// <summary>
     /// Class to represent a game Board.
     /// </summary>
-    class Board
+    public class Board
     {
         // Game engine pointers
         ImmortalsEngine engine;
         ModelManager modelManager;
 
         // Game object information
-        Point size;
+        public Point size { get; protected set; }
+
 
         // Display information
         Texture2D texture;
