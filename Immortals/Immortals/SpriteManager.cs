@@ -57,8 +57,8 @@ namespace Immortals
             Rectangle bounds = new Rectangle(0, 0, 300, 750);
             // Make the sidebar
             MakeSidebar(
-                engine.Content.Load<Texture2D>(@"Images/sidebarScroll"),
-                new Point(300, 750), bounds);
+                engine.Content.Load<Texture2D>(@"Images/sidebarPurpleFrame"),
+                new Point(300, 800), bounds);
         }
 
         /// <summary>Allows the game component to update itself.</summary>
