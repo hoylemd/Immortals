@@ -102,9 +102,9 @@ namespace Immortals
 
             // set up panning
             panningAllowed = true;
-            cameraRestrictionFactor = 0.60;  
-            // This allows the camera to move out to 60% of the board's edge's
-                // distance from the origin. This prevents the camera from 
+            cameraRestrictionFactor = 0.3;  
+            // This restricts the camera from moving out more than 30% of the
+                // board's width from the origin. This prevents the camera from
                 // overlooking too much of the board when panned maximally.
 
             // set up input settings
@@ -142,10 +142,8 @@ namespace Immortals
         {
             // calculate the maximum panning displacement
             maxPan = new Vector2(
-                (float)(cameraRestrictionFactor * 
-                    ((double)boardSize.X / 2.0)),
-                (float)(cameraRestrictionFactor * 
-                    ((double)boardSize.Y / 2.0)));
+                (float)(cameraRestrictionFactor * (double)boardSize.X),
+                (float)(cameraRestrictionFactor * (double)boardSize.Y));
 
            
         }

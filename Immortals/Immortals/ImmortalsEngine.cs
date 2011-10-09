@@ -30,8 +30,8 @@ namespace Immortals
         {
             // Set up the game window
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 750;
-            graphics.PreferredBackBufferWidth = 1050;
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 1280;
 
 
             Console.Out.WriteLine("bounds one: " + this.Window.ClientBounds.ToString());
@@ -94,6 +94,11 @@ namespace Immortals
             // Poll devices
             mouseState = Mouse.GetState();
             keyboardState = Keyboard.GetState();
+
+            if (keyboardState.IsKeyDown(Keys.Escape))
+            {
+                Exit();
+            }
 
             // save the mouse state for next cyle
             prevMouseState = mouseState;
