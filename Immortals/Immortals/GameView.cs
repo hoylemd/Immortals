@@ -145,7 +145,6 @@ namespace Immortals
         {
             Point panDirection = new Point(0,0);
             Vector2 panDisplacement = Vector2.Zero;
-            int panLimit;
 
             timeSinceLastDraw += gameTime.ElapsedGameTime.Milliseconds;
             if (timeSinceLastDraw > msBetweenFrames)
@@ -212,9 +211,13 @@ namespace Immortals
 
             // validate and calculate X & Y
             if (Math.Abs(camPosition.X + direction.X) <= maxPan.X)
+            {
                 newPosition.X += direction.X;
+            }
             if (Math.Abs(camPosition.Y + direction.Y) <= maxPan.Y)
+            {
                 newPosition.Y += direction.Y;
+            }
 
             // move the camera
             this.mainCamera.MoveCamera(newPosition);

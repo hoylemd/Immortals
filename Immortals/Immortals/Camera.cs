@@ -27,6 +27,7 @@ namespace Immortals
         // Camera Vectors
         public Vector3 cameraPosition { get; protected set; }
         Vector3 cameraDirection;
+        Vector3 cameraPositionActual;
         Vector3 cameraUp;
         Vector3 cameraStrafe;
 
@@ -57,6 +58,7 @@ namespace Immortals
         {
             // Store data
             this.cameraPosition = pos;
+            this.cameraPositionActual = new Vector3(pos.X, pos.Y - 10, pos.Z);
             this.cameraUp = up;
             this.gameView = gv;
             this.drawRectangle = drawRectangle;
@@ -143,6 +145,11 @@ namespace Immortals
         /// Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
+            // recompensate for camera Angle
+
+            cameraPositionActual = new Vector3(
+                cameraPosition.X, cameraPosition.Y - 10, cameraPosition.Z);
+
             // Reconstruct the view matrix
             CreateLookAt();
 
@@ -158,8 +165,8 @@ namespace Immortals
         /// </summary>
         private void CreateLookAt()
         {
-            view = Matrix.CreateLookAt(cameraPosition,
-                cameraPosition + this.cameraDirection,
+            view = Matrix.CreateLookAt(cameraPositionActual,
+                cameraPositionActual + this.cameraDirection,
                 cameraUp);
         }
     }
