@@ -27,7 +27,7 @@ namespace Immortals
         // Camera Vectors
         public Vector3 cameraPosition { get; protected set; }
         Vector3 cameraDirection;
-        Vector3 cameraPositionActual;
+        Vector3 cameraAngle;
         Vector3 cameraUp;
         Vector3 cameraStrafe;
 
@@ -45,26 +45,27 @@ namespace Immortals
         /// <param name="game">
         /// Game object.  The top-level game entity.</param>
         /// <param name="gv">The game view manager.</param>
-        /// <param name="pos">
-        /// Matrix representing the position of the camera.</param>
+        /// <param name="angle">
+        /// Matrix representing the angle of the camera. This also sets the 
+        /// initial zoom level of the camera.</param>
         /// <param name="target">
         /// Matrix representing the position the camera is looking at.</param>
         /// <param name="up">
         /// Matrix representing the orientation of the camera.</param>
         public Camera(
-            Game game, GameView gv, Vector3 pos, Vector3 target, Vector3 up,
+            Game game, GameView gv, Vector3 angle, Vector3 target, Vector3 up,
             Rectangle drawRectangle)
             : base(game)
         {
             // Store data
-            this.cameraPosition = pos;
-            this.cameraPositionActual = new Vector3(pos.X, pos.Y - 10, pos.Z);
+            this.cameraPosition = new Vector3(0, 0, angle.Z);
+            this.cameraAngle = new Vector3(angle.X, angle.Y, 0);
             this.cameraUp = up;
             this.gameView = gv;
             this.drawRectangle = drawRectangle;
 
             // Normalize and calculate direction vectors
-            this.cameraDirection = target - pos;
+            this.cameraDirection = target - angle;
             this.cameraDirection.Normalize();
             this.cameraStrafe = Vector3.Cross(up, this.cameraDirection);
 
@@ -145,10 +146,6 @@ namespace Immortals
         /// Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // recompensate for camera Angle
-
-            cameraPositionActual = new Vector3(
-                cameraPosition.X, cameraPosition.Y - 10, cameraPosition.Z);
 
             // Reconstruct the view matrix
             CreateLookAt();
@@ -165,8 +162,8 @@ namespace Immortals
         /// </summary>
         private void CreateLookAt()
         {
-            view = Matrix.CreateLookAt(cameraPositionActual,
-                cameraPositionActual + this.cameraDirection,
+            view = Matrix.CreateLookAt(cameraPosition + cameraAngle,
+                cameraPosition + cameraAngle + cameraDirection,
                 cameraUp);
         }
     }

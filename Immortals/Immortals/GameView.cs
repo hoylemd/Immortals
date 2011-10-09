@@ -90,7 +90,7 @@ namespace Immortals
             sidebarViewport = new Viewport(sidebarView);
 
             // Set up the main camera
-            CameraAngle = new Vector3(0, -10, -20);
+            CameraAngle = new Vector3(0, -5, -20);
             CameraAngle.Normalize();
             mainCamera = new Camera(
                 Game, this, CameraAngle * 20, Vector3.Zero, Vector3.Up,
