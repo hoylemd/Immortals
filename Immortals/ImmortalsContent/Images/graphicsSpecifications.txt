@@ -1,0 +1,10 @@
+Default Res:
+1280 x 800
+
+Sidebar Specs:
+Width: 300
+height: 800
+
+Game View Specs:
+Width: 920
+height: 800
