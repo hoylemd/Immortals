@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Immortals
 {
     /// <summary>
     /// Class to represent a clickable button.
     /// </summary>
-    public abstract class Button
+    public abstract class Button: Sprite
     {
-        // Presence on screen
-        Rectangle positionBox;
-        Sprite sprite;
-
         // Parent Objects
         Sidebar sidebar;
 
@@ -26,28 +23,11 @@ namespace Immortals
         /// <param name="positionBox"> 
         /// The position the box occupies within it's parent 
         /// container.</param>
-        public Button(Sidebar sidebar, Sprite sprite, Rectangle positionBox)
+        public Button(Texture2D texture, Point frameSize, Point sheetSize,
+            Sidebar sidebar)
+            : base(texture, frameSize, sheetSize, 0, Point.Zero)
         {
             this.sidebar = sidebar;
-            this.sprite = sprite;
-            this.positionBox = positionBox;
         }
-
-        /// <summary>
-        /// Function to move a button to a specific position within it's 
-        /// parent container
-        /// </summary>
-        /// <param name="position"> The position relative to thw top-left
-        /// of the parent container to move the button to.</param>
-        public void Move(Point position)
-        {
-            this.positionBox.X = position.X;
-            this.positionBox.Y = position.Y;
-        }
-
-        /// <summary>
-        /// Class to be overridden for actual button implementations.
-        /// </summary>
-        public virtual void Clicked();
     }
 }

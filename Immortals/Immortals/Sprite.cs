@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Immortals
 {
-    /*abstract*/ public class Sprite
+    abstract public class Sprite
     {
         // Animation variables
         Point frameSize;
@@ -20,6 +20,7 @@ namespace Immortals
         // drawing variables
         Texture2D texture;
         Vector2 position;
+        public Boolean hidden { get; private set; }
 
         // collision variables
         Point boundingOffset;
@@ -56,6 +57,7 @@ namespace Immortals
             // Initialize variables
             this.timeSinceLastFrame = 0;
             this.currentFrame = new Point(0, 0);
+            this.hidden = false;
 
             // Calculate the bounding box
             this.boundingBox = new Rectangle( 
@@ -69,7 +71,7 @@ namespace Immortals
         /// </summary>
         /// <returns> Returns a copy of the Point object representing the 
         /// framesize.</returns>
-        public Point GetFrameSize()
+        Point GetFrameSize()
         {
             return new Point(frameSize.X, frameSize.Y);
         }
@@ -77,7 +79,7 @@ namespace Immortals
         /// <summary>
         /// Function to increment the frame variable
         /// </summary>
-        public void IncrementFrame(int elapsedTime)
+        void IncrementFrame(int elapsedTime)
         {
             // Update timing
             timeSinceLastFrame += elapsedTime;
@@ -127,19 +129,22 @@ namespace Immortals
         /// The spriteBatch that will draw the sprite.</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            try
+            if (!hidden)
             {
-                //Draw the sprite.
-                spriteBatch.Draw(
-                   texture, position, NextFrame(),Color.White, 0,Vector2.Zero,
-                   1, SpriteEffects.None, 1);
-            }
-            // Handle unbegun spriteBatches
-            catch (InvalidOperationException e)
-            {
-                Console.Out.WriteLine(
-                    "Sprite.Draw call outside of SpriteBatch.Begin() and\n" +
-                    "End() calls. Error type: " + e.GetType().ToString());
+                try
+                {
+                    //Draw the sprite.
+                    spriteBatch.Draw(
+                       texture, position, NextFrame(), Color.White, 0, Vector2.Zero,
+                       1, SpriteEffects.None, 1);
+                }
+                // Handle unbegun spriteBatches
+                catch (InvalidOperationException e)
+                {
+                    Console.Out.WriteLine(
+                        "Sprite.Draw call outside of SpriteBatch.Begin() and\n" +
+                        "End() calls. Error type: " + e.GetType().ToString());
+                }
             }
         }
 
@@ -152,19 +157,22 @@ namespace Immortals
         /// The location to draw the sprite at.</param>
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
-            try
+            if (!hidden)
             {
-                //Draw the sprite.
-                spriteBatch.Draw(
-                    texture, location, NextFrame(), Color.White, 0,
-                    Vector2.Zero, 1, SpriteEffects.None, 1);
-            }
-            // Handle unbegun spriteBatches
-            catch (InvalidOperationException e)
-            {
-                Console.Out.WriteLine(
-                    "Sprite.Draw call outside of SpriteBatch.Begin() and\n" +
-                    "End() calls. Error type: " + e.GetType().ToString());
+                try
+                {
+                    //Draw the sprite.
+                    spriteBatch.Draw(
+                        texture, location, NextFrame(), Color.White, 0,
+                        Vector2.Zero, 1, SpriteEffects.None, 1);
+                }
+                // Handle unbegun spriteBatches
+                catch (InvalidOperationException e)
+                {
+                    Console.Out.WriteLine(
+                        "Sprite.Draw call outside of SpriteBatch.Begin() and\n" +
+                        "End() calls. Error type: " + e.GetType().ToString());
+                }
             }
         }
 
@@ -176,20 +184,22 @@ namespace Immortals
         /// The Rectangle to draw into.</param>
         public void Draw(SpriteBatch spriteBatch, Rectangle view)
         {
-            //Console.Out.WriteLine("drawing sprite to " + view.ToString());
-            try
+            if (!hidden)
             {
-                //Draw the sprite.
-                spriteBatch.Draw(
-                    texture, view, NextFrame(), Color.White, 0, Vector2.Zero,
-                    SpriteEffects.None, 1);
-            }
-            // Handle unbegun spriteBatches
-            catch (InvalidOperationException e)
-            {
-                Console.Out.WriteLine(
-                    "Sprite.Draw call outside of SpriteBatch.Begin() and\n" +
-                    "End() calls. Error type: " + e.GetType().ToString());
+                try
+                {
+                    //Draw the sprite.
+                    spriteBatch.Draw(
+                        texture, view, NextFrame(), Color.White, 0, Vector2.Zero,
+                        SpriteEffects.None, 1);
+                }
+                // Handle unbegun spriteBatches
+                catch (InvalidOperationException e)
+                {
+                    Console.Out.WriteLine(
+                        "Sprite.Draw call outside of SpriteBatch.Begin() and\n" +
+                        "End() calls. Error type: " + e.GetType().ToString());
+                }
             }
         }
 
@@ -213,6 +223,22 @@ namespace Immortals
 
             // Update the bounding Box
             updateBoundingBox();
+        }
+
+        /// <summary>
+        /// Function to hide a sprite. It will not be drawn hereafter.
+        /// </summary>
+        public void Hide()
+        {
+            this.hidden = true;
+        }
+
+        /// <summary>
+        /// Function to show or unhide a sprite. It will now be drawn.
+        /// </summary>
+        public void Show()
+        {
+            this.hidden = false;
         }
 
         /// <summary>
@@ -275,5 +301,11 @@ namespace Immortals
             // use existing containment check
             return boundingBox.Contains(point);
         }
+
+        /// <summary>
+        /// Class to be overridden for actual control and container 
+        /// implementations.
+        /// </summary>
+        public abstract void Clicked();
     }
 }

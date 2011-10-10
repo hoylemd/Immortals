@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Immortals
 {
     /// <summary>
     /// Class for sidebar drawing</summary>
-    class Sidebar: Sprite
+    public class Sidebar: Sprite
     {
         // Background texture
         Texture2D backgroundTexture;
@@ -47,6 +48,16 @@ namespace Immortals
         {
             // Call the basic draw-to-rectangle of a sprite
             base.Draw(spriteBatch,rectangle);
+        }
+
+        /// <summary>
+        /// Container behavior for clicking.  Decide on sub-member clicked and
+        /// message.
+        /// </summary>
+        public override void Clicked()
+        {
+            MouseState mouseState = Mouse.GetState();
+
         }
     }
 }
