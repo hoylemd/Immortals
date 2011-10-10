@@ -112,6 +112,7 @@
     <Compile Include="Box.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Container.cs" />
     <Compile Include="Cylinder.cs" />
     <Compile Include="GameView.cs" />
     <Compile Include="ModelManager.cs" />

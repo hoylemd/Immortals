@@ -9,55 +9,29 @@ using Microsoft.Xna.Framework.Input;
 namespace Immortals
 {
     /// <summary>
-    /// Class for sidebar drawing</summary>
-    public class Sidebar: Sprite
+    /// Class for sidebars. Currently only implements the Container 
+    /// class.</summary>
+    public class Sidebar: Container
     {
-        // Background texture
-        Texture2D backgroundTexture;
-
-        // Absolute rectangle
-        Rectangle rectangle;
-
         /// <summary>
         /// Constructor</summary>
-        /// <param name="backgroundTexture">
+        /// <param name="texture">
         /// The background texture for the sidebar</param>
-        /// <param name="size"> 
-        /// The size of the background in pixels </param>
-        /// <param name="clientBounds">
-        /// The rectangle representing the game window.</param>
+        /// <param name="frameSize">
+        /// The size in pixels of each frame of the animation.
+        /// </param>
+        /// <param name="sheetSize">
+        /// The dimenions in frames of the framesheet.</param>
+        /// <param name="frameDuration">
+        /// The time in milliseconds to display each frame.</param>
+        /// <param name="position">
+        /// The position relative to the parent's frame of reference in which 
+        /// to draw the sidebar.</param>
         public Sidebar(
-            Texture2D backgroundTexture, Point size, Rectangle rectangle)
-            : base(backgroundTexture, size, new Point(1,1),0,Point.Zero)
+            Texture2D texture, Point frameSize, Point sheetSize,
+            int frameDuration, Point position)
+            : base(texture, frameSize, sheetSize,0, position)
         {
-            // store textures
-            this.backgroundTexture = backgroundTexture;
-
-            // reposition
-            this.rectangle = rectangle;
-            this.MoveTo(new Vector2(rectangle.X, rectangle.Y));
-        }
-
-        /// <summary>
-        /// Override for the Sprite draw method. Will eventually draw all 
-        /// sub-components of the sidebar, but only does the background
-        /// now.</summary>
-        /// <param name="spriteBatch"> 
-        /// The spritebatch to draw with.</param>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            // Call the basic draw-to-rectangle of a sprite
-            base.Draw(spriteBatch,rectangle);
-        }
-
-        /// <summary>
-        /// Container behavior for clicking.  Decide on sub-member clicked and
-        /// message.
-        /// </summary>
-        public override void Clicked()
-        {
-            MouseState mouseState = Mouse.GetState();
-
         }
     }
 }

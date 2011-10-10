@@ -19,7 +19,7 @@ namespace Immortals
         SpriteBatch spriteBatch;
 
         // List of sprites to draw
-        List<Sprite> spriteList = new List<Sprite>();
+        List<Sprite> spriteList;
 
         // Sidebar pointer
         Sidebar sidebar;
@@ -49,16 +49,18 @@ namespace Immortals
             // Set up the SpriteBatch.
             this.spriteBatch = new SpriteBatch(gameView.GraphicsDevice);
 
+            // Set up the sprite list
+            spriteList = new List<Sprite>();
+
         }
 
         /// <summary>Allows the game component to load content.</summary>
         public void LoadContent()
         {
-            Rectangle bounds = new Rectangle(0, 0, 300, 800);
             // Make the sidebar
             MakeSidebar(
                 engine.Content.Load<Texture2D>(@"Images/sidebarPurpleFrame"),
-                new Point(300, 800), bounds);
+                new Point(300, 800), new Point (0, 0));
         }
 
         /// <summary>Allows the game component to update itself.</summary>
@@ -100,9 +102,9 @@ namespace Immortals
         /// <param name="rectangle"> 
         /// The rectangle represeting the client window.</param>
         public void MakeSidebar(
-            Texture2D background, Point size, Rectangle rectangle)
+            Texture2D background, Point size, Point location)
         {
-            sidebar = new Sidebar(background, size, rectangle);
+            sidebar = new Sidebar(background, size, Point.Zero, 0, location);
         }
 
         /// <summary>

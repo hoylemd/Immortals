@@ -10,7 +10,7 @@ namespace Immortals
     abstract public class Sprite
     {
         // Animation variables
-        Point frameSize;
+        protected Point frameSize;
         Point currentFrame;
         Point sheetSize;
         int timeSinceLastFrame;
@@ -18,8 +18,8 @@ namespace Immortals
         Boolean animated;
 
         // drawing variables
-        Texture2D texture;
-        Vector2 position;
+        protected Texture2D texture;
+        protected Point position;
         public Boolean hidden { get; private set; }
 
         // collision variables
@@ -105,7 +105,7 @@ namespace Immortals
         /// sheet </summary>
         /// <returns>
         /// next frame's rectangle </returns>
-        Rectangle NextFrame()
+        protected Rectangle NextFrame()
         {
             return new Rectangle(currentFrame.X * frameSize.X,
                 currentFrame.Y * frameSize.Y, frameSize.X, frameSize.Y);
@@ -134,9 +134,11 @@ namespace Immortals
                 try
                 {
                     //Draw the sprite.
-                    spriteBatch.Draw(
-                       texture, position, NextFrame(), Color.White, 0, Vector2.Zero,
-                       1, SpriteEffects.None, 1);
+                    if (texture != null)
+                        spriteBatch.Draw(
+                            texture, new Vector2(position.X, position.Y), 
+                            NextFrame(), Color.White, 0, Vector2.Zero, 
+                            1, SpriteEffects.None, 1);
                 }
                 // Handle unbegun spriteBatches
                 catch (InvalidOperationException e)
@@ -155,16 +157,18 @@ namespace Immortals
         /// The spriteBatch that will draw the sprite.</param>
         /// <param name="location">
         /// The location to draw the sprite at.</param>
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        public void Draw(SpriteBatch spriteBatch, Point location)
         {
             if (!hidden)
             {
                 try
                 {
                     //Draw the sprite.
-                    spriteBatch.Draw(
-                        texture, location, NextFrame(), Color.White, 0,
-                        Vector2.Zero, 1, SpriteEffects.None, 1);
+                    if (texture != null)
+                        spriteBatch.Draw(
+                            texture, new Vector2(location.X, location.Y), 
+                            NextFrame(), Color.White, 0,Vector2.Zero, 1, 
+                            SpriteEffects.None, 1);
                 }
                 // Handle unbegun spriteBatches
                 catch (InvalidOperationException e)
@@ -177,21 +181,26 @@ namespace Immortals
         }
 
         /// <summary>
-        /// overload of draw to draw into a specific rectangle </summary>
+        /// Overload of draw to draw into a specific rectangle </summary>
         /// <param name="spriteBatch">
         /// The SpriteBatch to draw the sprite with.</param>
         /// <param name="view">
-        /// The Rectangle to draw into.</param>
-        public void Draw(SpriteBatch spriteBatch, Rectangle view)
+        /// The Rectangle to use as a frame of reference.</param>
+        public virtual void Draw(SpriteBatch spriteBatch, Rectangle view)
         {
+            Rectangle drawLoc = new Rectangle(
+                view.X + (int)position.X, view.Y + (int)position.Y, view.Width, 
+                view.Height);
+
             if (!hidden)
             {
                 try
                 {
                     //Draw the sprite.
-                    spriteBatch.Draw(
-                        texture, view, NextFrame(), Color.White, 0, Vector2.Zero,
-                        SpriteEffects.None, 1);
+                    if (texture != null)
+                        spriteBatch.Draw(
+                            texture, drawLoc, NextFrame(), Color.White, 0, 
+                            Vector2.Zero, SpriteEffects.None, 1);
                 }
                 // Handle unbegun spriteBatches
                 catch (InvalidOperationException e)
@@ -216,7 +225,7 @@ namespace Immortals
         /// Function to move a sprite to the given location.</summary>
         /// <param name="targetLocation">
         /// The location to move the sprite to.</param>
-        public void MoveTo(Vector2 targetLocation)
+        public void MoveTo(Point targetLocation)
         {
             // Change the position
             position = targetLocation;
