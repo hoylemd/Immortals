@@ -68,7 +68,7 @@ namespace Immortals
         public GameView(ImmortalsEngine game)
             : base(game)
         {
-            // store and/or initlialize all data and pointers
+            // store and/or initialize all data and pointers
             this.engine = game;
 
             // Create subcomponents
