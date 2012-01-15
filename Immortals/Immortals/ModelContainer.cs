@@ -18,32 +18,24 @@ namespace Immortals
         // Model list
         List<BasicModel> models = new List<BasicModel>();
 
-        // Random number generator
-        Random rnd;
-
-        // Engine pointer
-        ImmortalsEngine engine;
-
         // Camera pointer
-        Camera camera;
+        protected Camera camera;
 
         // Graphics Device pointer
         public GraphicsDevice graphicsDevice { get; private set; }
 
-        // board pointer
-        public Board board;/* { get; protected set; }*/
-
-        public ModelContainer(Rectangle area, ImmortalsEngine game, Camera camera)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="area">
+        /// The area this view occupies in the parent container</param>
+        /// <param name="camera">The camera to use for drawing this view</param>
+        public ModelContainer(Rectangle area, Camera camera)
             :base(area)
         {
             // save pointers
             this.camera = camera;
 
-            // register parents
-            this.engine = game;
-
-            // get the randomizer
-            this.rnd = game.rnd;
         }
 
         /// <summary>
@@ -68,9 +60,9 @@ namespace Immortals
         /// Allows the game component to perform any initialization it needs to
         /// before starting to run.  This is where it can query for any 
         /// required services and load content.</summary>
-        public void Initialize()
+        public void Initialize(GraphicsDevice gd)
         {
-            this.graphicsDevice = engine.GraphicsDevice;
+            this.graphicsDevice = gd;
         }
 
         /// <summary>

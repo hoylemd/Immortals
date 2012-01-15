@@ -116,7 +116,7 @@
     <Compile Include="Container.cs" />
     <Compile Include="Cylinder.cs" />
     <Compile Include="GameView.cs" />
-    <Compile Include="GameWindow.cs" />
+    <Compile Include="TacticalView.cs" />
     <Compile Include="InvalidClickException.cs" />
     <Compile Include="ModelContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

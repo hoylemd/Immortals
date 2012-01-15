@@ -20,16 +20,8 @@ namespace Immortals
     /// </summary>
     public class GameView : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        // Main Camera
-        public Camera mainCamera { get; protected set; }
-        private Vector3 CameraAngle;
-
         // Panning variables
         private Boolean panningAllowed; // Flag to allow or disallow panning
-        private Vector2 maxPan; // The maximum distance from the origin the 
-                                // camera is allowed to pan.
-        private double cameraRestrictionFactor; // Affects the reduction in 
-                                // space the camera may move in.
 
         // Rectangle representing the game window
         Rectangle clientBounds;
@@ -44,7 +36,7 @@ namespace Immortals
         SpriteBatch spriteBatch;
 
         // model manager
-        ModelContainer modelManager;
+        GameWindow gameWindow;
 
         // Rectangles and viewports for sidebar and board views
         Rectangle sidebarView;
@@ -89,17 +81,16 @@ namespace Immortals
 
             // Create subcomponents
             // Set up the main camera
-            CameraAngle = new Vector3(0, -5, -20);
+            Vector3 CameraAngle = new Vector3(0, -5, -20);
             CameraAngle.Normalize();
-            mainCamera = new Camera(
+            Camera mainCamera = new Camera(
                 Game, this, CameraAngle * 20, Vector3.Zero, Vector3.Up,
                 boardView);
             engine.Components.Add(mainCamera);
 
             // Model management
             boardView.X = 0;
-            this.modelManager = new ModelContainer(boardView, this.engine, 
-                                                   this.mainCamera);
+            this.gameWindow = new GameWindow(boardView, mainCamera);
 
             // Sprite/sidebar managment
             sidebarView.X = 0;
@@ -107,10 +98,7 @@ namespace Immortals
 
             // set up panning
             panningAllowed = true;
-            cameraRestrictionFactor = 0.35;  
-            // This restricts the camera from moving out more than 30% of the
-                // board's width from the origin. This prevents the camera from
-                // overlooking too much of the board when panned maximally.
+
 
             // set up input settings
             panBuffer = 25;
@@ -129,10 +117,10 @@ namespace Immortals
         protected override void LoadContent()
         {
             // initialize children
-            modelManager.Initialize();
+            gameWindow.Initialize(this.GraphicsDevice);
 
             // Load children's content
-            modelManager.addModel(new StaticModel( modelManager,
+            gameWindow.addModel(new StaticModel( gameWindow,
                 engine.Content.Load<Model>(@"Models/gamepiece"),
                 new Cylinder(Matrix.Identity, 1.5f, 0.5f),
                 new Vector3(2f, 0f, -0.75f)));
@@ -142,12 +130,10 @@ namespace Immortals
     
             // Generate some terrain
             boardSize = new Point(40, 40);
-            modelManager.board = new Board(
-                engine, modelManager, boardSize,
+            gameWindow.registerBoard(new Board(
+                engine, gameWindow, boardSize,
                 engine.Content.Load<Texture2D>(
-                    @"Images/Terrains/Grass/grass 40x40 board"));
-
-            this.RegisterBoardSize(boardSize);
+                    @"Images/Terrains/Grass/grass 40x40 board")));
 
             // set the sidebar's background
             sidebar.setBackground(
@@ -158,20 +144,6 @@ namespace Immortals
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
             base.LoadContent();
-        }
-
-        /// <summary>
-        /// Function to register a board size so panning can be restricted.
-        /// </summary>
-        /// <param name="boardSize"> The dimensions of the board in DU</param>
-        public void RegisterBoardSize(Point boardSize)
-        {
-            // calculate the maximum panning displacement
-            maxPan = new Vector2(
-                (float)(cameraRestrictionFactor * (double)boardSize.X),
-                (float)(cameraRestrictionFactor * (double)boardSize.Y));
-
-            mainCamera.maxPan = maxPan;
         }
 
         /// <summary>Function to update the view.</summary>
@@ -223,13 +195,13 @@ namespace Immortals
 
                     // execute pan
                     if (!panDirection.Equals(Point.Zero))
-                        mainCamera.Pan(panDirection);
+                        gameWindow.Pan(panDirection);
                 }
 
 
 
                 // update children
-                modelManager.Update(gameTime);
+                gameWindow.Update(gameTime);
 
                 // record old input state
                 prevMouseState = mouseState;
@@ -273,7 +245,7 @@ namespace Immortals
         {
             // draw children in their viewports
             GraphicsDevice.Viewport = boardViewport;
-            modelManager.Draw(gameTime);
+            gameWindow.Draw(gameTime);
 
             engine.GraphicsDevice.Viewport = sidebarViewport;
             spriteBatch.Begin();
