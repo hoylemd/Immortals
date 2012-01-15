@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Immortals
 {
-    abstract public class Sprite
+    public class Sprite
     {
         // Animation variables
         protected Point frameSize;
@@ -163,6 +163,7 @@ namespace Immortals
             {
                 try
                 {
+                    
                     //Draw the sprite.
                     if (texture != null)
                         spriteBatch.Draw(
@@ -191,16 +192,18 @@ namespace Immortals
             Rectangle drawLoc = new Rectangle(
                 view.X + (int)position.X, view.Y + (int)position.Y, view.Width, 
                 view.Height);
-
             if (!hidden)
             {
                 try
                 {
+
                     //Draw the sprite.
                     if (texture != null)
+                    {
                         spriteBatch.Draw(
-                            texture, drawLoc, NextFrame(), Color.White, 0, 
+                            texture, drawLoc, NextFrame(), Color.White, 0,
                             Vector2.Zero, SpriteEffects.None, 1);
+                    }
                 }
                 // Handle unbegun spriteBatches
                 catch (InvalidOperationException e)
@@ -310,11 +313,5 @@ namespace Immortals
             // use existing containment check
             return boundingBox.Contains(point);
         }
-
-        /// <summary>
-        /// Class to be overridden for actual control and container 
-        /// implementations.
-        /// </summary>
-        public abstract void Clicked();
     }
 }

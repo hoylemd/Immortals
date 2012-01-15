@@ -33,6 +33,8 @@ namespace Immortals
             this.engine = engine;
             this.Mv = Mv;
             this.name = name;
+
+            modelList = new List<BasicModel>();
         }
     }
 }

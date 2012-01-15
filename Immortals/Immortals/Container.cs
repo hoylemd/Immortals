@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,102 +7,85 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+
 namespace Immortals
 {
     /// <summary>
-    /// Class to represent container-type sprites/sprite trees
+    /// Class to represent containers in a clicktree
     /// </summary>
-    public class Container: Sprite
+    public abstract class Container
     {
-        List<Sprite> spriteList;
+        // rectangle which this container draws in in the frame of reference of it's parent
+        protected Rectangle area;
+
+        // list of child containers
+        protected List<Container> children;
 
         /// <summary>
         /// Contructor
         /// </summary>
-        /// <param name="texture"> 
-        /// The texture to associate with this sprite. </param>
-        /// <param name="frameSize"> 
-        /// The size of each frame in pixels. </param>
-        /// <param name="sheetSize">
-        /// The dimensions of the sheet in frames. </param>
-        /// <param name="frameDuration">
-        /// The time in milliseconds to display each frame. </param>
-        /// <param name="position">
-        /// The position relative to the parent's frame of reference to draw 
-        /// this container in.</param>
-        public Container(
-            Texture2D texture, Point frameSize, Point sheetSize,
-            int frameDuration, Point position)
-            : base(texture, frameSize, sheetSize, frameDuration, Point.Zero)
+        public Container(Rectangle area)
         {
             // initialize members
-            spriteList = new List<Sprite>();
+            children = new List<Container>();
 
-            // Move to position
-            this.MoveTo(position);
+            // save data
+            this.area = area;
         }
 
         /// <summary>
-        /// Function to add a sprite or container to this container.
+        /// Function to add a child container to this one.
         /// </summary>
-        /// <param name="sprite">the Sprite object to add.</param>
-        public void addSprite(Sprite sprite)
+        /// <param name="child">The child Container to add.</param>
+        public void addChild(Container child)
         {
-            spriteList.Add(sprite);
+            this.children.Add(child);
         }
 
         /// <summary>
-        /// Function to draw a container and all of its children
+        /// Function to remove a child from this container.
         /// </summary>
-        /// <param name="spriteBatch"> 
-        /// The spriteBatch that will draw the sprite.</param>
-        /// <param name="view">
-        /// The Rectangle to use as a frame of reference.</param>
-        public override void Draw(SpriteBatch spriteBatch, Rectangle view)
+        /// <param name="child">The child to remove.</param>
+        public void removeChild(Container child)
         {
-            // calculate the location to draw with
-            Rectangle drawLoc = new Rectangle(
-                view.X + (int)position.X, view.Y + (int)position.Y, frameSize.X, 
-                frameSize.Y);
-
-            // Draw everything if the container isn't hidden.
-            if (!hidden)
-            {
-                try
-                {
-                    //Draw the sprite.
-                    if (texture != null)
-                        spriteBatch.Draw(
-                            texture, drawLoc, NextFrame(), Color.White, 0, 
-                            Vector2.Zero, SpriteEffects.None, 1);
-                }
-                // Handle unbegun spriteBatches
-                catch (InvalidOperationException e)
-                {
-                    Console.Out.WriteLine(
-                        "Sprite.Draw call outside of SpriteBatch.Begin() and\n" +
-                        "End() calls. Error type: " + e.GetType().ToString());
-                }
-           
-                // Draw each child sprite/container
-                foreach (Sprite s in spriteList)
-                {
-                    s.Draw(spriteBatch, drawLoc);
-                }
-
-                // draw parent?
-                base.Draw(spriteBatch);
-            }
+            this.children.Remove(child);
         }
 
         /// <summary>
         /// Container behavior for clicking.  Decide on sub-member clicked and
         /// message.
         /// </summary>
-        public override void Clicked()
+        /// <param name="clickedPoint">
+        /// Point object representing the location of the click in the parent's frame of reference.
+        /// </param>
+        public void Clicked(Point clickedPoint)
         {
-            MouseState mouseState = Mouse.GetState();
+            // normalize the point to this container's rectangle
+            Point normalizedPoint = new Point(clickedPoint.X - area.X, clickedPoint.Y - area.Y);
 
+            // validate the click point
+            if (area.Contains(normalizedPoint))
+            {
+                // iterate through children and send click event to the first one the click is in.
+                foreach (Container child in children)
+                    if (child.area.Contains(normalizedPoint))
+                    {
+                        try
+                        {
+                            child.Clicked(normalizedPoint);
+                            break;
+                        }
+
+                        // handle exceptions
+                        catch (InvalidClickException ex)
+                        {
+                            System.Windows.Forms.MessageBox.Show(ex.Message);
+                        }
+                    }
+            }
+            // throw exception on invalid click loacations
+            else
+                throw new InvalidClickException("click outside container boundaries");
         }
     }
 

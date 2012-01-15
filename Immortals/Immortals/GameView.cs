@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -37,8 +38,10 @@ namespace Immortals
         int panBuffer;  // represents how close to the edge of the window the
                         // cursor must be to trigger a pan.
 
-        // sprite manager
-        SpriteManager spriteManager;
+        // sprite mangement
+        //SpriteManager spriteManager;
+        Sidebar sidebar;
+        SpriteBatch spriteBatch;
 
         // model manager
         ModelManager modelManager;
@@ -70,14 +73,6 @@ namespace Immortals
         {
             // store and/or initialize all data and pointers
             this.engine = game;
-
-            // Create subcomponents
-            // Model management
-            this.modelManager = new ModelManager(game, this);
-
-            // Sprite managment
-            this.spriteManager = new SpriteManager(game, this);
-
         }
 
         /// <summary>Function to initialize local members.</summary>
@@ -87,12 +82,18 @@ namespace Immortals
             clientBounds = engine.Window.ClientBounds;
             boardView = new Rectangle(
                 0, 0, clientBounds.Width - 300, clientBounds.Height);
-            System.Console.WriteLine("clinetbounds before sidebarview gen " + clientBounds.ToString());
             sidebarView = new Rectangle(
                 boardView.Width, 0, 300, clientBounds.Height);
             boardViewport = new Viewport(boardView);
-            System.Console.WriteLine("sidebarViewport dimensions: " + sidebarView.ToString());
             sidebarViewport = new Viewport(sidebarView);
+
+            // Create subcomponents
+            // Model management
+            this.modelManager = new ModelManager(this.engine, this);
+
+            // Sprite/sidebar managment
+            sidebarView.X = 0;
+            this.sidebar = new Sidebar(sidebarView);
 
             // Set up the main camera
             CameraAngle = new Vector3(0, -5, -20);
@@ -127,11 +128,16 @@ namespace Immortals
         {
             // initialize children
             modelManager.Initialize();
-            spriteManager.Initialize();
 
             // Load children's content
             modelManager.LoadContent();
-            spriteManager.LoadContent();
+
+            // set the sidebar's background
+            sidebar.setBackground(engine.Content.Load<Texture2D>(@"Images/sidebarPurpleFrame"),
+                new Point(300, 800), new Point(1, 1), 0);
+
+            // set up the spriteBatch
+            this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
 
             base.LoadContent();
         }
@@ -164,18 +170,21 @@ namespace Immortals
 
                 // Poll input
                 MouseState mouseState = Mouse.GetState();
+                int mouseX = mouseState.X;
+                int mouseY = mouseState.Y;
+
+                // check for clicking
+                if (prevMouseState.LeftButton == ButtonState.Pressed && 
+                    mouseState.LeftButton == ButtonState.Released)
+                {
+                    Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
+                    Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
+                }
 
                 // check for panning
-                // determine direction
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                {
-                }
-                else
-                {
-                    //panningAllowed = false;
-                }
                 if (panningAllowed)
                 {
+                    // determine direction
                     if (mouseState.X <= panBuffer)
                     {
                         panDirection.X = 1;
@@ -191,15 +200,17 @@ namespace Immortals
                     if (mouseState.Y >= (clientBounds.Height - panBuffer))
                     {
                         panDirection.Y = -1;
-     
+
                     }
 
                     // execute pan
                     Pan(panDirection);
                 }
+
+
+
                 // update children
                 modelManager.Update(gameTime);
-                spriteManager.Update(gameTime);
 
                 // record old input state
                 prevMouseState = mouseState;
@@ -246,7 +257,10 @@ namespace Immortals
             modelManager.Draw(gameTime);
 
             engine.GraphicsDevice.Viewport = sidebarViewport;
-            spriteManager.Draw(gameTime);
+            spriteBatch.Begin();
+            //System.Console.WriteLine("sidebar view: " + sidebarView.ToString());
+            sidebar.Draw(sidebarView, spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
