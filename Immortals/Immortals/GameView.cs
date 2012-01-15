@@ -44,7 +44,7 @@ namespace Immortals
         SpriteBatch spriteBatch;
 
         // model manager
-        ModelManager modelManager;
+        ModelContainer modelManager;
 
         // Rectangles and viewports for sidebar and board views
         Rectangle sidebarView;
@@ -88,13 +88,6 @@ namespace Immortals
             sidebarViewport = new Viewport(sidebarView);
 
             // Create subcomponents
-            // Model management
-            this.modelManager = new ModelManager(this.engine, this);
-
-            // Sprite/sidebar managment
-            sidebarView.X = 0;
-            this.sidebar = new Sidebar(sidebarView);
-
             // Set up the main camera
             CameraAngle = new Vector3(0, -5, -20);
             CameraAngle.Normalize();
@@ -102,6 +95,15 @@ namespace Immortals
                 Game, this, CameraAngle * 20, Vector3.Zero, Vector3.Up,
                 boardView);
             engine.Components.Add(mainCamera);
+
+            // Model management
+            boardView.X = 0;
+            this.modelManager = new ModelContainer(boardView, this.engine, 
+                                                   this.mainCamera);
+
+            // Sprite/sidebar managment
+            sidebarView.X = 0;
+            this.sidebar = new Sidebar(sidebarView);
 
             // set up panning
             panningAllowed = true;
@@ -130,7 +132,22 @@ namespace Immortals
             modelManager.Initialize();
 
             // Load children's content
-            modelManager.LoadContent();
+            modelManager.addModel(new StaticModel( modelManager,
+                engine.Content.Load<Model>(@"Models/gamepiece"),
+                new Cylinder(Matrix.Identity, 1.5f, 0.5f),
+                new Vector3(2f, 0f, -0.75f)));
+
+            // temporary variables
+            Point boardSize;
+    
+            // Generate some terrain
+            boardSize = new Point(40, 40);
+            modelManager.board = new Board(
+                engine, modelManager, boardSize,
+                engine.Content.Load<Texture2D>(
+                    @"Images/Terrains/Grass/grass 40x40 board"));
+
+            this.RegisterBoardSize(boardSize);
 
             // set the sidebar's background
             sidebar.setBackground(
@@ -154,7 +171,7 @@ namespace Immortals
                 (float)(cameraRestrictionFactor * (double)boardSize.X),
                 (float)(cameraRestrictionFactor * (double)boardSize.Y));
 
-           
+            mainCamera.maxPan = maxPan;
         }
 
         /// <summary>Function to update the view.</summary>
@@ -205,7 +222,8 @@ namespace Immortals
                     }
 
                     // execute pan
-                    Pan(panDirection);
+                    if (!panDirection.Equals(Point.Zero))
+                        mainCamera.Pan(panDirection);
                 }
 
 
@@ -225,7 +243,7 @@ namespace Immortals
         /// <param name="direction">Point object representing in which 
         /// directions panning is happening. Both dimensions should be 1, 0 
         /// or -1</param>
-        public void Pan(Point direction)
+        /*public void Pan(Point direction)
         {
             // temporary variables
             Vector3 camPosition = mainCamera.cameraPosition;
@@ -245,7 +263,7 @@ namespace Immortals
             // move the camera
             this.mainCamera.MoveCamera(newPosition);
                 
-        }
+        }*/
 
         /// <summary>
         /// Function to draw any general components.

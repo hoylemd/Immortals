@@ -16,9 +16,7 @@ namespace Immortals
         /// The model to use.</param>,
         /// <param name="Position">
         /// The position this model begins at.</param>
-        public StaticModel(
-            ModelManager modelManager, Model model, Volume boundingVolume, 
-            Vector3 Position)
+        public StaticModel(ModelContainer modelManager, Model model, Volume boundingVolume, Vector3 Position)
             : base(modelManager, model, boundingVolume)
         {
 

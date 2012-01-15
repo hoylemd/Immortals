@@ -13,13 +13,10 @@ using Microsoft.Xna.Framework.Media;
 namespace Immortals
 {
     /// <summary>Manager class to handle models.</summary>
-    public class ModelManager
+    public class ModelContainer : Container
     {
         // Model list
         List<BasicModel> models = new List<BasicModel>();
-
-        // GameView pointer
-        GameView gameView;
 
         // Random number generator
         Random rnd;
@@ -27,20 +24,44 @@ namespace Immortals
         // Engine pointer
         ImmortalsEngine engine;
 
+        // Camera pointer
+        Camera camera;
+
         // Graphics Device pointer
         public GraphicsDevice graphicsDevice { get; private set; }
 
         // board pointer
-        public Board board { get; protected set; }
+        public Board board;/* { get; protected set; }*/
 
-        public ModelManager(ImmortalsEngine game, GameView gv)
+        public ModelContainer(Rectangle area, ImmortalsEngine game, Camera camera)
+            :base(area)
         {
+            // save pointers
+            this.camera = camera;
+
             // register parents
-            this.gameView = gv;
             this.engine = game;
 
             // get the randomizer
             this.rnd = game.rnd;
+        }
+
+        /// <summary>
+        /// Function to add a model to be managed
+        /// </summary>
+        /// <param name="model"> The model to add.</param>
+        public void addModel(BasicModel model)
+        {
+            this.models.Add(model);
+        }
+
+        /// <summary>
+        /// Function to remove a model from the management list
+        /// </summary>
+        /// <param name="model"> The model to remove</param>
+        public void removeModel(BasicModel model)
+        {
+            this.models.Remove(model);
         }
 
         /// <summary>
@@ -50,28 +71,6 @@ namespace Immortals
         public void Initialize()
         {
             this.graphicsDevice = engine.GraphicsDevice;
-        }
-
-        /// <summary>Allows the module to load it's content.</summary>
-        public void LoadContent()
-        {
-            // temporary variables
-            Point boardSize;
-
-            // Load up the test model
-            models.Add(new StaticModel(this,
-                engine.Content.Load<Model>(@"Models/gamepiece"), 
-                new Cylinder(Matrix.Identity,1.5f,0.5f),
-                new Vector3(2f, 0f, -0.75f)));
-    
-            // Generate some terrain
-            boardSize = new Point(40, 40);
-            board = new Board(
-                engine, this, boardSize,
-                engine.Content.Load<Texture2D>(
-                    @"Images/Terrains/Grass/grass 40x40 board"));
-            gameView.RegisterBoardSize(boardSize);
-
         }
 
         /// <summary>
@@ -98,7 +97,7 @@ namespace Immortals
             
             // loop through and draw each model
             foreach (BasicModel bm in this.models)
-                bm.Draw(gameView.mainCamera);
+                bm.Draw(camera);
         }
 
         /// <summary>
@@ -111,15 +110,6 @@ namespace Immortals
                 // Update each model
                 this.models[i].Update();
             }
-        }
-
-        /// <summary>
-        /// Function to add a model to be managed
-        /// </summary>
-        /// <param name="model"> The model to add.</param>
-        public void AddModel(BasicModel model)
-        {
-            this.models.Add(model);
         }
     }
 }

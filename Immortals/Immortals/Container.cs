@@ -18,6 +18,9 @@ namespace Immortals
         // rectangle which this container draws in in the frame of reference of it's parent
         protected Rectangle area;
 
+        // parent pointer
+        public Container parent { get; protected set; }
+
         // list of child containers
         protected List<Container> children;
 

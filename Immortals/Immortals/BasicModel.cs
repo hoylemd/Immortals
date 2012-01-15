@@ -19,7 +19,7 @@ namespace Immortals
         public Volume BoundingVolume { get; protected set; }
 
         // Parent pointer
-        protected ModelManager modelManager;
+        protected ModelContainer modelManager;
 
         /// <summary>Constructor</summary>
         /// <param name="modelManager">
@@ -29,7 +29,7 @@ namespace Immortals
         /// The Volume to represent the 3-dimensional space the model 
         /// occupies.</param>
         public BasicModel(
-            ModelManager modelManager, Model model, Volume BoundingVolume)
+            ModelContainer modelManager, Model model, Volume BoundingVolume)
         {
             // Save data
             this.modelManager = modelManager;
@@ -41,7 +41,7 @@ namespace Immortals
         /// <summary>Constructor</summary>
         /// <param name="modelManager">
         /// The model manager handling this model</param>
-        public BasicModel(ModelManager modelManager)
+        protected BasicModel(ModelContainer modelManager)
         {            
             // Save data
             this.modelManager = modelManager;

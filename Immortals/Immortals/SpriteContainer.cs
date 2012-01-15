@@ -21,11 +21,10 @@ namespace Immortals
         // visilibilty members
         Boolean hidden;
 
-
-
         /// <summary>
         /// Constructor</summary>
-        /// <param name="area">The area of the parent container this sprite occupies</param>
+        /// <param name="area">
+        /// The area of the parent container this sprite occupies</param>
         public SpriteContainer(Rectangle area)
             : base(area)
         {
@@ -47,16 +46,26 @@ namespace Immortals
             int frameDuration)
         {
             // set up background sprite
-            background = new Sprite(texture, frameSize, sheetSize, frameDuration, Point.Zero);
+            background = new Sprite(texture, frameSize, sheetSize, frameDuration, 
+                                    Point.Zero);
         }
 
         /// <summary>
-        /// Function to add a sprite or container to this container.
+        /// Function to add a sprite to this container.
         /// </summary>
         /// <param name="sprite">the Sprite object to add.</param>
         public void addSprite(Sprite sprite)
         {
             spriteList.Add(sprite);
+        }
+
+        /// <summary>
+        /// Function to remove a spriteto this container.
+        /// </summary>
+        /// <param name="sprite">the sprite to remove</param>
+        public void removeSprite(Sprite sprite)
+        {
+            spriteList.Remove(sprite);
         }
 
         /// <summary>
@@ -69,8 +78,9 @@ namespace Immortals
         public void Draw(Rectangle drawArea, SpriteBatch spriteBatch )
         {
             // calculate the location to draw with
-            Rectangle normalizedRectangle = new Rectangle(drawArea.X + area.X, drawArea.Y + area.Y,
-                                                          area.Width, area.Height);
+            Rectangle normalizedRectangle = 
+                new Rectangle(drawArea.X + area.X, drawArea.Y + area.Y, area.Width, 
+                              area.Height);
 
             // Draw everything if the container isn't hidden.
             if (!hidden)
@@ -100,7 +110,5 @@ namespace Immortals
                 }
             }
         }
-
-
     }
 }

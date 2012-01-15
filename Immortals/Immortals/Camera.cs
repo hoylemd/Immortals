@@ -31,6 +31,9 @@ namespace Immortals
         Vector3 cameraUp;
         Vector3 cameraStrafe;
 
+        // panning constraints
+        public Vector2 maxPan;
+
         // Orbit angles
         // float tau = 6.2918f;
         Vector3 orbit;
@@ -127,6 +130,34 @@ namespace Immortals
                 cameraDirection.Y + displacement.Y,
                 cameraDirection.Z);*/
             Console.WriteLine("Slid to " + cameraPosition.ToString());
+        }
+
+        /// <summary>
+        /// Function to pan the game view around. also ensures the camera 
+        /// cannot be panned to far as to lose the game board.
+        /// </summary>
+        /// <param name="direction">Point object representing in which 
+        /// directions panning is happening. Both dimensions should be 1, 0 
+        /// or -1</param>
+        public void Pan(Point direction)
+        {
+            // temporary variables
+            Vector3 newPosition = new Vector3(
+                cameraPosition.X, cameraPosition.Y, cameraPosition.Z);
+
+            // validate and calculate X & Y
+            if (Math.Abs(cameraPosition.X + direction.X) <= maxPan.X)
+            {
+                newPosition.X += direction.X;
+            }
+            if (Math.Abs(cameraPosition.Y + direction.Y) <= maxPan.Y)
+            {
+                newPosition.Y += direction.Y;
+            }
+
+            // move the camera
+            this.MoveCamera(newPosition);
+
         }
 
         /// <summary>

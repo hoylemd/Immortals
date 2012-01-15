@@ -14,7 +14,7 @@ namespace Immortals
     {
         // Game engine pointers
         ImmortalsEngine engine;
-        ModelManager modelManager;
+        ModelContainer modelManager;
 
         // Game object information
         public Point size { get; protected set; }
@@ -35,7 +35,7 @@ namespace Immortals
         /// A Texture2D object holding the image to paint the board with.
         /// </param>
         public Board(
-            ImmortalsEngine engine, ModelManager modelManager, Point size,
+            ImmortalsEngine engine, ModelContainer modelManager, Point size,
             Texture2D texture)
         {
             // Local variables
@@ -65,7 +65,7 @@ namespace Immortals
                 texture, Vector3.Zero);
 
             // Register game model with modelManager
-            modelManager.AddModel(this.model);
+            modelManager.addModel(this.model);
         }
     }
 }

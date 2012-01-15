@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Immortals
 {
-    class GameWindow : Container
+    class GameWindow : ModelContainer
     {
-        public GameWindow(Rectangle area)
-            : base(area) { }
+        public GameWindow(Rectangle area, ImmortalsEngine game, Camera camera)
+            : base(area, game, camera) { }
     }
 }
