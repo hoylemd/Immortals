@@ -30,8 +30,8 @@ namespace Immortals
         {
             // Set up the game window
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 800;
-            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
             graphics.IsFullScreen = true;
 
            // set up the Content path

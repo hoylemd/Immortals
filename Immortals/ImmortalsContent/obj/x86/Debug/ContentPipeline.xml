@@ -210,6 +210,15 @@
       <Output>obj\x86\Debug\Models\gamepiece_0.xml</Output>
       <Time>2012-01-13T19:18:54.5578-05:00</Time>
     </Item>
+    <Item>
+      <Source>Images\sidebarPurpleFrame1080.png</Source>
+      <Name>Images\sidebarPurpleFrame1080</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\hoylemd\Code\Immortals\Immortals\Immortals\bin\x86\Debug\Content\Images\sidebarPurpleFrame1080.xnb</Output>
+      <Time>2012-01-15T01:22:01.987-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

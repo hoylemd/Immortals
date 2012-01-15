@@ -133,8 +133,9 @@ namespace Immortals
             modelManager.LoadContent();
 
             // set the sidebar's background
-            sidebar.setBackground(engine.Content.Load<Texture2D>(@"Images/sidebarPurpleFrame"),
-                new Point(300, 800), new Point(1, 1), 0);
+            sidebar.setBackground(
+                engine.Content.Load<Texture2D>(@"Images/sidebarPurpleFrame1080"),
+                new Point(300, 1080), new Point(1, 1), 0);
 
             // set up the spriteBatch
             this.spriteBatch = new SpriteBatch(this.GraphicsDevice);
