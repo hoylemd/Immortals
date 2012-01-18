@@ -1,0 +1,12 @@
+intensity: 19
+Color Saturation: 69
+Coverage: 46.43
+
+red val: 720000
+border val: 190000
+
+Clouds:
+Scale: 305
+Roughness: 0.61
+
+
