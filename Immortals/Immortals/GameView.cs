@@ -36,13 +36,11 @@ namespace Immortals
         SpriteBatch spriteBatch;
 
         // model manager
-        GameWindow gameWindow;
+        TacticalView tacticalView;
 
         // Rectangles and viewports for sidebar and board views
         Rectangle sidebarView;
-        Viewport sidebarViewport;
         Rectangle boardView;
-        Viewport boardViewport;
 
         // Input Records
         private MouseState prevMouseState;
@@ -76,25 +74,15 @@ namespace Immortals
                 0, 0, clientBounds.Width - 300, clientBounds.Height);
             sidebarView = new Rectangle(
                 boardView.Width, 0, 300, clientBounds.Height);
-            boardViewport = new Viewport(boardView);
-            sidebarViewport = new Viewport(sidebarView);
 
             // Create subcomponents
-            // Set up the main camera
-            Vector3 CameraAngle = new Vector3(0, -5, -20);
-            CameraAngle.Normalize();
-            Camera mainCamera = new Camera(
-                Game, this, CameraAngle * 20, Vector3.Zero, Vector3.Up,
-                boardView);
-            engine.Components.Add(mainCamera);
 
             // Model management
             boardView.X = 0;
-            this.gameWindow = new GameWindow(boardView, mainCamera);
+            this.tacticalView = new TacticalView(boardView);
 
             // Sprite/sidebar managment
-            sidebarView.X = 0;
-            this.sidebar = new Sidebar(sidebarView);
+            this.sidebar = new Sidebar(new Rectangle(0, 0, 300, 1080));
 
             // set up panning
             panningAllowed = true;
@@ -117,23 +105,18 @@ namespace Immortals
         protected override void LoadContent()
         {
             // initialize children
-            gameWindow.Initialize(this.GraphicsDevice);
-
-            // Load children's content
-            gameWindow.addModel(new StaticModel( gameWindow,
-                engine.Content.Load<Model>(@"Models/gamepiece"),
-                new Cylinder(Matrix.Identity, 1.5f, 0.5f),
-                new Vector3(2f, 0f, -0.75f)));
+            //gameWindow.Initialize(this.GraphicsDevice);
 
             // temporary variables
             Point boardSize;
     
             // Generate some terrain
-            boardSize = new Point(40, 40);
-            gameWindow.registerBoard(new Board(
-                engine, gameWindow, boardSize,
-                engine.Content.Load<Texture2D>(
-                    @"Images/Terrains/Grass/grass 40x40 board")));
+            boardSize = new Point(30, 30);
+            tacticalView.registerBoard(
+                new Board(boardSize, 
+                    new Sprite(engine.Content.Load<Texture2D>(
+                               @"Images/Terrains/Grass/grass 40x40 board"),
+                               new Point(3000,3000), new Point(1,1), 0, Point.Zero)));
 
             // set the sidebar's background
             sidebar.setBackground(
@@ -195,13 +178,13 @@ namespace Immortals
 
                     // execute pan
                     if (!panDirection.Equals(Point.Zero))
-                        gameWindow.Pan(panDirection);
+                        tacticalView.Pan(panDirection);
                 }
 
 
 
                 // update children
-                gameWindow.Update(gameTime);
+                //gameWindow.Update(gameTime);
 
                 // record old input state
                 prevMouseState = mouseState;
@@ -244,11 +227,12 @@ namespace Immortals
         public override void Draw(GameTime gameTime)
         {
             // draw children in their viewports
-            GraphicsDevice.Viewport = boardViewport;
-            gameWindow.Draw(gameTime);
-
-            engine.GraphicsDevice.Viewport = sidebarViewport;
+            //GraphicsDevice.Viewport = boardViewport;
             spriteBatch.Begin();
+            tacticalView.Draw(boardView, spriteBatch);
+
+            //engine.GraphicsDevice.Viewport = sidebarViewport;
+
             //System.Console.WriteLine("sidebar view: " + sidebarView.ToString());
             sidebar.Draw(sidebarView, spriteBatch);
             spriteBatch.End();

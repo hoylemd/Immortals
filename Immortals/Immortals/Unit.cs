@@ -10,7 +10,7 @@ namespace Immortals
     class Unit
     {
         // the list of models for the unit
-        List<BasicModel> modelList;
+        List<Sprite> spriteList;
 
         // the game stats
         int Mv;
@@ -34,7 +34,7 @@ namespace Immortals
             this.Mv = Mv;
             this.name = name;
 
-            modelList = new List<BasicModel>();
+            spriteList = new List<Sprite>();
         }
     }
 }

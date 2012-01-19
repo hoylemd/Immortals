@@ -16,10 +16,10 @@ namespace Immortals
     {
         // sprite members
         Sprite background;
-        List<Sprite> spriteList;
+        internal List<Sprite> spriteList;
 
         // visilibilty members
-        Boolean hidden;
+        internal Boolean hidden;
 
         /// <summary>
         /// Constructor</summary>
@@ -75,7 +75,7 @@ namespace Immortals
         /// The Rectangle to use as a frame of reference.</param>
         /// <param name="spriteBatch"> 
         /// The spriteBatch that will draw the sprite.</param>
-        public void Draw(Rectangle drawArea, SpriteBatch spriteBatch )
+        public virtual void Draw(Rectangle drawArea, SpriteBatch spriteBatch )
         {
             // calculate the location to draw with
             Rectangle normalizedRectangle = 

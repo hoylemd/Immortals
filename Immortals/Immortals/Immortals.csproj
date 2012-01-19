@@ -16,7 +16,8 @@
     <XnaProfile>HiDef</XnaProfile>
     <XnaCrossPlatformGroupID>6cb320b9-eab5-41d4-9e0e-ec6967e3dcce</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
-    <ApplicationIcon>Game.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -108,30 +109,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicModel.cs" />
     <Compile Include="Board.cs" />
-    <Compile Include="Box.cs" />
     <Compile Include="Button.cs" />
-    <Compile Include="Camera.cs" />
     <Compile Include="Container.cs" />
-    <Compile Include="Cylinder.cs" />
     <Compile Include="GameView.cs" />
     <Compile Include="TacticalView.cs" />
     <Compile Include="InvalidClickException.cs" />
-    <Compile Include="ModelContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ImmortalsEngine.cs" />
     <Compile Include="Sidebar.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteContainer.cs" />
-    <Compile Include="StaticModel.cs" />
     <Compile Include="Unit.cs" />
-    <Compile Include="VertexModel.cs" />
     <Compile Include="Volume.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
