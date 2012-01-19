@@ -122,7 +122,6 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteContainer.cs" />
     <Compile Include="Unit.cs" />
-    <Compile Include="Volume.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameThumbnail.png" />

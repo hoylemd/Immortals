@@ -15,7 +15,7 @@ namespace Immortals
     class TacticalView : SpriteContainer
     {
         // panning factors
-        //private double cameraRestrictionFactor; // Affects the reduction in 
+        private double cameraRestrictionFactor; // Affects the reduction in 
                                             // space the camera may move in.
 
         // board pointer
@@ -34,7 +34,7 @@ namespace Immortals
             // This restricts the camera from moving out more than 35% of the
             // board's width from the origin. This prevents the camera from
             // overlooking too much of the board when panned maximally.
-            // this.cameraRestrictionFactor = 0.35;
+            this.cameraRestrictionFactor = 0.35;
         }
 
         /// <summary>
@@ -49,10 +49,10 @@ namespace Immortals
             this.boardSprite = board.sprite;
 
             // calculate and set maximum panning distance
-            //Vector2 maxPan = new Vector2(
-                //(float)(cameraRestrictionFactor * (double)board.size.X),
-                //(float)(cameraRestrictionFactor * (double)board.size.Y));
-            //this.setMaxPan(maxPan);
+            Vector2 maxPan = new Vector2(
+                (float)(cameraRestrictionFactor * (double)board.size.X * 100),
+                (float)(cameraRestrictionFactor * (double)board.size.Y * 100));
+            this.setMaxPan(maxPan);
         }
 
         /// <summary>

@@ -87,7 +87,6 @@ namespace Immortals
             // set up panning
             panningAllowed = true;
 
-
             // set up input settings
             panBuffer = 25;
 
